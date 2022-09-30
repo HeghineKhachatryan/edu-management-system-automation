@@ -1,4 +1,4 @@
-Feature: Login
+Feature: Login Functionality
 
   Scenario: Check UI of Login Page
     Given Check email input field is present
