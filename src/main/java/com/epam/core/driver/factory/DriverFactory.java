@@ -1,7 +1,7 @@
-package com.epam.core.factory;
+package com.epam.core.driver.factory;
 
-import com.epam.core.providers.ChromeDriverProvider;
-import com.epam.core.providers.FirefoxDriverProvider;
+import com.epam.core.driver.providers.ChromeDriverProvider;
+import com.epam.core.driver.providers.FirefoxDriverProvider;
 import org.openqa.selenium.WebDriver;
 
 public class DriverFactory {

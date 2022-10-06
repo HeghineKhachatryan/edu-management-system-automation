@@ -1,7 +1,7 @@
-package com.epam.core;
+package com.epam.core.driver;
 
-import com.epam.core.config.PropertiesReader;
-import com.epam.core.factory.DriverFactory;
+import com.epam.config.PropertiesReader;
+import com.epam.core.driver.factory.DriverFactory;
 import org.openqa.selenium.WebDriver;
 
 public class Driver {
