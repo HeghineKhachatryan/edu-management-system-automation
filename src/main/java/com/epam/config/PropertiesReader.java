@@ -1,4 +1,4 @@
-package com.epam.core.config;
+package com.epam.config;
 
 import java.io.IOException;
 import java.io.InputStream;

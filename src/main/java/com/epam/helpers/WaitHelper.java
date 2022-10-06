@@ -1,6 +1,6 @@
 package com.epam.helpers;
 
-import com.epam.core.Driver;
+import com.epam.core.driver.Driver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;

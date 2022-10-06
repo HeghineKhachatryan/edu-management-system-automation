@@ -1,4 +1,4 @@
-package com.epam.core.providers;
+package com.epam.core.driver.providers;
 
 import org.openqa.selenium.WebDriver;
 
