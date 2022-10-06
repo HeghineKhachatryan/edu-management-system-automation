@@ -5,6 +5,8 @@ import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "src\\test\\resources\\auth",glue = "com\\epam\\steps")
+@CucumberOptions(features = "src\\test\\resources\\features",
+        glue = "com\\epam\\steps",
+        publish = true)
 public class TestRunner {
 }
