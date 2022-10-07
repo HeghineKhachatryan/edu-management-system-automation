@@ -2,6 +2,7 @@ package com.epam.steps.common;
 
 import com.epam.pages.main.SuperAdminPage;
 import com.epam.pages.popup.CreatePopup;
+import com.epam.steps.BaseSteps;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -10,7 +11,7 @@ import io.cucumber.java.en.When;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CreateUserSteps {
+public class CreateUserSteps extends BaseSteps {
 
     private SuperAdminPage superAdminPage;
     private CreatePopup createPopup;
@@ -31,8 +32,8 @@ public class CreateUserSteps {
         createPopup.fillInvalidEmail();
     }
 
-    @Given("Fill all fields but email")
-    public void fillFieldsButEmail() {
+    @Given("Fill all fields besides email")
+    public void fillFieldsBesidesEmail() {
         createPopup.fillAllFieldsBesidesEmail();
     }
 
@@ -59,11 +60,13 @@ public class CreateUserSteps {
     @And("Click on 'Generate password' button")
     public void clickOnGeneratePasswordButton() {
         createPopup.clickOnGeneratePasswordButton();
+        logger.info("Generate password button was clicked in create popup");
     }
 
     @And("Click on 'Save' button")
     public void clickOnSaveButton() {
         createPopup.clickOnSaveButton();
+        logger.info("Save button was clicked in create popup");
     }
 
     @When("Click on 'X' button")
@@ -82,13 +85,13 @@ public class CreateUserSteps {
         createPopup.doubleClickOnGeneratePasswordButton();
     }
 
-    @And("Fill in surname fill more than 50 sybmols")
-    public void fillInSurnameFillMoreThanSybmols() {
+    @And("Fill in surname fill more than 50 symbols")
+    public void fillInSurnameFillMoreThanSymbols() {
         createPopup.fillSurnameWithMoreSymbols();
     }
 
-    @And("Fill in email fill more than 50 sybmols")
-    public void fillInEmailFillMoreThanSybmols() {
+    @And("Fill in email fill more than 50 symbols")
+    public void fillInEmailFillMoreThanSymbols() {
         createPopup.fillEmailWithMoreSymbols();
     }
 
@@ -101,6 +104,7 @@ public class CreateUserSteps {
     @Then("Click on 'create' button and open popup")
     public void clickOnCreateButtonAndOpenPopup() {
         superAdminPage.clickOnCreateButton();
+        logger.info("Create button was clicked");
     }
 
     @Then("Check all input fields are empty in create popup")
