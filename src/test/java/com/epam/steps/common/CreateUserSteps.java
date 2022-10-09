@@ -60,13 +60,11 @@ public class CreateUserSteps extends BaseSteps {
     @And("Click on 'Generate password' button")
     public void clickOnGeneratePasswordButton() {
         createPopup.clickOnGeneratePasswordButton();
-        logger.info("Generate password button was clicked in create popup");
     }
 
     @And("Click on 'Save' button")
     public void clickOnSaveButton() {
         createPopup.clickOnSaveButton();
-        logger.info("Save button was clicked in create popup");
     }
 
     @When("Click on 'X' button")
@@ -104,7 +102,6 @@ public class CreateUserSteps extends BaseSteps {
     @Then("Click on 'create' button and open popup")
     public void clickOnCreateButtonAndOpenPopup() {
         superAdminPage.clickOnCreateButton();
-        logger.info("Create button was clicked");
     }
 
     @Then("Check all input fields are empty in create popup")
