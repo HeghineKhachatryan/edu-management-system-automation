@@ -58,10 +58,9 @@ public class LoginSteps extends BaseSteps {
         assertThat(roleName).isEqualToIgnoringCase(superAdminPage.getRoleName());
     }
 
-    @When("Leave blank or incorrect {} and-or {} field")
+    @When("Enter {} and-or {} fields")
     public void leaveBlankOrIncorrectUsernameAndOrPasswordField(String email, String password) {
-        loginPage.fillEmail(email);
-        loginPage.fillPassword(password);
+        loginPage.fillEmailAndPassword(email, password);
     }
 
     @Then("See error message")
