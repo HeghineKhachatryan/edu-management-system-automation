@@ -43,19 +43,16 @@ public class LoginSteps extends BaseSteps {
     @Given("Enter email {} in login page")
     public void fillEmailInLoginPage(String email) {
         loginPage.fillEmail(email);
-        logger.info("fill email: {}", email);
     }
 
     @And("Enter password {} in login page")
     public void fillPasswordInLoginPage(String password) {
         loginPage.fillPassword(password);
-        logger.info("fill password: {}", password);
     }
 
     @And("Click on 'login' button")
     public void clickOnLoginButton() {
         loginPage.clickOnLoginButton();
-        logger.info("Click on login button");
     }
 
     @Then("The user is on {} page")
