@@ -1,12 +1,15 @@
 package com.epam.helpers;
 
 import org.openqa.selenium.WebElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class UiHelper {
 
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final WaitHelper waitHelper = new WaitHelper();
 
     public void clickOnWebElement(final WebElement target) {

@@ -2,10 +2,12 @@ package com.epam.pages.popup;
 
 import com.epam.helpers.SharedTestData;
 import com.epam.pages.common.CommonPopup;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
+import java.util.Random;
 
 public class CreatePopup extends CommonPopup {
 
@@ -35,7 +37,9 @@ public class CreatePopup extends CommonPopup {
     }
 
     public void fillNameWithMoreSymbols() {
-        uiHelper.sendKeys(nameInput, SharedTestData.getMoreSymbols());
+        String generatedString = RandomStringUtils.random(50, true, true);
+        uiHelper.sendKeys(nameInput, generatedString);
+        logger.info("50 symbols in name field are {}", generatedString);
     }
 
     public void fillSurname(String surname) {
@@ -44,7 +48,9 @@ public class CreatePopup extends CommonPopup {
     }
 
     public void fillSurnameWithMoreSymbols() {
-        uiHelper.sendKeys(surnameInput, SharedTestData.getMoreSymbols());
+        String generatedString = RandomStringUtils.random(50, true, true);
+        uiHelper.sendKeys(surnameInput, generatedString);
+        logger.info("50 symbols in surname field are {}", generatedString);
     }
 
     public void fillEmail(String email) {
@@ -53,7 +59,9 @@ public class CreatePopup extends CommonPopup {
     }
 
     public void fillEmailWithMoreSymbols() {
-        uiHelper.sendKeys(emailInput, SharedTestData.getMoreSymbols());
+        String generatedString = RandomStringUtils.random(50, true, true);
+        uiHelper.sendKeys(emailInput, generatedString);
+        logger.info("50 symbols in email input are {}", generatedString);
     }
 
     public void fillInvalidEmail() {
@@ -65,13 +73,9 @@ public class CreatePopup extends CommonPopup {
     }
 
     public void fillAllFields() {
-        fillAllFieldsBesidesEmail();
-        fillEmail(System.currentTimeMillis() + "@gmail.com");
-    }
-
-    public void fillAllFieldsBesidesEmail() {
         fillName("Davit");
         fillSurname("Balabekyan");
+        fillEmail(System.currentTimeMillis() + "@gmail.com");
     }
 
     private void clickOnGeneratePasswordButtonInternal() {
@@ -90,6 +94,8 @@ public class CreatePopup extends CommonPopup {
     }
 
     public boolean checkAllFieldsArePresent() {
+        logger.info("Check fields name, surname, email, password, save button," +
+                "generate password button, X button are displayed in create popup");
         return uiHelper.checkElementsAreDisplayed(nameInput,
                 surnameInput,
                 emailInput,
@@ -100,6 +106,7 @@ public class CreatePopup extends CommonPopup {
     }
 
     public boolean checkAllInputFieldsAreEmpty() {
+        logger.info("Check fields name, surname, email, password are displayed in create popup");
         return uiHelper.checkElementsAreEmpty(nameInput,
                 surnameInput,
                 emailInput,
