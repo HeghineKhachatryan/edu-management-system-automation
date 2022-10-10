@@ -20,7 +20,6 @@ import org.slf4j.LoggerFactory;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LoginSteps extends BaseSteps {
-
     private LoginPage loginPage;
     private AdminPage adminPage;
     private SuperAdminPage superAdminPage;
