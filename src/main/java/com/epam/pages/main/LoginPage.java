@@ -32,6 +32,10 @@ public class LoginPage extends BasePage {
         uiHelper.sendKeys(passwordInput, SharedTestData.getLastGeneratedPassword());
     }
 
+    public void enterLastGeneratedEmail() {
+        uiHelper.sendKeys(emailInput, SharedTestData.getLastGeneratedEmail());
+    }
+
     public String getErrorMessage() {
         return errorMessage.getText();
     }
