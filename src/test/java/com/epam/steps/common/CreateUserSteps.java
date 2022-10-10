@@ -2,6 +2,7 @@ package com.epam.steps.common;
 
 import com.epam.pages.main.SuperAdminPage;
 import com.epam.pages.popup.CreatePopup;
+import com.epam.steps.BaseSteps;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -10,7 +11,7 @@ import io.cucumber.java.en.When;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CreateUserSteps {
+public class CreateUserSteps extends BaseSteps {
 
     private SuperAdminPage superAdminPage;
     private CreatePopup createPopup;
@@ -29,11 +30,6 @@ public class CreateUserSteps {
     @Given("Fill invalid email")
     public void fillInvalidEmail() {
         createPopup.fillInvalidEmail();
-    }
-
-    @Given("Fill all fields but email")
-    public void fillFieldsButEmail() {
-        createPopup.fillAllFieldsBesidesEmail();
     }
 
     @When("Fill existed email")
@@ -82,13 +78,13 @@ public class CreateUserSteps {
         createPopup.doubleClickOnGeneratePasswordButton();
     }
 
-    @And("Fill in surname fill more than 50 sybmols")
-    public void fillInSurnameFillMoreThanSybmols() {
+    @And("Fill in surname fill more than 50 symbols")
+    public void fillInSurnameFillMoreThanSymbols() {
         createPopup.fillSurnameWithMoreSymbols();
     }
 
-    @And("Fill in email fill more than 50 sybmols")
-    public void fillInEmailFillMoreThanSybmols() {
+    @And("Fill in email fill more than 50 symbols")
+    public void fillInEmailFillMoreThanSymbols() {
         createPopup.fillEmailWithMoreSymbols();
     }
 
