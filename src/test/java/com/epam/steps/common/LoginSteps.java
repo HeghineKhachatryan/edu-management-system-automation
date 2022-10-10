@@ -27,6 +27,11 @@ public class LoginSteps extends BaseSteps {
         setup();
     }
 
+    @AfterAll
+    public static void tearDown() {
+        quitDriver();
+    }
+
     @Before
     public void initPages() {
         loginPage = new LoginPage();
@@ -83,10 +88,5 @@ public class LoginSteps extends BaseSteps {
         loginPage.clickOnLoginButton();
         assertThat(adminPage.getNameAndSurname())
                 .contains(SharedTestData.getNameField(), SharedTestData.getSurnameField());
-    }
-
-    @AfterAll
-    public static void tearDown() {
-        quitDriver();
     }
 }
