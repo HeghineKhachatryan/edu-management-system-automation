@@ -14,10 +14,12 @@ public class SuperAdminPage extends CommonPage {
     }
 
     public boolean checkAllElementsArePresent() {
-        return uiHelper.checkElementsAreDisplayed(list,
+        return uiHelper.checkElementsAreDisplayed(
+                list,
                 roleName,
                 adminsSection,
                 settingsSection,
-                createButton);
+                createButton
+        );
     }
 }

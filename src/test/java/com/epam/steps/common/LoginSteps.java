@@ -58,14 +58,17 @@ public class LoginSteps extends BaseSteps {
         assertThat(roleName).isEqualToIgnoringCase(superAdminPage.getRoleName());
     }
 
-    @When("Enter {} and-or {} fields")
+    @When("Enter {} and {} fields")
     public void leaveBlankOrIncorrectUsernameAndOrPasswordField(String email, String password) {
-        loginPage.fillEmailAndPassword(email, password);
+        loginPage.fillEmail(email);
+        loginPage.fillPassword(password);
     }
 
-    @Then("See error message")
-    public void seeErrorMessage() {
-        Assertions.assertThat(loginPage.getErrorMessage()).isEqualTo("Incorrect email and/or password");
+    @Then("Check error message")
+    public void checkErrorMessage() {
+        assertThat(loginPage
+                .getErrorMessage())
+                .isEqualTo("Incorrect email and/or password");
     }
 
     @And("Fill in all required fields")
@@ -80,8 +83,8 @@ public class LoginSteps extends BaseSteps {
         loginPage.enterLastGeneratedEmail();
         loginPage.enterLastGeneratedPassword();
         loginPage.clickOnLoginButton();
-        Assertions.assertThat(createPopup.passwordIsChanged()).isTrue();
-        Assertions.assertThat(adminPage.getNameAndSurname()).contains(SharedTestData.getNameField());
+        assertThat(adminPage.getNameAndSurname())
+                .contains(SharedTestData.getNameField(), SharedTestData.getSurnameField());
     }
 
     @AfterAll

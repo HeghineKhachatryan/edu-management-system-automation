@@ -1,6 +1,5 @@
 package com.epam.steps.common;
 
-import com.epam.pages.main.AdminPage;
 import com.epam.pages.main.LoginPage;
 import com.epam.pages.main.SuperAdminPage;
 import io.cucumber.java.Before;

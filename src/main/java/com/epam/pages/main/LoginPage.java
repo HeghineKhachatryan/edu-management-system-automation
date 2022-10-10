@@ -24,11 +24,6 @@ public class LoginPage extends BasePage {
         uiHelper.sendKeys(passwordInput, password);
     }
 
-    public void fillEmailAndPassword(String email, String password) {
-        fillEmail(email);
-        fillPassword(password);
-    }
-
     public void clickOnLoginButton() {
         uiHelper.clickOnWebElement(loginButton);
     }
