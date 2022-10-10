@@ -17,19 +17,30 @@ public class LoginPage extends BasePage {
     private WebElement errorMessage;
 
     public void fillEmail(String email) {
+        logger.info("Fill email {}", email);
         uiHelper.sendKeys(emailInput, email);
     }
 
     public void fillPassword(String password) {
+        logger.info("Fill password {}", password);
         uiHelper.sendKeys(passwordInput, password);
     }
 
     public void clickOnLoginButton() {
+        logger.info("Click on login button");
         uiHelper.clickOnWebElement(loginButton);
     }
 
     public void enterLastGeneratedPassword() {
-        uiHelper.sendKeys(passwordInput, SharedTestData.getLastGeneratedPassword());
+        String password = SharedTestData.getLastGeneratedPassword();
+        logger.info("Fill last generated password {}", password);
+        uiHelper.sendKeys(passwordInput, password);
+    }
+
+    public void enterLastGeneratedEmail() {
+        String email = SharedTestData.getLastGeneratedEmail();
+        logger.info("Fill last generated email {}", email);
+        uiHelper.sendKeys(emailInput, email);
     }
 
     public String getErrorMessage() {
@@ -37,6 +48,7 @@ public class LoginPage extends BasePage {
     }
 
     public boolean checkAllElementsArePresent() {
+        logger.info("Check elements email, password, login button are displayed in login page");
         return uiHelper.checkElementsAreDisplayed(emailInput, passwordInput, loginButton);
     }
 
