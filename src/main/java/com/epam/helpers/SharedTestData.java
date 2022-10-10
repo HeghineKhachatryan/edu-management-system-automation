@@ -39,10 +39,6 @@ public class SharedTestData {
         return surnameField;
     }
 
-    public static String getMoreSymbols() {
-        return "qawsedrftgyhujikolpzxcvbnmqawsedrfgthyjukiopzxcvcdrtdrscvhhg";
-    }
-
     public static String getInvalidEmail() {
         return "!!InvalidEmail.com";
     }

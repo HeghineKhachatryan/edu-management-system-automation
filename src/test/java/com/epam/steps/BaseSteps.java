@@ -6,6 +6,8 @@ import org.slf4j.LoggerFactory;
 
 public class BaseSteps {
 
+    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     public static void setup() {
         Driver.getDriver();
     }

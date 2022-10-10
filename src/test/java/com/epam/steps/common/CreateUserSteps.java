@@ -32,11 +32,6 @@ public class CreateUserSteps extends BaseSteps {
         createPopup.fillInvalidEmail();
     }
 
-    @Given("Fill all fields besides email")
-    public void fillFieldsBesidesEmail() {
-        createPopup.fillAllFieldsBesidesEmail();
-    }
-
     @When("Fill existed email")
     public void fillExistedEmail() {
         createPopup.fillExistedEmail();
