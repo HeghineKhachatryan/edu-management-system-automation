@@ -2,6 +2,8 @@ package com.epam.jdbc.service;
 
 import com.epam.jdbc.config.DBConnectionProvider;
 import com.epam.jdbc.model.Teacher;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,13 +13,18 @@ import java.sql.SQLException;
 public class TeacherService implements Service<Teacher> {
 
     private final Connection connection = DBConnectionProvider.getInstance().getConnection();
+    private final Logger logger = LoggerFactory.getLogger(TeacherService.class);
 
     @Override
     public Teacher findByEmail(String email) {
         Teacher teacher = new Teacher();
-        try {
-            String query = "SELECT public.teacher.id, name, surname, email FROM public.user INNER JOIN public.teacher ON public.user.id=public.teacher.user_id WHERE public.user.email=?;";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        String query = "SELECT public.teacher.id, password, name, surname, email " +
+                "FROM public.user " +
+                "INNER JOIN public.teacher " +
+                "ON public.user.id=public.teacher.user_id " +
+                "WHERE public.user.email=?;";
+        logger.info("Find teacher by email");
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -25,9 +32,10 @@ public class TeacherService implements Service<Teacher> {
                 teacher.setName(resultSet.getString("name"));
                 teacher.setSurname(resultSet.getString("surname"));
                 teacher.setEmail(resultSet.getString("email"));
+                teacher.setPassword(resultSet.getString("password"));
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            logger.error("Can not execute query");
         }
         return teacher;
     }

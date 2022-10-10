@@ -1,23 +1,12 @@
 package com.epam.jdbc.model;
 
-import java.util.Objects;
-
 public class Admin {
 
     private int id;
     private String name;
     private String surname;
     private String email;
-
-    public Admin() {
-    }
-
-    public Admin(int id, String name, String surname, String email) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-    }
+    private String password;
 
     public int getId() {
         return id;
@@ -51,26 +40,11 @@ public class Admin {
         this.email = email;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Admin admin = (Admin) o;
-        return Objects.equals(name, admin.name) && Objects.equals(surname, admin.surname) && Objects.equals(email, admin.email);
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, surname, email);
-    }
-
-    @Override
-    public String toString() {
-        return "Admin{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+    public String getPassword() {
+        return password;
     }
 }

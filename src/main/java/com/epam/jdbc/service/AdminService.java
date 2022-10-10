@@ -2,6 +2,8 @@ package com.epam.jdbc.service;
 
 import com.epam.jdbc.config.DBConnectionProvider;
 import com.epam.jdbc.model.Admin;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,13 +13,18 @@ import java.sql.SQLException;
 public class AdminService implements Service<Admin> {
 
     private final Connection connection = DBConnectionProvider.getInstance().getConnection();
+    private final Logger logger = LoggerFactory.getLogger(AdminService.class);
 
     @Override
     public Admin findByEmail(String email) {
         Admin admin = new Admin();
-        try {
-            String query = "SELECT public.admin.id, username, surname, email FROM public.user INNER JOIN public.admin ON public.user.id=public.admin.user_id WHERE public.user.email=?;";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        String query = "SELECT public.admin.id, password, username, surname, email " +
+                "FROM public.user " +
+                "INNER JOIN public.admin " +
+                "ON public.user.id=public.admin.user_id " +
+                "WHERE public.user.email=?;";
+        logger.info("Find admin by email");
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -25,9 +32,10 @@ public class AdminService implements Service<Admin> {
                 admin.setName(resultSet.getString("username"));
                 admin.setSurname(resultSet.getString("surname"));
                 admin.setEmail(resultSet.getString("email"));
+                admin.setPassword(resultSet.getString("password"));
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            logger.error("Can not execute query");
         }
         return admin;
     }
