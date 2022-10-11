@@ -1,4 +1,4 @@
-package com.common;
+package com.epam.steps.common;
 
 import com.epam.helpers.SharedTestData;
 import com.epam.pages.main.AdminPage;
