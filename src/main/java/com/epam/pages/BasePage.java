@@ -19,14 +19,11 @@ public abstract class BasePage {
     }
 
     public void goToPage() {
+        logger.info("Go to page - {}", pageUrl());
         driver.get(pageUrl());
     }
 
     protected String pageUrl() {
         return "";
-    }
-
-    public String getCurrentPageURL() {
-        return driver.getCurrentUrl();
     }
 }

@@ -38,12 +38,4 @@ public class SharedTestData {
     public static void setSurnameField(String surname) {
         surnameField = surname;
     }
-
-    public static String getInvalidEmail() {
-        return "!!InvalidEmail.com";
-    }
-
-    public static String getExistedEmail() {
-        return "petrosyan@gmail.com";
-    }
 }

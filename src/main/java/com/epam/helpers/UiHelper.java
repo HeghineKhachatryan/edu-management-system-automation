@@ -13,6 +13,7 @@ public class UiHelper {
     private final WaitHelper waitHelper = new WaitHelper();
 
     public void clickOnWebElement(final WebElement target) {
+        logger.info("Click on {} button", target.getText());
         waitHelper.waitElementToBeClickable(target);
         target.click();
     }

@@ -1,4 +1,4 @@
-package com.epam.steps.common;
+package com.common;
 
 import com.epam.helpers.SharedTestData;
 import com.epam.pages.main.AdminPage;
@@ -12,7 +12,6 @@ import io.cucumber.java.BeforeAll;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -41,12 +40,12 @@ public class LoginSteps extends BaseSteps {
         loginPage.goToPage();
     }
 
-    @Given("Enter email {} in login page")
+    @Given("Fill email {} in login page")
     public void fillEmailInLoginPage(String email) {
         loginPage.fillEmail(email);
     }
 
-    @And("Enter password {} in login page")
+    @And("Fill password {} in login page")
     public void fillPasswordInLoginPage(String password) {
         loginPage.fillPassword(password);
     }
@@ -61,8 +60,8 @@ public class LoginSteps extends BaseSteps {
         assertThat(roleName).isEqualToIgnoringCase(superAdminPage.getRoleName());
     }
 
-    @When("Enter {} and {} fields")
-    public void leaveBlankOrIncorrectUsernameAndOrPasswordField(String email, String password) {
+    @Given("Fill {} and {} fields")
+    public void fillEmailAndPassword(String email, String password) {
         loginPage.fillEmail(email);
         loginPage.fillPassword(password);
     }
@@ -77,7 +76,7 @@ public class LoginSteps extends BaseSteps {
     @And("Fill in all required fields")
     public void fillInAllRequiredFields() {
         createPopup.fillAllFields();
-        createPopup.doubleClickOnGeneratePasswordButton();
+        createPopup.clickOnGeneratePasswordButton();
     }
 
     @Then("Sign in as admin with generated password")

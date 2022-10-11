@@ -2,6 +2,7 @@ package com.epam.pages.popup;
 
 import com.epam.helpers.SharedTestData;
 import com.epam.pages.common.CommonPopup;
+import com.epam.pages.main.SuperAdminPage;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -36,9 +37,15 @@ public class CreatePopup extends CommonPopup {
     }
 
     public void fillNameWithMoreSymbols() {
-        String generatedString = RandomStringUtils.random(50, true, true);
+        String generatedString = RandomStringUtils.random(51, true, true);
         uiHelper.sendKeys(nameInput, generatedString);
         logger.info("50 symbols in name field are {}", generatedString);
+    }
+
+    public void fillExistedName() {
+        String name = new SuperAdminPage().getNameOfLastCreatedUser();
+        uiHelper.sendKeys(nameInput, name);
+        SharedTestData.setSurnameField(name);
     }
 
     public void fillSurname(String surname) {
@@ -47,9 +54,15 @@ public class CreatePopup extends CommonPopup {
     }
 
     public void fillSurnameWithMoreSymbols() {
-        String generatedString = RandomStringUtils.random(50, true, true);
+        String generatedString = RandomStringUtils.random(51, true, true);
         uiHelper.sendKeys(surnameInput, generatedString);
         logger.info("50 symbols in surname field are {}", generatedString);
+    }
+
+    public void fillExistedSurname() {
+        String surname = new SuperAdminPage().getSurnameOfLastCreatedUser();
+        uiHelper.sendKeys(surnameInput, surname);
+        SharedTestData.setSurnameField(surname);
     }
 
     public void fillEmail(String email) {
@@ -58,38 +71,32 @@ public class CreatePopup extends CommonPopup {
     }
 
     public void fillEmailWithMoreSymbols() {
-        String generatedString = RandomStringUtils.random(50, true, true);
+        String generatedString = RandomStringUtils.random(51, true, true);
         uiHelper.sendKeys(emailInput, generatedString);
         logger.info("50 symbols in email input are {}", generatedString);
     }
 
     public void fillInvalidEmail() {
-        uiHelper.sendKeys(emailInput, SharedTestData.getInvalidEmail());
+        uiHelper.sendKeys(
+                emailInput,
+                String.format("!!%sgmail.com", RandomStringUtils.random(7, true, true))
+        );
     }
 
     public void fillExistedEmail() {
-        uiHelper.sendKeys(emailInput, SharedTestData.getExistedEmail());
+        uiHelper.sendKeys(emailInput, "petrosyan@gmail.com");
     }
 
     public void fillAllFields() {
         fillName("Davit");
         fillSurname("Balabekyan");
-        fillEmail(System.currentTimeMillis() + "@gmail.com");
-    }
-
-    private void clickOnGeneratePasswordButtonInternal() {
-        uiHelper.clickOnWebElement(generatePasswordButton);
+        String generatedString = RandomStringUtils.random(7, true, true);
+        fillEmail(String.format("%s@gmail.com", generatedString));
     }
 
     public void clickOnGeneratePasswordButton() {
-        clickOnGeneratePasswordButtonInternal();
+        uiHelper.clickOnWebElement(generatePasswordButton);
         SharedTestData.setLastGeneratedPassword(passwordInput.getDomProperty("value"));
-    }
-
-    public void doubleClickOnGeneratePasswordButton() {
-        clickOnGeneratePasswordButtonInternal();
-        password = passwordInput.getDomProperty("value");
-        clickOnGeneratePasswordButton();
     }
 
     public boolean checkAllFieldsArePresent() {
@@ -113,31 +120,42 @@ public class CreatePopup extends CommonPopup {
     }
 
     public boolean checkGeneratedPasswordIsFilled() {
+        logger.info("Check password field is filled");
         return !passwordInput.getDomProperty("value").isEmpty();
     }
 
     public boolean checkGeneratePasswordButtonIsEnabled() {
+        logger.info("Check 'Generate password' button is active");
         return generatePasswordButton.isEnabled();
     }
 
     public boolean checkGeneratedPasswordStructure() {
+        logger.info("Check generated password structure");
         return passwordInput.getDomProperty("value")
-                .matches("(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$#!%*?&])[A-Za-z\\d@$!#%*?&]{9,50}");
+                .matches("(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$#!%*?&])[A-Za-z\\d@#$%&*()]{9,50}");
     }
 
     public boolean checkThePasswordFieldIsDisabled() {
+        logger.info("Check the password field is readonly");
         return Boolean.parseBoolean(passwordInput.getAttribute("readonly"));
     }
 
+    public void setPassword() {
+        password = passwordInput.getDomProperty("value");
+    }
+
     public boolean passwordIsChanged() {
+        logger.info("Check password is changed after generating a new password");
         return !password.equals(SharedTestData.getLastGeneratedPassword());
     }
 
     public String getInvalidEmailErrorMessage() {
+        logger.info("Get error message of invalid inputted email");
         return emailInvalidAndExistedErrorMessage.getText();
     }
 
     public boolean checkErrorMessagesOfBlankInputFields() {
+        logger.info("Check error messages of blank input fields");
         return errorMessagesOfBlankInputFields
                 .stream()
                 .allMatch(errMessage -> errMessage.getText()
@@ -145,6 +163,7 @@ public class CreatePopup extends CommonPopup {
     }
 
     public boolean checkErrorMessagesOfMoreSymbolsFilledInputFields() {
+        logger.info("Check error messages for inputting more than 50 symbols");
         return errorMessagesOfMoreSymbols
                 .stream()
                 .allMatch(errMessage -> errMessage.getText()
@@ -152,10 +171,12 @@ public class CreatePopup extends CommonPopup {
     }
 
     public String getErrorMessageOfExistedEmail() {
+        logger.info("Get error message of existed email");
         return emailInvalidAndExistedErrorMessage.getText();
     }
 
     public boolean popupIsClosed() {
+        logger.info("Popup is closed");
         return !popupWindow.isDisplayed();
     }
 }

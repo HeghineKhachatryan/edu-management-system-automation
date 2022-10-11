@@ -6,16 +6,10 @@ import org.openqa.selenium.support.FindBy;
 
 public class CommonPopup extends BasePage {
 
-    @FindBy(tagName = "h1")
-    protected WebElement title;
     @FindBy(id = "submit")
     protected WebElement saveButton;
     @FindBy(className = "close-btn")
     protected WebElement xButton;
-
-    public String getTitle() {
-        return title.getText();
-    }
 
     public void clickOnSaveButton() {
         logger.info("Click on save button");

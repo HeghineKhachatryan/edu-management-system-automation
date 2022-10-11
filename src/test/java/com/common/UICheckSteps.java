@@ -1,4 +1,4 @@
-package com.epam.steps.common;
+package com.common;
 
 import com.epam.pages.main.LoginPage;
 import com.epam.pages.main.SuperAdminPage;
