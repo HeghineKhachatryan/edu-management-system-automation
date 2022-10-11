@@ -1,5 +1,5 @@
 Feature: Super admin page/ Admin section functionality
-  This feature will cover admin section of super admin page, especially: creating new,
+  This feature will cover admin section of super admin page, especially: creating new admins,
   adding new created admins to database, checking functionality of different buttons on the given page
 
   Background: Login as super admin and click on create button
