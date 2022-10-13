@@ -22,11 +22,6 @@ public class CreateUserSteps extends BaseSteps {
         createPopup = new CreatePopup();
     }
 
-    @Given("Fill in name fill more than 50 symbols")
-    public void fillInNameFillMoreThanSymbols() {
-        createPopup.fillNameWithMoreSymbols();
-    }
-
     @Given("Fill invalid email")
     public void fillInvalidEmail() {
         createPopup.fillInvalidEmail();
@@ -73,28 +68,24 @@ public class CreateUserSteps extends BaseSteps {
                 .isTrue();
     }
 
-    @And("Double click on 'Generate password' button")
-    public void doubleClickOnGeneratePasswordButton() {
-        createPopup.doubleClickOnGeneratePasswordButton();
+    @Given("Fill existed name and surname")
+    public void fillExistedNameAndSurname() {
+        createPopup.fillExistedName();
+        createPopup.fillExistedSurname();
     }
 
-    @And("Fill in surname fill more than 50 symbols")
-    public void fillInSurnameFillMoreThanSymbols() {
-        createPopup.fillSurnameWithMoreSymbols();
+    @And("Get value from password input field")
+    public void getGeneratedPasswordFromInputField() {
+        createPopup.setPassword();
     }
 
-    @And("Fill in email fill more than 50 symbols")
-    public void fillInEmailFillMoreThanSymbols() {
-        createPopup.fillEmailWithMoreSymbols();
-    }
-
-    @Then("Password is changed")
+    @And("Check the generated password has been changed")
     public void passwordIsChanged() {
         assertThat(createPopup.passwordIsChanged())
                 .isTrue();
     }
 
-    @Then("Click on 'create' button and open popup")
+    @And("Click on 'create' button and open popup")
     public void clickOnCreateButtonAndOpenPopup() {
         superAdminPage.clickOnCreateButton();
     }
@@ -144,5 +135,17 @@ public class CreateUserSteps extends BaseSteps {
     public void checkErrorMessageOfExistedEmail() {
         assertThat(createPopup.getErrorMessageOfExistedEmail())
                 .isEqualTo("A user with the specified email already exists");
+    }
+
+    @Then("Check 'Generate password' button is active")
+    public void checkGeneratePasswordButtonIsActive() {
+        assertThat(createPopup.checkGeneratePasswordButtonIsEnabled())
+                .isTrue();
+    }
+
+    @Then("Check the user is not able to input any data in the password field")
+    public void theUserIsNotAbleToInputAnyDataInPasswordField() {
+        assertThat(createPopup.checkThePasswordFieldIsDisabled())
+                .isTrue();
     }
 }

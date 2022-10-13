@@ -31,20 +31,22 @@ public class LoginPage extends BasePage {
         uiHelper.clickOnWebElement(loginButton);
     }
 
-    public void enterLastGeneratedPassword() {
-        String password = SharedTestData.getLastGeneratedPassword();
-        logger.info("Fill last generated password {}", password);
-        uiHelper.sendKeys(passwordInput, password);
-    }
-
     public void enterLastGeneratedEmail() {
         String email = SharedTestData.getLastGeneratedEmail();
         logger.info("Fill last generated email {}", email);
         uiHelper.sendKeys(emailInput, email);
     }
 
+    public void enterLastGeneratedPassword() {
+        String password = SharedTestData.getLastGeneratedPassword();
+        logger.info("Fill last generated password {}", password);
+        uiHelper.sendKeys(passwordInput, password);
+    }
+
     public String getErrorMessage() {
-        return errorMessage.getText();
+        String errMessage = errorMessage.getText();
+        logger.info("Get error message - {}", errMessage);
+        return errMessage;
     }
 
     public boolean checkAllElementsArePresent() {

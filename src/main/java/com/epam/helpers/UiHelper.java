@@ -5,7 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class UiHelper {
 
@@ -13,6 +12,7 @@ public class UiHelper {
     private final WaitHelper waitHelper = new WaitHelper();
 
     public void clickOnWebElement(final WebElement target) {
+        logger.info("Click on {} button", target.getText());
         waitHelper.waitElementToBeClickable(target);
         target.click();
     }
@@ -28,11 +28,5 @@ public class UiHelper {
 
     public boolean checkElementsAreEmpty(WebElement... elements) {
         return Arrays.stream(elements).allMatch(element -> element.getText().isEmpty());
-    }
-
-    public boolean checkElementsAreDisplayed(List<WebElement> list, WebElement... elements) {
-        return !list.isEmpty()
-                && list.stream().allMatch(WebElement::isDisplayed)
-                && Arrays.stream(elements).allMatch(WebElement::isDisplayed);
     }
 }

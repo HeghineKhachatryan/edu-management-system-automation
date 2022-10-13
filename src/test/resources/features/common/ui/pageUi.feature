@@ -7,6 +7,13 @@ Feature: UI of pages
 
   @TC1.7.7 @Regression
   Scenario: Check UI of super admin page
-    Given Enter super@gmail.com and Sa1234567+ fields
+    Given Fill super@gmail.com and Sa1234567+ fields
     And Click on 'login' button
     Then Check all elements are present in super admin page
+
+  @TC1.6.1 @Regression @Smoke
+  Scenario: Check UI of create popup in super admin dashboard
+    Given Fill super@gmail.com and Sa1234567+ fields
+    And Click on 'login' button
+    And Click on 'create' button and open popup
+    Then Check all fields are present in create popup
