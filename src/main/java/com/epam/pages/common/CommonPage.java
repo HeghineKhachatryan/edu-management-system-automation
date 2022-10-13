@@ -15,7 +15,7 @@ public abstract class CommonPage extends BasePage {
     @FindBy(id = "show-btn")
     protected WebElement createButton;
     @FindBy(className = "list")
-    protected List<WebElement> list;
+    protected WebElement list;
     @FindBy(xpath = "//div[@class='list-items']/p")
     protected List<WebElement> listItems;
     @FindBy(linkText = "Settings")

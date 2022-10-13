@@ -102,21 +102,25 @@ public class CreatePopup extends CommonPopup {
     public boolean checkAllFieldsArePresent() {
         logger.info("Check fields name, surname, email, password, save button," +
                 "generate password button, X button are displayed in create popup");
-        return uiHelper.checkElementsAreDisplayed(nameInput,
+        return uiHelper.checkElementsAreDisplayed(
+                nameInput,
                 surnameInput,
                 emailInput,
                 passwordInput,
                 saveButton,
                 generatePasswordButton,
-                xButton);
+                xButton
+        );
     }
 
     public boolean checkAllInputFieldsAreEmpty() {
         logger.info("Check fields name, surname, email, password are displayed in create popup");
-        return uiHelper.checkElementsAreEmpty(nameInput,
+        return uiHelper.checkElementsAreEmpty(
+                nameInput,
                 surnameInput,
                 emailInput,
-                passwordInput);
+                passwordInput
+        );
     }
 
     public boolean checkGeneratedPasswordIsFilled() {
