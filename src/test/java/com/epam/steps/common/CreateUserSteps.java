@@ -22,11 +22,6 @@ public class CreateUserSteps extends BaseSteps {
         createPopup = new CreatePopup();
     }
 
-    @Given("Fill invalid email")
-    public void fillInvalidEmail() {
-        createPopup.fillInvalidEmail();
-    }
-
     @When("Fill existed email")
     public void fillExistedEmail() {
         createPopup.fillExistedEmail();
@@ -74,9 +69,9 @@ public class CreateUserSteps extends BaseSteps {
         createPopup.fillExistedSurname();
     }
 
-    @And("Get value from password input field")
+    @And("Save value from password input field")
     public void getGeneratedPasswordFromInputField() {
-        createPopup.setPassword();
+        createPopup.savePasswordValue();
     }
 
     @And("Check the generated password has been changed")
@@ -147,5 +142,10 @@ public class CreateUserSteps extends BaseSteps {
     public void theUserIsNotAbleToInputAnyDataInPasswordField() {
         assertThat(createPopup.checkThePasswordFieldIsDisabled())
                 .isTrue();
+    }
+
+    @And("Save value from email input field")
+    public void getValueFromEmailInputField() {
+        createPopup.saveEmailValue();
     }
 }

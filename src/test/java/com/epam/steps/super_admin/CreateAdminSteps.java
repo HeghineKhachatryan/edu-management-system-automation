@@ -37,9 +37,7 @@ public class CreateAdminSteps extends BaseSteps {
 
     @Given("Fill in input fields more than 50 symbols")
     public void typeInInputFieldsMoreThan50Symbols() {
-        createPopup.fillNameWithMoreSymbols();
-        createPopup.fillSurnameWithMoreSymbols();
-        createPopup.fillEmailWithMoreSymbols();
+        createPopup.fillInputFieldsWithMoreSymbols();
     }
 
     @Then("Check new Admin is displayed on the Admins section")
