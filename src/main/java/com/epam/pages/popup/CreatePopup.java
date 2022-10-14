@@ -32,34 +32,37 @@ public class CreatePopup extends CommonPopup {
     protected WebElement popupWindow;
     @FindBy(xpath = "//input[not(@readonly)]")
     protected List<WebElement> inputFields;
-    private String password;
 
     public void fillName(String name) {
         uiHelper.sendKeys(nameInput, name);
-        SharedTestData.setNameField(name);
     }
 
     public void fillExistedName() {
         String name = new SuperAdminPage().getNameOfLastCreatedUser();
-        uiHelper.sendKeys(nameInput, name);
-        SharedTestData.setSurnameField(name);
+        fillName(name);
     }
 
     public void fillSurname(String surname) {
         uiHelper.sendKeys(surnameInput, surname);
-        SharedTestData.setSurnameField(surname);
     }
 
     public void fillExistedSurname() {
         String surname = new SuperAdminPage().getSurnameOfLastCreatedUser();
-        uiHelper.sendKeys(surnameInput, surname);
-        SharedTestData.setSurnameField(surname);
+        fillSurname(surname);
     }
 
     public void fillEmail(String email) {
         logger.info("Fill email {}", email);
         uiHelper.sendKeys(emailInput, email);
-        SharedTestData.setLastGeneratedEmail(email);
+    }
+
+    public void setEmail() {
+        SharedTestData.setLastGeneratedEmail(emailInput.getDomProperty("value"));
+    }
+
+    public void setNameAndSurname() {
+        SharedTestData.setNameField(nameInput.getDomProperty("value"));
+        SharedTestData.setSurnameField(surnameInput.getDomProperty("value"));
     }
 
     public void fillInputFieldsWithMoreSymbols() {
@@ -80,7 +83,7 @@ public class CreatePopup extends CommonPopup {
         uiHelper.sendKeys(emailInput, "petrosyan@gmail.com");
     }
 
-    public void fillAllFields() {
+    public void fillNameSurnameEmail() {
         fillName("Davit");
         fillSurname("Balabekyan");
         String generatedString = RandomStringUtils.random(7, true, true);
@@ -89,7 +92,6 @@ public class CreatePopup extends CommonPopup {
 
     public void clickOnGeneratePasswordButton() {
         uiHelper.clickOnWebElement(generatePasswordButton);
-        SharedTestData.setLastGeneratedPassword(passwordInput.getDomProperty("value"));
     }
 
     public boolean checkAllFieldsArePresent() {
@@ -138,12 +140,14 @@ public class CreatePopup extends CommonPopup {
     }
 
     public void setPassword() {
-        password = passwordInput.getDomProperty("value");
+        SharedTestData.setLastGeneratedPassword(passwordInput.getDomProperty("value"));
     }
 
     public boolean passwordIsChanged() {
         logger.info("Check password is changed after generating a new password");
-        return !password.equals(SharedTestData.getLastGeneratedPassword());
+        return !passwordInput
+                .getDomProperty("value")
+                .equals(SharedTestData.getLastGeneratedPassword());
     }
 
     public String getInvalidEmailErrorMessage() {

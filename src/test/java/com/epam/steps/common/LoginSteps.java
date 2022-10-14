@@ -75,7 +75,7 @@ public class LoginSteps extends BaseSteps {
 
     @And("Fill in all required fields")
     public void fillInAllRequiredFields() {
-        createPopup.fillAllFields();
+        createPopup.fillNameSurnameEmail();
         createPopup.clickOnGeneratePasswordButton();
     }
 
@@ -87,5 +87,12 @@ public class LoginSteps extends BaseSteps {
         loginPage.clickOnLoginButton();
         assertThat(adminPage.getNameAndSurname())
                 .contains(SharedTestData.getNameField(), SharedTestData.getSurnameField());
+    }
+
+    @And("Get and save values from name, surname and email fields")
+    public void getAndSaveValuesFromRequiredFields() {
+        createPopup.setEmail();
+        createPopup.setPassword();
+        createPopup.setNameAndSurname();
     }
 }

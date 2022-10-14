@@ -64,7 +64,7 @@ Feature: This feature will cover possible scenarios of checking password input i
       | parents  |
 
 
-  @TC1.8.6 @TC1.10.9 @TC1.9.10 @Regression @Smoke
+  @TC1.8.6 @TC1.9.10 @TC1.10.9 @Regression @Smoke
   Scenario Outline: Check structure of email
     When Select <section> section
     And Click on 'create' button and open popup

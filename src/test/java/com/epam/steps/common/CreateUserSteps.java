@@ -148,4 +148,9 @@ public class CreateUserSteps extends BaseSteps {
         assertThat(createPopup.checkThePasswordFieldIsDisabled())
                 .isTrue();
     }
+
+    @And("Get value from email input field")
+    public void getValueFromEmailInputField() {
+        createPopup.setEmail();
+    }
 }
