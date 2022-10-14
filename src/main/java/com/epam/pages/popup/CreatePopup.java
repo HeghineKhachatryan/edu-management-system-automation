@@ -3,7 +3,6 @@ package com.epam.pages.popup;
 import com.epam.helpers.SharedTestData;
 import com.epam.pages.common.CommonPopup;
 import com.epam.pages.main.SuperAdminPage;
-import com.epam.pages.main.AdminPage;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -70,13 +69,6 @@ public class CreatePopup extends CommonPopup {
         logger.info("50 symbols in name field are {}", generatedString);
         inputFields
                 .forEach(fields -> uiHelper.sendKeys(fields, generatedString));
-    }
-
-    public void fillInvalidEmail() {
-        uiHelper.sendKeys(
-                emailInput,
-                String.format("!!%sgmail.com", RandomStringUtils.random(7, true, true))
-        );
     }
 
     public void fillExistedEmail() {

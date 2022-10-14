@@ -68,16 +68,21 @@ Feature: This feature will cover possible scenarios of checking password input i
   Scenario Outline: Check structure of email
     When Select <section> section
     And Click on 'create' button and open popup
-    And Fill invalid email
+    And Fill email <invalid>
     And Click on 'Save' button
     Then Check invalid email error message
 
     Examples:
-      | section  |
-      | teachers |
-      | students |
-      | parents  |
-
+      | section  | invalid             |
+      | teachers | !!invalid@gmail.com |
+      | students | invalid{@gmail.com  |
+      | parents  | invalidgmail.com    |
+      | teachers | invalid@gmailcom    |
+      | students | invalid@gmail.c1om  |
+      | parents  | invalid@gmail.COM   |
+      | teachers | invalid@gmail-.com  |
+      | students | invalid@gm--ail.com |
+      | parents  | invalid@gm.ail.com  |
 
   @TC1.8.7 @TC1.9.6 @TC1.10.6 @Regression @Smoke
   Scenario Outline: Check the creation of the new user after filling in not all the required fields

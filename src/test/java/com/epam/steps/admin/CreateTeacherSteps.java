@@ -8,7 +8,7 @@ import io.cucumber.java.en.When;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AdminStepsTeacherSection {
+public class CreateTeacherSteps {
     private final AdminPage adminPage = new AdminPage();
     private final CreatePopup createPopup = new CreatePopup();
 

@@ -37,10 +37,22 @@ Feature: Super admin page/ Admin section functionality
     Then Check error messages of more symbols filled input fields
 
   @TC1.6.6 @Regression @Smoke
-  Scenario: Check email structure when creating new admin
-    Given Fill invalid email
+  Scenario Outline: Check email structure when creating new admin
+    And Fill email <invalid>
     And Click on 'Save' button
     Then Check invalid email error message
+
+    Examples:
+      | invalid             |
+      | !!invalid@gmail.com |
+      | invalid{@gmail.com  |
+      | invalidgmail.com    |
+      | invalid@gmailcom    |
+      | invalid@gmail.c1om  |
+      | invalid@gmail.COM   |
+      | invalid@gmail-.com  |
+      | invalid@gm--ail.com |
+      | invalid@gm.ail.com  |
 
   @TC1.6.7 @Regression @Smoke
   Scenario: Check mandatoriness of all input fields
@@ -78,7 +90,7 @@ Feature: Super admin page/ Admin section functionality
   @TC1.6.12 @Regression @Smoke
   Scenario: Check possibility of creating new admin with an existing 'Admin name' and 'Admin Surname'
     Given Fill existed name and surname
-    And Fill email nervaynacnelyan1@mail.ru
+    And Fill email myvalid@gmail.com
     And Click on 'Generate password' button
     And Get and save values from name, surname and email fields
     And Click on 'Save' button

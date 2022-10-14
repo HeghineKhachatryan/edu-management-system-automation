@@ -22,11 +22,6 @@ public class CreateUserSteps extends BaseSteps {
         createPopup = new CreatePopup();
     }
 
-    @Given("Fill invalid email")
-    public void fillInvalidEmail() {
-        createPopup.fillInvalidEmail();
-    }
-
     @When("Fill existed email")
     public void fillExistedEmail() {
         createPopup.fillExistedEmail();
