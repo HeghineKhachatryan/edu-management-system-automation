@@ -3,6 +3,7 @@ package com.epam.pages.popup;
 import com.epam.helpers.SharedTestData;
 import com.epam.pages.common.CommonPopup;
 import com.epam.pages.main.SuperAdminPage;
+import com.epam.pages.main.AdminPage;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,6 +30,8 @@ public class CreatePopup extends CommonPopup {
     protected List<WebElement> errorMessagesOfMoreSymbols;
     @FindBy(id = "popup-container")
     protected WebElement popupWindow;
+    @FindBy(xpath = "//input[not(@readonly)]")
+    protected List<WebElement> inputFields;
     private String password;
 
     public void fillName(String name) {
@@ -66,14 +69,16 @@ public class CreatePopup extends CommonPopup {
     }
 
     public void fillEmail(String email) {
+        logger.info("Fill email {}", email);
         uiHelper.sendKeys(emailInput, email);
         SharedTestData.setLastGeneratedEmail(email);
     }
 
-    public void fillEmailWithMoreSymbols() {
+    public void fillInputFieldsWithMoreSymbols() {
         String generatedString = RandomStringUtils.random(51, true, true);
-        uiHelper.sendKeys(emailInput, generatedString);
-        logger.info("50 symbols in email input are {}", generatedString);
+        logger.info("50 symbols in name field are {}", generatedString);
+        inputFields
+                .forEach(fields -> uiHelper.sendKeys(fields, generatedString));
     }
 
     public void fillInvalidEmail() {
@@ -136,7 +141,7 @@ public class CreatePopup extends CommonPopup {
     public boolean checkGeneratedPasswordStructure() {
         logger.info("Check generated password structure");
         return passwordInput.getDomProperty("value")
-                .matches("(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$#!%*?&])[A-Za-z\\d@#$%&*()]{9,50}");
+                .matches("(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$#!%*?&])[A-Za-z\\dd()`~@$!^#*%-_?+=|&]{9,50}");
     }
 
     public boolean checkThePasswordFieldIsDisabled() {
