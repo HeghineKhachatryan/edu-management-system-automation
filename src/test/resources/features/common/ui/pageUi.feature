@@ -23,5 +23,5 @@ Feature: UI of pages
     When Fill heghine9696@gmail.com and 2kB$8tU#1aO( fields
     And Click on 'login' button
     When Select teachers section
-    And Click on create button on admin page
+    And Click on 'create' button and open popup
     Then Check all fields are present in create popup

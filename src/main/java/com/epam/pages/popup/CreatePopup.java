@@ -129,7 +129,7 @@ public class CreatePopup extends CommonPopup {
     public boolean checkGeneratedPasswordStructure() {
         logger.info("Check generated password structure");
         return passwordInput.getDomProperty("value")
-                .matches("(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$#!%*?&])[A-Za-z\\d()`~@$!^#*%-_?+=|&]{9,50}");
+                .matches("(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$#!%*?&])[A-Za-z\\d()`~@$?!\"'^#*:.,;<>%-_+=|/{}&]{9,50}");
     }
 
     public boolean checkThePasswordFieldIsDisabled() {

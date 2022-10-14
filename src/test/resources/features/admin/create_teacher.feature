@@ -6,26 +6,15 @@ Feature: Admin page/ Teacher section functionality
     Given Fill heghine9696@gmail.com and 2kB$8tU#1aO( fields
     And Click on 'login' button
     When Select teachers section
-    And Click on create button on admin page
+    And Click on 'create' button and open popup
 
   @TC1.8.2 @Regression @Smoke
   Scenario: Check functionality of 'X' button in create popup
     And Fill in all required fields
     And Click on 'X' button
-    And Click on create button on admin page
+    And Click on 'create' button and open popup
     Then Check all input fields are empty in create popup
     And Check teacher is not added in the DB
-
-  @TC1.8.5 @Regression @Smoke
-  Scenario: Check validations/errors for Teacher name, Teacher surname and Teacher email input fields
-    And Fill in input fields more than 50 symbols
-    And Click on 'Save' button
-    Then Check error messages of more symbols filled input fields
-
-  @TC1.8.7 @Regression @Smoke
-  Scenario: Check mandatoriness of all input fields
-    And Click on 'Save' button
-    Then Check error messages of blank input fields
 
   @TC1.8.9 @Regression @Smoke
   Scenario: Check uniqueness of the Teacher email

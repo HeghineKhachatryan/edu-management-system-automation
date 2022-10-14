@@ -22,11 +22,6 @@ public class AdminStepsTeacherSection {
         adminPage.selectSection(section);
     }
 
-    @And("Click on create button on admin page")
-    public void clickOnCreateButtonOnAdminPage(){
-        adminPage.clickOnCreateButton();
-    }
-
     @And("Fill in existed name, surname")
     public void fillInNameSurname() {
         createPopup.fillExistedName();

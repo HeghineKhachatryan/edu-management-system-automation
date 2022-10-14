@@ -77,3 +77,32 @@ Feature: This feature will cover possible scenarios of checking password input i
       | teachers |
       | students |
       | parents  |
+
+
+  @TC1.8.7 @TC1.9.6 @TC1.10.6 @Regression @Smoke
+  Scenario Outline: Check the creation of the new user after filling in not all the required fields
+    When Select <section> section
+    And Click on 'create' button and open popup
+    And Click on 'Save' button
+    Then Check error messages of blank input fields
+
+    Examples:
+      | section  |
+      | teachers |
+      | students |
+      | parents  |
+
+
+  @TC1.8.5 @TC1.9.16 @TC1.10.20 @Regression @Smoke
+  Scenario Outline: Check validations/error messages for input fields when filled more than 50 symbols
+    When Select <section> section
+    And Click on 'create' button and open popup
+    And Fill in input fields more than 50 symbols
+    And Click on 'Save' button
+    Then Check error messages of more symbols filled input fields
+
+    Examples:
+      | section  |
+      | teachers |
+      | students |
+      | parents  |
