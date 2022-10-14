@@ -65,6 +65,4 @@ public class AdminPage extends CommonPage {
                 .getPassword()
                 .equals(SharedTestData.getLastGeneratedPassword());
     }
-
-
 }

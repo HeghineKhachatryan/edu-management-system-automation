@@ -1,5 +1,5 @@
 Feature: This feature will cover possible scenarios of checking password input in create popup of admin page,
-  especially on teachers, students, parent section.
+  especially on teachers, students, parent sections.
 
   Background:
     Given Fill heghine9696@gmail.com and 2kB$8tU#1aO( fields
@@ -25,7 +25,7 @@ Feature: This feature will cover possible scenarios of checking password input i
     When Select <section> section
     And Click on 'create' button and open popup
     And Click on 'Generate password' button
-    And Get value from password input field
+    And Save value from password input field
     And Click on 'Generate password' button
     Then Check the generated password has been changed
     And Check 'Generate password' button is active
@@ -37,7 +37,7 @@ Feature: This feature will cover possible scenarios of checking password input i
       | parents  |
 
   @TC1.8.10 @TC1.9.13 @TC1.10.14 @Regression @Smoke
-  Scenario Outline: Check possibility to write in Password field/create popup
+  Scenario Outline: Check possibility to write password in create popup
     When Select <section> section
     And Click on 'create' button and open popup
     Then Check the user is not able to input any data in the password field
@@ -68,12 +68,12 @@ Feature: This feature will cover possible scenarios of checking password input i
   Scenario Outline: Check structure of email
     When Select <section> section
     And Click on 'create' button and open popup
-    And Fill email <invalid>
+    And Fill email <invalidEmail>
     And Click on 'Save' button
     Then Check invalid email error message
 
     Examples:
-      | section  | invalid             |
+      | section  | invalidEmail        |
       | teachers | !!invalid@gmail.com |
       | students | invalid{@gmail.com  |
       | parents  | invalidgmail.com    |
@@ -85,7 +85,7 @@ Feature: This feature will cover possible scenarios of checking password input i
       | parents  | invalid@gm.ail.com  |
 
   @TC1.8.7 @TC1.9.6 @TC1.10.6 @Regression @Smoke
-  Scenario Outline: Check the creation of the new user after filling in not all the required fields
+  Scenario Outline: Check the creation of the new user after not filling in all the required fields
     When Select <section> section
     And Click on 'create' button and open popup
     And Click on 'Save' button

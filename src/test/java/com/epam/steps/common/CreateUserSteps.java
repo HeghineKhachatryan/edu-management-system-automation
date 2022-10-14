@@ -69,9 +69,9 @@ public class CreateUserSteps extends BaseSteps {
         createPopup.fillExistedSurname();
     }
 
-    @And("Get value from password input field")
+    @And("Save value from password input field")
     public void getGeneratedPasswordFromInputField() {
-        createPopup.setPassword();
+        createPopup.savePasswordValue();
     }
 
     @And("Check the generated password has been changed")
@@ -144,8 +144,8 @@ public class CreateUserSteps extends BaseSteps {
                 .isTrue();
     }
 
-    @And("Get value from email input field")
+    @And("Save value from email input field")
     public void getValueFromEmailInputField() {
-        createPopup.setEmail();
+        createPopup.saveEmailValue();
     }
 }

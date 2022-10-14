@@ -89,10 +89,10 @@ public class LoginSteps extends BaseSteps {
                 .contains(SharedTestData.getNameField(), SharedTestData.getSurnameField());
     }
 
-    @And("Get and save values from name, surname and email fields")
+    @And("Save values from name, surname and email fields")
     public void getAndSaveValuesFromRequiredFields() {
-        createPopup.setEmail();
-        createPopup.setPassword();
-        createPopup.setNameAndSurname();
+        createPopup.saveEmailValue();
+        createPopup.savePasswordValue();
+        createPopup.saveNameAndSurnameValue();
     }
 }

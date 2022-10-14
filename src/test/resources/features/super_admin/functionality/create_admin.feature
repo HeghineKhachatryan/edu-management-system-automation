@@ -14,7 +14,7 @@ Feature: Super admin page/ Admin section functionality
     And Popup is closed
     And Click on 'create' button and open popup
     Then Check all input fields are empty in create popup
-    And Get value from email input field
+    And Save value from email input field
     And Check admin is not added in the DB
 
   @TC1.6.3 @Regression @Smoke
@@ -25,7 +25,7 @@ Feature: Super admin page/ Admin section functionality
   @TC1.6.4 @Regression @Smoke
   Scenario: Check functionality to regenerate password
     And Click on 'Generate password' button
-    And Get value from password input field
+    And Save value from password input field
     And Click on 'Generate password' button
     And Check the generated password has been changed
     Then Check 'Generate password' button is active
@@ -38,12 +38,12 @@ Feature: Super admin page/ Admin section functionality
 
   @TC1.6.6 @Regression @Smoke
   Scenario Outline: Check email structure when creating new admin
-    And Fill email <invalid>
+    And Fill email <invalidEmail>
     And Click on 'Save' button
     Then Check invalid email error message
 
     Examples:
-      | invalid             |
+      | invalidEmail        |
       | !!invalid@gmail.com |
       | invalid{@gmail.com  |
       | invalidgmail.com    |
@@ -81,7 +81,7 @@ Feature: Super admin page/ Admin section functionality
   Scenario: Check functionality to create new admin using valid credentials
     And Fill in all required fields
     And Click on 'Generate password' button
-    And Get and save values from name, surname and email fields
+    And Save values from name, surname and email fields
     And Click on 'Save' button
     And Popup is closed
     And Check admin is added in the DB
@@ -92,7 +92,7 @@ Feature: Super admin page/ Admin section functionality
     Given Fill existed name and surname
     And Fill email myvalid@gmail.com
     And Click on 'Generate password' button
-    And Get and save values from name, surname and email fields
+    And Save values from name, surname and email fields
     And Click on 'Save' button
     Then Check admin is added in the DB
     Then Check new Admin is displayed on the Admins section
@@ -101,6 +101,6 @@ Feature: Super admin page/ Admin section functionality
   Scenario: Check how password is kept in DB
     And Fill in all required fields
     And Click on 'Generate password' button
-    And Get value from password input field
+    And Save value from password input field
     And Click on 'Save' button
     Then Check the admin password is hashed in the DB

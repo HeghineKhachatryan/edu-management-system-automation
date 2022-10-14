@@ -29,9 +29,9 @@ Feature: Admin page/ Teacher section functionality
   Scenario: Check functionality to create New Teacher using valid credentials
     When Fill in all required fields
     And Click on 'Generate password' button
-    And Get and save values from name, surname and email fields
+    And Save values from name, surname and email fields
     And Click on 'Save' button
-    And Popup is closed
+    Then Popup is closed
     Then Check teacher is added in the DB
     And User is created and displayed in the list
 
@@ -40,7 +40,7 @@ Feature: Admin page/ Teacher section functionality
     When Fill in existed name, surname
     And Fill email nonexisted@gmail.com
     And Click on 'Generate password' button
-    And Get and save values from name, surname and email fields
+    And Save values from name, surname and email fields
     And Click on 'Save' button
     Then Check teacher is added in the DB
     And User is created and displayed in the list
@@ -49,7 +49,7 @@ Feature: Admin page/ Teacher section functionality
   Scenario: Check how password is kept in DB
     And Fill in all required fields
     And Click on 'Generate password' button
-    And Get value from password input field
+    And Save value from password input field
     And Click on 'Save' button
     Then Check the teacher password is hashed in the DB
 

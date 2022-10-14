@@ -55,11 +55,11 @@ public class CreatePopup extends CommonPopup {
         uiHelper.sendKeys(emailInput, email);
     }
 
-    public void setEmail() {
+    public void saveEmailValue() {
         SharedTestData.setLastGeneratedEmail(emailInput.getDomProperty("value"));
     }
 
-    public void setNameAndSurname() {
+    public void saveNameAndSurnameValue() {
         SharedTestData.setNameField(nameInput.getDomProperty("value"));
         SharedTestData.setSurnameField(surnameInput.getDomProperty("value"));
     }
@@ -131,7 +131,7 @@ public class CreatePopup extends CommonPopup {
         return Boolean.parseBoolean(passwordInput.getAttribute("readonly"));
     }
 
-    public void setPassword() {
+    public void savePasswordValue() {
         SharedTestData.setLastGeneratedPassword(passwordInput.getDomProperty("value"));
     }
 
