@@ -27,20 +27,10 @@ public class AdminStepsTeacherSection {
         adminPage.clickOnCreateButton();
     }
 
-    @And("Fill in input fields more than 50 symbols")
-    public void typeInInputFieldsMoreThan50Symbols() {
-        createPopup.fillInputFieldsWithMoreSymbols();
-    }
-
     @And("Fill in existed name, surname")
     public void fillInNameSurname() {
         createPopup.fillExistedName();
         createPopup.fillExistedSurname();
-    }
-
-    @Then("Check the user is not able to input any data in the password field")
-    public void fillInPasswordFieldNoInteractionHappensBecausePasswordFieldIsReadOnly() {
-        assertThat(createPopup.checkThePasswordFieldIsDisabled()).isTrue();
     }
 
     @Then("User is created and displayed in the list")

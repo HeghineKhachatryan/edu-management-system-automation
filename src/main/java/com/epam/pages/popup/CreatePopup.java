@@ -39,12 +39,6 @@ public class CreatePopup extends CommonPopup {
         SharedTestData.setNameField(name);
     }
 
-    public void fillNameWithMoreSymbols() {
-        String generatedString = RandomStringUtils.random(51, true, true);
-        uiHelper.sendKeys(nameInput, generatedString);
-        logger.info("50 symbols in name field are {}", generatedString);
-    }
-
     public void fillExistedName() {
         String name = new SuperAdminPage().getNameOfLastCreatedUser();
         uiHelper.sendKeys(nameInput, name);
@@ -54,12 +48,6 @@ public class CreatePopup extends CommonPopup {
     public void fillSurname(String surname) {
         uiHelper.sendKeys(surnameInput, surname);
         SharedTestData.setSurnameField(surname);
-    }
-
-    public void fillSurnameWithMoreSymbols() {
-        String generatedString = RandomStringUtils.random(51, true, true);
-        uiHelper.sendKeys(surnameInput, generatedString);
-        logger.info("50 symbols in surname field are {}", generatedString);
     }
 
     public void fillExistedSurname() {
