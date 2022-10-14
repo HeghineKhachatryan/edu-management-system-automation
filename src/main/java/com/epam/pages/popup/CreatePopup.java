@@ -26,7 +26,7 @@ public class CreatePopup extends CommonPopup {
     protected WebElement emailInvalidAndExistedErrorMessage;
     @FindBy(xpath = "//input/following-sibling::div[@class='error']")
     protected List<WebElement> errorMessagesOfBlankInputFields;
-    @FindBy(xpath = "//input[not(@id='password')]/following-sibling::div[@class='error']")
+    @FindBy(xpath = "//input[@class='form_input' and not(@readonly)]/following-sibling::div[not(preceding-sibling::input[@id='date'])]")
     protected List<WebElement> errorMessagesOfMoreSymbols;
     @FindBy(id = "popup-container")
     protected WebElement popupWindow;
@@ -141,7 +141,7 @@ public class CreatePopup extends CommonPopup {
     public boolean checkGeneratedPasswordStructure() {
         logger.info("Check generated password structure");
         return passwordInput.getDomProperty("value")
-                .matches("(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$#!%*?&])[A-Za-z\\dd()`~@$!^#*%-_?+=|&]{9,50}");
+                .matches("(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$#!%*?&])[A-Za-z\\d()`~@$!^#*%-_?+=|&]{9,50}");
     }
 
     public boolean checkThePasswordFieldIsDisabled() {
