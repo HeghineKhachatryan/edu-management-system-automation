@@ -13,6 +13,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 
+import static com.epam.helpers.ErrorMessages.INCORRECT_LOGIN_OR_PASSWORD;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LoginSteps extends BaseSteps {
@@ -57,7 +58,9 @@ public class LoginSteps extends BaseSteps {
 
     @Then("The user is on {} page")
     public void theUserIsOnRequestedPage(String roleName) {
-        assertThat(roleName).isEqualToIgnoringCase(superAdminPage.getRoleName());
+        assertThat(roleName)
+                .withFailMessage("The user is not on demanded page as role name is different from expected.")
+                .isEqualToIgnoringCase(superAdminPage.getRoleName());
     }
 
     @Given("Fill {} and {} fields")
@@ -68,9 +71,9 @@ public class LoginSteps extends BaseSteps {
 
     @Then("Check error message")
     public void checkErrorMessage() {
-        assertThat(loginPage
-                .getErrorMessage())
-                .isEqualTo("Incorrect email and/or password");
+        assertThat(loginPage.getErrorMessage())
+                .withFailMessage("Error message for incorrect login/or password was different from expected one.")
+                .isEqualTo(INCORRECT_LOGIN_OR_PASSWORD.getErrorMessage());
     }
 
     @And("Fill in all required fields")
@@ -86,6 +89,7 @@ public class LoginSteps extends BaseSteps {
         loginPage.enterLastGeneratedPassword();
         loginPage.clickOnLoginButton();
         assertThat(adminPage.getNameAndSurname())
+                .withFailMessage("Last created admin's name and surname is not equal to the signed in admin's name and surname.")
                 .contains(SharedTestData.getNameField(), SharedTestData.getSurnameField());
     }
 

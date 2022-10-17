@@ -1,6 +1,7 @@
 package com.epam.pages.popup;
 
 import com.epam.helpers.SharedTestData;
+import com.epam.jdbc.service.UserServiceImpl;
 import com.epam.pages.common.CommonPopup;
 import com.epam.pages.main.SuperAdminPage;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -8,6 +9,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
+
+import static com.epam.helpers.ErrorMessages.*;
 
 public class CreatePopup extends CommonPopup {
 
@@ -53,6 +56,16 @@ public class CreatePopup extends CommonPopup {
     public void fillEmail(String email) {
         logger.info("Fill email {}", email);
         uiHelper.sendKeys(emailInput, email);
+    }
+
+    public void fillNonExistedEmail() {
+        String email = String.format("%s@gmail.com", RandomStringUtils.random(7, true, true));
+        logger.info("Fill non-existed email {}", email);
+        if (new UserServiceImpl().findByEmail(email).getEmail() == null) {
+            fillEmail(email);
+        } else {
+            fillNonExistedEmail();
+        }
     }
 
     public void saveEmailValue() {
@@ -123,7 +136,7 @@ public class CreatePopup extends CommonPopup {
     public boolean checkGeneratedPasswordStructure() {
         logger.info("Check generated password structure");
         return passwordInput.getDomProperty("value")
-                .matches("(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$#!%*?&])[A-Za-z\\d()`~@$?!\"'^#*:.,;<>%-_+=|/{}&]{9,50}");
+                .matches("(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$#!%*?&])[A-Za-z\\d()`~@$?!\"'^#*:.,;<>%-_\\[\\]+=|/{}&]{9,50}");
     }
 
     public boolean checkThePasswordFieldIsDisabled() {
@@ -152,7 +165,7 @@ public class CreatePopup extends CommonPopup {
         return errorMessagesOfBlankInputFields
                 .stream()
                 .allMatch(errMessage -> errMessage.getText()
-                        .equals("Please, fill the required fields"));
+                        .equals(BLANK_INPUT_FIELDS.getErrorMessage()));
     }
 
     public boolean checkErrorMessagesOfMoreSymbolsFilledInputFields() {
@@ -160,7 +173,7 @@ public class CreatePopup extends CommonPopup {
         return errorMessagesOfMoreSymbols
                 .stream()
                 .allMatch(errMessage -> errMessage.getText()
-                        .equals("Symbols cant be more than 50"));
+                        .equals(MORE_THAN_50_SYMBOLS.getErrorMessage()));
     }
 
     public String getErrorMessageOfExistedEmail() {

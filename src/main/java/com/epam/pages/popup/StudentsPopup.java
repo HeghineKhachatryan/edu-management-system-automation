@@ -39,7 +39,6 @@ public class StudentsPopup extends CreatePopup {
         selectBirthday(9, 7, 1996);
         clickOnFieldAndSelectValue("bloodGroup", "B-");
         clickOnFieldAndSelectValue("gender", "Female");
-
     }
 
     public void selectBirthday(int day, int month, int year) {

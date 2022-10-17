@@ -1,5 +1,7 @@
 package com.epam.steps.admin;
 
+import com.epam.helpers.SharedTestData;
+import com.epam.jdbc.service.UserServiceImpl;
 import com.epam.pages.main.AdminPage;
 import com.epam.pages.popup.CreatePopup;
 import com.epam.pages.popup.StudentsPopup;
@@ -9,19 +11,24 @@ import io.cucumber.java.en.When;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AdminStepsStudentSection {
+public class CreateStudentSteps {
     private final AdminPage adminPage = new AdminPage();
     private final StudentsPopup studentsPopup = new StudentsPopup();
     private final CreatePopup createPopup = new CreatePopup();
+    private final UserServiceImpl userService = new UserServiceImpl();
 
     @Then("See all elements are present in student section")
     public void seeAllElementsArePresentInStudentSection() {
-        assertThat(adminPage.checkUIofStudentsSection()).isTrue();
+        assertThat(adminPage.checkUIofStudentsSection())
+                .withFailMessage("Elements are not present in student section")
+                .isTrue();
     }
 
     @Then("Check all fields are present in create popup - students section")
     public void checkAllFieldsArePresentInCreatePopupStudentsSection() {
-        assertThat(studentsPopup.checkUIOfCreatePopupStudentsSection()).isTrue();
+        assertThat(studentsPopup.checkUIOfCreatePopupStudentsSection())
+                .withFailMessage("Elements are not present in create popup - student section")
+                .isTrue();
     }
 
     @And("Fill in all required fields in students section create popup")
@@ -33,13 +40,9 @@ public class AdminStepsStudentSection {
 
     @Then("Check all input fields are empty in students section create popup")
     public void checkAllInputFieldsAreEmptyInStudentsSectionCreatePopup() {
-        assertThat(studentsPopup.checkAllFieldsAreEmptyInStudentsCreatePopup()).isTrue();
-    }
-
-    //duplicate in teachers section
-    @When("Select {} section")
-    public void selectSection(String section) {
-        adminPage.selectSection(section);
+        assertThat(studentsPopup.checkAllFieldsAreEmptyInStudentsCreatePopup())
+                .withFailMessage("All input fields are not empty in create popup - student section")
+                .isTrue();
     }
 
     @When("Fill in existed name, surname, all other required fields besides email")
@@ -51,44 +54,66 @@ public class AdminStepsStudentSection {
 
     @When("Click on 'Birth Day' field opens calendar")
     public void clickOnBirthDayFieldOpensCalendar() {
-        assertThat(studentsPopup.checkCalendarIsOpened()).isTrue();
+        assertThat(studentsPopup.checkCalendarIsOpened())
+                .withFailMessage("Calendar is not opened in create popup - students section")
+                .isTrue();
     }
 
     @Then("User is able to select dates between the given interval provided by documentation")
     public void userIsAbleToSelectDatesBetweenTheGivenIntervalProvidedByDocumentation() {
-        assertThat(studentsPopup.isYearFromInterval()).isTrue();
+        assertThat(studentsPopup.isYearFromInterval())
+                .withFailMessage("Selected year is not from the given interval provided by documentation")
+                .isTrue();
     }
 
     @And("The user choice is displayed in the {} field")
     public void theUserChoiceIsDisplayedInTheLinkedClassField(String fieldName) {
-        assertThat(studentsPopup.checkValueOfSelectedField(fieldName)).isTrue();
+        assertThat(studentsPopup.checkValueOfSelectedField(fieldName))
+                .withFailMessage("Saved value of selected fields is not the same with what user sees on screen")
+                .isTrue();
     }
 
     @Then("Check student created by admin is not added in the DB")
     public void checkAdminIsNotAddedInTheDB() {
-        assertThat(adminPage.checkStudentIsNotAddedInTheDB())
+        assertThat(checkStudentIsNotAddedInTheDB())
+                .withFailMessage("Student wasn't meant to be added in the DB, but it was added.")
                 .isTrue();
     }
 
     @Then("Check student created by admin is added in the DB")
     public void checkAdminIsAddedInTheDB() {
-        assertThat(adminPage.checkStudentIsNotAddedInTheDB())
+        assertThat(checkStudentIsNotAddedInTheDB())
+                .withFailMessage("Student was meant to be added in the DB, but wasn't added.")
                 .isFalse();
     }
 
-    //duplicate in teachers section
-    @Then("User is created and displayed in the list")
-    public void userIsCreatedAndDisplayedInTheList() {
-        assertThat(adminPage.checkNewUserIsDisplayedOnAdminsSection()).isTrue();
-    }
-
-    @When("Click on {} field and select {} from the list")
+    @When("Click on {} field having drop-down list and select {} from the list")
     public void clickOnFieldAndSelectAcademicClassNameFromTheList(String fieldName, String valueToSelect) {
         studentsPopup.clickOnFieldAndSelectValue(fieldName, valueToSelect);
     }
 
     @And("Check that 'Linked Parent' and 'Linked Class' fields are not selected")
     public void checkThatLinkedParentAndLinkedClassFieldsAreNotSelected() {
-        assertThat(studentsPopup.areLinkedClassAndParentSelected()).isFalse();
+        assertThat(studentsPopup.areLinkedClassAndParentSelected())
+                .withFailMessage("'Linked Parent' and 'Linked Class' fields are selected, but they shouldn't be.")
+                .isFalse();
+    }
+
+
+    @Then("Check the student password is hashed in the DB")
+    public void checkTheStudentPasswordIsHashedInTheDB() {
+        assertThat(passwordIsHashed())
+                .withFailMessage("Password was not hashed in the DB.")
+                .isTrue();
+    }
+
+    private boolean checkStudentIsNotAddedInTheDB() {
+        return userService.findByEmail(SharedTestData.getLastGeneratedEmail()).getEmail() == null;
+    }
+
+    private boolean passwordIsHashed() {
+        return !userService.findStudentPasswordByEmail(
+                        SharedTestData.getLastGeneratedEmail())
+                .equals(SharedTestData.getLastGeneratedPassword());
     }
 }
