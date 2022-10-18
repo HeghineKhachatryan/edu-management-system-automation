@@ -38,14 +38,14 @@ public class CreateTeacherSteps extends BaseSteps {
     }
 
     @Then("Check teacher is not added in the DB")
-    public void checkAdminIsNotAddedInTheDB() {
+    public void checkTeacherIsNotAddedInTheDB() {
         assertThat(dbHelper.isUserAddedInTheDB())
                 .withFailMessage("Teacher wasn't meant to be added in the DB, but was added.")
                 .isTrue();
     }
 
     @Then("Check teacher is added in the DB")
-    public void checkAdminIsAddedInTheDB() {
+    public void checkTeacherIsAddedInTheDB() {
         assertThat(dbHelper.isUserAddedInTheDB())
                 .withFailMessage("Teacher was meant to be added in the DB, but wasn't added.")
                 .isFalse();
