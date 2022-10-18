@@ -1,6 +1,5 @@
 package com.epam.steps.common;
 
-import com.epam.helpers.ErrorMessages;
 import com.epam.pages.main.SuperAdminPage;
 import com.epam.pages.popup.CreatePopup;
 import com.epam.steps.BaseSteps;

@@ -1,7 +1,5 @@
 package com.epam.steps.super_admin;
 
-import com.epam.helpers.SharedTestData;
-import com.epam.jdbc.service.UserServiceImpl;
 import com.epam.pages.main.SuperAdminPage;
 import com.epam.pages.popup.CreatePopup;
 import com.epam.steps.BaseSteps;
@@ -16,7 +14,6 @@ public class CreateAdminSteps extends BaseSteps {
 
     private SuperAdminPage superAdminPage;
     private CreatePopup createPopup;
-    private final UserServiceImpl userService = new UserServiceImpl();
 
     @Before
     public void initPages() {
@@ -27,7 +24,7 @@ public class CreateAdminSteps extends BaseSteps {
     @And("Check admin is not added in the DB")
     public void checkAdminIsNotAddedInTheDB() {
         logger.info("Check admin is not added in the DB");
-        assertThat(isAdminAddedInTheDB())
+        assertThat(dbHelper.isUserAddedInTheDB())
                 .withFailMessage("Admin is added in the DB, but it shouldn't be")
                 .isTrue();
     }
@@ -35,7 +32,7 @@ public class CreateAdminSteps extends BaseSteps {
     @And("Check admin is added in the DB")
     public void checkAdminIsAddedInTheDB() {
         logger.info("Check admin is added in the DB");
-        assertThat(isAdminAddedInTheDB())
+        assertThat(dbHelper.isUserAddedInTheDB())
                 .withFailMessage("Admin is not added in the DB, but it should be")
                 .isFalse();
     }
@@ -54,18 +51,8 @@ public class CreateAdminSteps extends BaseSteps {
 
     @Then("Check the admin password is hashed in the DB")
     public void checkPasswordIsHashedInTheDB() {
-        assertThat(passwordIsHashed())
+        assertThat(dbHelper.isAdminPasswordHashed())
                 .withFailMessage("Password is not hashed in DB")
                 .isTrue();
-    }
-
-    private boolean passwordIsHashed() {
-        logger.info("Check password is encrypted");
-        return !userService.findAdminPasswordByEmail(SharedTestData.getLastGeneratedEmail())
-                .equals(SharedTestData.getLastGeneratedPassword());
-    }
-
-    private boolean isAdminAddedInTheDB() {
-        return userService.findByEmail(SharedTestData.getLastGeneratedEmail()).getEmail() == null;
     }
 }

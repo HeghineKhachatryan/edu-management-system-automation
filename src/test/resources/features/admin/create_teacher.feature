@@ -11,6 +11,7 @@ Feature: Admin page/ Teacher section functionality
   @TC1.8.2 @Regression @Smoke
   Scenario: Check functionality of 'X' button in create popup
     And Fill in all required fields
+    And Save value from email input field
     And Click on 'X' button
     And Click on 'create' button and open popup
     Then Check all input fields are empty in create popup

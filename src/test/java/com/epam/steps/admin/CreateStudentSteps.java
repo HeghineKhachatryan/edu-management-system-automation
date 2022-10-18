@@ -1,21 +1,19 @@
 package com.epam.steps.admin;
 
-import com.epam.helpers.SharedTestData;
-import com.epam.jdbc.service.UserServiceImpl;
 import com.epam.pages.main.AdminPage;
 import com.epam.pages.popup.CreatePopup;
 import com.epam.pages.popup.StudentsPopup;
+import com.epam.steps.BaseSteps;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CreateStudentSteps {
+public class CreateStudentSteps extends BaseSteps {
     private final AdminPage adminPage = new AdminPage();
     private final StudentsPopup studentsPopup = new StudentsPopup();
     private final CreatePopup createPopup = new CreatePopup();
-    private final UserServiceImpl userService = new UserServiceImpl();
 
     @Then("See all elements are present in student section")
     public void seeAllElementsArePresentInStudentSection() {
@@ -75,14 +73,14 @@ public class CreateStudentSteps {
 
     @Then("Check student created by admin is not added in the DB")
     public void checkAdminIsNotAddedInTheDB() {
-        assertThat(checkStudentIsNotAddedInTheDB())
+        assertThat(dbHelper.isUserAddedInTheDB())
                 .withFailMessage("Student wasn't meant to be added in the DB, but it was added.")
                 .isTrue();
     }
 
     @Then("Check student created by admin is added in the DB")
     public void checkAdminIsAddedInTheDB() {
-        assertThat(checkStudentIsNotAddedInTheDB())
+        assertThat(dbHelper.isUserAddedInTheDB())
                 .withFailMessage("Student was meant to be added in the DB, but wasn't added.")
                 .isFalse();
     }
@@ -102,18 +100,9 @@ public class CreateStudentSteps {
 
     @Then("Check the student password is hashed in the DB")
     public void checkTheStudentPasswordIsHashedInTheDB() {
-        assertThat(passwordIsHashed())
+        assertThat(dbHelper.isStudentPasswordHashed())
                 .withFailMessage("Password was not hashed in the DB.")
                 .isTrue();
     }
 
-    private boolean checkStudentIsNotAddedInTheDB() {
-        return userService.findByEmail(SharedTestData.getLastGeneratedEmail()).getEmail() == null;
-    }
-
-    private boolean passwordIsHashed() {
-        return !userService.findStudentPasswordByEmail(
-                        SharedTestData.getLastGeneratedEmail())
-                .equals(SharedTestData.getLastGeneratedPassword());
-    }
 }

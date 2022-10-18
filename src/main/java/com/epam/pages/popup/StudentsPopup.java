@@ -83,15 +83,18 @@ public class StudentsPopup extends CreatePopup {
         map.put("linkedParent", linkedParent.getText());
         map.put("address", address.getText());
         map.put("birthDay", birthDate.getText());
+        logger.info("Value of selected '{}' field is - {}", fieldName, map.get(fieldName));
         return map.get(fieldName).equals(selectedValue);
     }
 
     public boolean checkCalendarIsOpened() {
+        logger.info("Check calendar is opened.");
         uiHelper.clickOnWebElement(birthDate);
         return uiHelper.checkElementsAreDisplayed(calendar);
     }
 
     public boolean checkUIOfCreatePopupStudentsSection() {
+        logger.info("Check UI of create popup in students section");
         return checkAllFieldsArePresent() &&
                 uiHelper.checkElementsAreDisplayed(
                         address,
@@ -104,6 +107,7 @@ public class StudentsPopup extends CreatePopup {
     }
 
     public boolean checkAllFieldsAreEmptyInStudentsCreatePopup() {
+        logger.info("Check all fields are empty in students section create popup.");
         return checkAllInputFieldsAreEmpty()
                 && !uiHelper.areElementsSelected(
                 linkedClass,
@@ -117,6 +121,7 @@ public class StudentsPopup extends CreatePopup {
     }
 
     public boolean areLinkedClassAndParentSelected() {
+        logger.info("Check if 'linked class' and 'linked parent' fields are selected.");
         return uiHelper.areElementsSelected(linkedClass, linkedParent);
     }
 
