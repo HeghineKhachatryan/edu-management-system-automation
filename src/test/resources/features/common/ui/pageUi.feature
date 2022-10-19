@@ -31,7 +31,7 @@ Feature: UI of pages
     Given Fill heghine9696@gmail.com and 2kB$8tU#1aO( fields
     And Click on 'login' button
     When Select students section
-    Then See all elements are present in student section
+    Then Check all elements are present in student section
 
   @TC1.10.2 @TC1.10.3 @Regression
   Scenario: Check UI of 'create' button in admin dashboard/ students section
@@ -45,4 +45,4 @@ Feature: UI of pages
   Scenario: Check UI of admin page
     Given Fill heghine9696@gmail.com and 2kB$8tU#1aO( fields
     And Click on 'login' button
-    Then See all elements are present on admin page
+    Then Check all elements are present on admin page

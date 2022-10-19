@@ -72,6 +72,19 @@ public class CreateUserSteps extends BaseSteps {
         createPopup.fillExistedSurname();
     }
 
+    @And("Save values from name, surname and email fields")
+    public void getAndSaveValuesFromRequiredFields() {
+        createPopup.saveEmailValue();
+        createPopup.savePasswordValue();
+        createPopup.saveNameAndSurnameValue();
+    }
+
+    @And("Fill in all required fields")
+    public void fillInAllRequiredFields() {
+        createPopup.fillNameSurnameEmail();
+        createPopup.clickOnGeneratePasswordButton();
+    }
+
     @And("Save value from password input field")
     public void getGeneratedPasswordFromInputField() {
         createPopup.savePasswordValue();

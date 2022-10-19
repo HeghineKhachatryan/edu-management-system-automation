@@ -4,7 +4,6 @@ import com.epam.helpers.SharedTestData;
 import com.epam.pages.main.AdminPage;
 import com.epam.pages.main.LoginPage;
 import com.epam.pages.main.SuperAdminPage;
-import com.epam.pages.popup.CreatePopup;
 import com.epam.steps.BaseSteps;
 import io.cucumber.java.AfterAll;
 import io.cucumber.java.Before;
@@ -20,7 +19,6 @@ public class LoginSteps extends BaseSteps {
     private LoginPage loginPage;
     private AdminPage adminPage;
     private SuperAdminPage superAdminPage;
-    private CreatePopup createPopup;
 
     @BeforeAll
     public static void setupDriver() {
@@ -36,7 +34,6 @@ public class LoginSteps extends BaseSteps {
     public void initPages() {
         loginPage = new LoginPage();
         adminPage = new AdminPage();
-        createPopup = new CreatePopup();
         superAdminPage = new SuperAdminPage();
         loginPage.goToPage();
     }
@@ -76,12 +73,6 @@ public class LoginSteps extends BaseSteps {
                 .isEqualTo(INCORRECT_LOGIN_OR_PASSWORD.getErrorMessage());
     }
 
-    @And("Fill in all required fields")
-    public void fillInAllRequiredFields() {
-        createPopup.fillNameSurnameEmail();
-        createPopup.clickOnGeneratePasswordButton();
-    }
-
     @Then("Sign in as admin with generated password")
     public void signInAsAdminWithGeneratedPassword() {
         loginPage.goToPage();
@@ -91,12 +82,5 @@ public class LoginSteps extends BaseSteps {
         assertThat(adminPage.getNameAndSurname())
                 .withFailMessage("Last created admin's name and surname is not equal to the signed in admin's name and surname.")
                 .contains(SharedTestData.getNameField(), SharedTestData.getSurnameField());
-    }
-
-    @And("Save values from name, surname and email fields")
-    public void getAndSaveValuesFromRequiredFields() {
-        createPopup.saveEmailValue();
-        createPopup.savePasswordValue();
-        createPopup.saveNameAndSurnameValue();
     }
 }

@@ -61,7 +61,7 @@ public class CreatePopup extends CommonPopup {
     public void fillNonExistedEmail() {
         String email = String.format("%s@gmail.com", RandomStringUtils.random(7, true, true));
         logger.info("Fill non-existed email {}", email);
-        if (new UserServiceImpl().findByEmail(email).getEmail() == null) {
+        if (new UserServiceImpl().findUserByEmail(email).getEmail() == null) {
             fillEmail(email);
         } else {
             fillNonExistedEmail();

@@ -1,6 +1,5 @@
 package com.epam.steps.admin;
 
-import com.epam.pages.main.AdminPage;
 import com.epam.pages.popup.CreatePopup;
 import com.epam.pages.popup.StudentsPopup;
 import com.epam.steps.BaseSteps;
@@ -11,16 +10,8 @@ import io.cucumber.java.en.When;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CreateStudentSteps extends BaseSteps {
-    private final AdminPage adminPage = new AdminPage();
     private final StudentsPopup studentsPopup = new StudentsPopup();
     private final CreatePopup createPopup = new CreatePopup();
-
-    @Then("See all elements are present in student section")
-    public void seeAllElementsArePresentInStudentSection() {
-        assertThat(adminPage.checkUIofStudentsSection())
-                .withFailMessage("Elements are not present in student section")
-                .isTrue();
-    }
 
     @Then("Check all fields are present in create popup - students section")
     public void checkAllFieldsArePresentInCreatePopupStudentsSection() {
@@ -96,7 +87,6 @@ public class CreateStudentSteps extends BaseSteps {
                 .withFailMessage("'Linked Parent' and 'Linked Class' fields are selected, but they shouldn't be.")
                 .isFalse();
     }
-
 
     @Then("Check the student password is hashed in the DB")
     public void checkTheStudentPasswordIsHashedInTheDB() {

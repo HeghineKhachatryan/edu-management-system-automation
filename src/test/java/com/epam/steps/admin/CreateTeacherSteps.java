@@ -5,24 +5,12 @@ import com.epam.pages.popup.CreatePopup;
 import com.epam.steps.BaseSteps;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CreateTeacherSteps extends BaseSteps {
     private final AdminPage adminPage = new AdminPage();
     private final CreatePopup createPopup = new CreatePopup();
-    @Then("See all elements are present on admin page")
-    public void seeAllElementsArePresentOnAdminPage() {
-        assertThat(adminPage.checkAllElementsArePresent())
-                .withFailMessage("Elements in admin page are not present")
-                .isTrue();
-    }
-
-    @When("Select {} section")
-    public void selectSection(String section) {
-        adminPage.selectSection(section);
-    }
 
     @And("Fill in existed name, surname")
     public void fillInNameSurname() {
