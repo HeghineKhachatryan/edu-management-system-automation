@@ -77,6 +77,3 @@ Feature: Admin page/ Students section functionality
     And Save value from password input field
     And Click on 'Save' button
     Then Check the student password is hashed in the DB
-
-
-

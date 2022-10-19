@@ -54,7 +54,3 @@ Feature: Admin page/ Teacher section functionality
     And Save value from email input field
     And Click on 'Save' button
     Then Check the teacher password is hashed in the DB
-
-
-
-
