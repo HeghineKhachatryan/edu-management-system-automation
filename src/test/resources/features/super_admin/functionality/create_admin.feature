@@ -53,6 +53,7 @@ Feature: Super admin page/ Admin section functionality
       | invalid@gmail-.com  |
       | invalid@gm--ail.com |
       | invalid@gm.ail.com  |
+      | i@gmail.com         |
 
   @TC1.6.7 @Regression @Smoke
   Scenario: Check mandatoriness of all input fields
@@ -90,7 +91,7 @@ Feature: Super admin page/ Admin section functionality
   @TC1.6.12 @Regression @Smoke
   Scenario: Check possibility of creating new admin with an existing 'Admin name' and 'Admin Surname'
     Given Fill existed name and surname
-    And Fill email myvalid@gmail.com
+    And Fill non-existed email
     And Click on 'Generate password' button
     And Save values from name, surname and email fields
     And Click on 'Save' button
@@ -102,5 +103,6 @@ Feature: Super admin page/ Admin section functionality
     And Fill in all required fields
     And Click on 'Generate password' button
     And Save value from password input field
+    And Save value from email input field
     And Click on 'Save' button
     Then Check the admin password is hashed in the DB

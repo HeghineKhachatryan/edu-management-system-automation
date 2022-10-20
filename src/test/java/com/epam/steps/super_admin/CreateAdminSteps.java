@@ -24,14 +24,16 @@ public class CreateAdminSteps extends BaseSteps {
     @And("Check admin is not added in the DB")
     public void checkAdminIsNotAddedInTheDB() {
         logger.info("Check admin is not added in the DB");
-        assertThat(superAdminPage.checkAdminIsNotAddedInTheDB())
+        assertThat(dbHelper.isUserAddedInTheDB())
+                .withFailMessage("Admin is added in the DB, but it shouldn't be")
                 .isTrue();
     }
 
     @And("Check admin is added in the DB")
     public void checkAdminIsAddedInTheDB() {
         logger.info("Check admin is added in the DB");
-        assertThat(superAdminPage.checkAdminIsNotAddedInTheDB())
+        assertThat(dbHelper.isUserAddedInTheDB())
+                .withFailMessage("Admin is not added in the DB, but it should be")
                 .isFalse();
     }
 
@@ -43,12 +45,14 @@ public class CreateAdminSteps extends BaseSteps {
     @Then("Check new Admin is displayed on the Admins section")
     public void checkNewAdminIsDisplayedOnTheAdminsSection() {
         assertThat(superAdminPage.checkNewAdminIsDisplayedOnAdminsSection())
+                .withFailMessage("new Admin is not displayed on the Admins section, but it should be")
                 .isTrue();
     }
 
     @Then("Check the admin password is hashed in the DB")
     public void checkPasswordIsHashedInTheDB() {
-        assertThat(superAdminPage.passwordIsHashed())
+        assertThat(dbHelper.isAdminPasswordHashed())
+                .withFailMessage("Password is not hashed in DB")
                 .isTrue();
     }
 }

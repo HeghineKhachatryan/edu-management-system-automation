@@ -29,4 +29,8 @@ public class UiHelper {
     public boolean checkElementsAreEmpty(WebElement... elements) {
         return Arrays.stream(elements).allMatch(element -> element.getText().isEmpty());
     }
+
+    public boolean areElementsSelected(WebElement... elements) {
+        return Arrays.stream(elements).allMatch(WebElement::isSelected);
+    }
 }

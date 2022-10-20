@@ -11,6 +11,7 @@ Feature: Admin page/ Teacher section functionality
   @TC1.8.2 @Regression @Smoke
   Scenario: Check functionality of 'X' button in create popup
     And Fill in all required fields
+    And Save value from email input field
     And Click on 'X' button
     And Click on 'create' button and open popup
     Then Check all input fields are empty in create popup
@@ -38,7 +39,7 @@ Feature: Admin page/ Teacher section functionality
   @TC1.8.12 @Regression @Smoke
   Scenario: Check the possibility of creating new teacher with an existing "Teacher Name" and "Teacher Surname"
     When Fill in existed name, surname
-    And Fill email nonexisted@gmail.com
+    And Fill non-existed email
     And Click on 'Generate password' button
     And Save values from name, surname and email fields
     And Click on 'Save' button
@@ -50,9 +51,6 @@ Feature: Admin page/ Teacher section functionality
     And Fill in all required fields
     And Click on 'Generate password' button
     And Save value from password input field
+    And Save value from email input field
     And Click on 'Save' button
     Then Check the teacher password is hashed in the DB
-
-
-
-

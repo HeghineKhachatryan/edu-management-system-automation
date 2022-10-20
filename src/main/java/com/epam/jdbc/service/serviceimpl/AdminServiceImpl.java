@@ -1,7 +1,8 @@
-package com.epam.jdbc.service;
+package com.epam.jdbc.service.serviceimpl;
 
 import com.epam.jdbc.config.DBConnectionProvider;
 import com.epam.jdbc.model.Admin;
+import com.epam.jdbc.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,13 +11,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class AdminService implements Service<Admin> {
+public class AdminServiceImpl implements UserService<Admin> {
 
     private final Connection connection = DBConnectionProvider.getInstance().getConnection();
-    private final Logger logger = LoggerFactory.getLogger(AdminService.class);
+    private final Logger logger = LoggerFactory.getLogger(AdminServiceImpl.class);
 
     @Override
-    public Admin findByEmail(String email) {
+    public Admin findUserByEmail(String email) {
         Admin admin = new Admin();
         String query = "SELECT public.admin.id, password, username, surname, email " +
                 "FROM public.user " +
