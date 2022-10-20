@@ -66,6 +66,13 @@ public class CreateUserSteps extends BaseSteps {
                 .isTrue();
     }
 
+    @Then("Popup is opened")
+    public void popupIsOpened() {
+        assertThat(createPopup.popupIsClosed())
+                .withFailMessage("Popup is not opened, but it should be.")
+                .isFalse();
+    }
+
     @Given("Fill existed name and surname")
     public void fillExistedNameAndSurname() {
         createPopup.fillExistedName();

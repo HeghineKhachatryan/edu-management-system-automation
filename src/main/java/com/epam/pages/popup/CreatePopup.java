@@ -103,6 +103,7 @@ public class CreatePopup extends CommonPopup {
         logger.info("Check fields name, surname, email, password, save button," +
                 "generate password button, X button are displayed in create popup");
         return uiHelper.checkElementsAreDisplayed(
+                title,
                 nameInput,
                 surnameInput,
                 emailInput,

@@ -4,8 +4,12 @@ import com.epam.helpers.SharedTestData;
 import com.epam.pages.common.CommonPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class AdminPage extends CommonPage {
+
+    @FindBy(linkText = "Parents")
+    private WebElement parentsSectionButton;
 
     public boolean checkAllElementsArePresent() {
         logger.info("Check elements: list, role name, name and surname," +
@@ -29,6 +33,15 @@ public class AdminPage extends CommonPage {
     public boolean checkUIofStudentsSection() {
         logger.info("Check elements are displayed in students section - list, create button");
         return uiHelper.checkElementsAreDisplayed(
+                list,
+                createButton
+        );
+    }
+
+    public boolean checkUIofParentsSection() {
+        logger.info("Check elements are displayed in parents section - list, create button");
+        return uiHelper.checkElementsAreDisplayed(
+                parentsSectionButton,
                 list,
                 createButton
         );

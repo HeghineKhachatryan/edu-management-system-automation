@@ -83,4 +83,14 @@ public class LoginSteps extends BaseSteps {
                 .withFailMessage("Last created admin's name and surname is not equal to the signed in admin's name and surname.")
                 .contains(SharedTestData.getNameField(), SharedTestData.getSurnameField());
     }
+
+    @And("User is not able to login using current credentials")
+    public void userIsNotAbleToLoginUsingCurrentCredentials() {
+        loginPage.enterLastGeneratedEmail();
+        loginPage.enterLastGeneratedPassword();
+        loginPage.clickOnLoginButton();
+        assertThat(loginPage.getErrorMessage())
+                .withFailMessage("Error message for incorrect login/or password was different from expected one.")
+                .isEqualTo(INCORRECT_LOGIN_OR_PASSWORD.getErrorMessage());
+    }
 }
