@@ -1,18 +1,18 @@
 package com.epam.helpers;
 
-import com.epam.jdbc.service.AdminService;
-import com.epam.jdbc.service.StudentService;
-import com.epam.jdbc.service.TeacherService;
-import com.epam.jdbc.service.UserServiceImpl;
+import com.epam.jdbc.service.serviceimpl.AdminServiceImpl;
+import com.epam.jdbc.service.serviceimpl.StudentServiceImpl;
+import com.epam.jdbc.service.serviceimpl.TeacherServiceImpl;
+import com.epam.jdbc.service.serviceimpl.UserServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class DBHelper {
 
     private final UserServiceImpl userService = new UserServiceImpl();
-    private final AdminService adminService = new AdminService();
-    private final TeacherService teacherService = new TeacherService();
-    private final StudentService studentService = new StudentService();
+    private final AdminServiceImpl adminService = new AdminServiceImpl();
+    private final TeacherServiceImpl teacherService = new TeacherServiceImpl();
+    private final StudentServiceImpl studentService = new StudentServiceImpl();
     private final Logger logger = LoggerFactory.getLogger(DBHelper.class);
 
 

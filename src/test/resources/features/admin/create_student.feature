@@ -54,11 +54,11 @@ Feature: Admin page/ Students section functionality
     Then The user choice is displayed in the <field> field
 
     Examples:
-      | field        | value           |
-      | linkedClass  | 1A              |
-      | bloodGroup   | B-              |
-      | linkedParent | Naira Bogdanyan |
-      | gender       | Female          |
+      | field         | value           |
+      | academicClass | 1A              |
+      | bloodGroup    | B-              |
+      | parent        | Naira Bogdanyan |
+      | gender        | Female          |
 
   @TC1.10.19 @Regression
   Scenario: Check the possibility of creating new student without selecting "Linked parent" and "Linked Class" optional fields

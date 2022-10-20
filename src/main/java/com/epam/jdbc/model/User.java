@@ -2,13 +2,13 @@ package com.epam.jdbc.model;
 
 public class User {
 
+    private String role;
     protected int id;
     protected int user_id;
     protected String name;
     protected String surname;
     protected String email;
     protected String password;
-    private String role;
     public int getId() {
         return id;
     }

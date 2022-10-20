@@ -6,9 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class StudentsPopup extends CreatePopup {
     @FindBy(id = "address")
@@ -49,16 +47,11 @@ public class StudentsPopup extends CreatePopup {
         driver.findElement(By.xpath(String.format("//a[@data-date='%s']", day))).click();
         selectedValue = String.format("%s/%s/%s", day, month, year);
     }
-
     public void clickOnFieldAndSelectValue(String fieldName, String valueToSelect) {
         logger.info("Click on field {} and select value {}", fieldName, valueToSelect);
-        Map<String, WebElement> map = new HashMap<>();
-        map.put("linkedClass", linkedClass);
-        map.put("bloodGroup", bloodGroup);
-        map.put("gender", gender);
-        map.put("linkedParent", linkedParent);
-        map.get(fieldName).click();
-        Select select = new Select(map.get(fieldName));
+        WebElement element = driver.findElement(By.xpath(String.format("//select[@id='%s']", fieldName)));
+        element.click();
+        Select select = new Select(element);
         select.selectByVisibleText(valueToSelect);
         selectedValue = select.getWrappedElement().getText();
     }
@@ -68,23 +61,18 @@ public class StudentsPopup extends CreatePopup {
         logger.info("Fill address - {}", selectedValue);
         uiHelper.sendKeys(address, selectedValue);
     }
-
     public boolean isYearFromInterval() {
         logger.info("User is able to select dates between interval 1900 and 3 years before moment of selection");
-        return listOfYears.stream().allMatch(element -> Integer.parseInt(element.getText()) >= 1900
-                && Integer.parseInt(element.getText()) <= (LocalDate.now().getYear() - 3));
+        return listOfYears.stream().allMatch(element -> {
+            int year = Integer.parseInt(element.getText());
+            return year >= 1900 && year <= (LocalDate.now().getYear() - 3);
+        });
     }
 
     public boolean checkValueOfSelectedField(String fieldName) {
-        Map<String, String> map = new HashMap<>();
-        map.put("linkedClass", linkedClass.getText());
-        map.put("bloodGroup", bloodGroup.getText());
-        map.put("gender", gender.getText());
-        map.put("linkedParent", linkedParent.getText());
-        map.put("address", address.getText());
-        map.put("birthDay", birthDate.getText());
-        logger.info("Value of selected '{}' field is - {}", fieldName, map.get(fieldName));
-        return map.get(fieldName).equals(selectedValue);
+        String text = driver.findElement(By.xpath(String.format("//select[@id='%s']", fieldName))).getText();
+        logger.info("Value of selected '{}' field is - {}", fieldName, text);
+        return text.equals(selectedValue);
     }
 
     public boolean checkCalendarIsOpened() {
@@ -128,11 +116,12 @@ public class StudentsPopup extends CreatePopup {
     private void selectYear(int year) {
         logger.info("User is able to select dates between interval 1900 and 3 years before moment of selection" +
                 "selected year is - {}", year);
-        if (year >= 1990 && year <= (LocalDate.now().getYear() - 3)) {
+        if (year >= 1900 && year <= (LocalDate.now().getYear() - 3)) {
             selectedValue = String.valueOf(year);
             new Select(yearToSelect).selectByValue(selectedValue);
         } else {
             logger.error("{} year is not in interval", year);
+            throw new IllegalArgumentException("Year needs to be in the range of 1900 and 3 years before moment of selection");
         }
     }
 }

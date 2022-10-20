@@ -1,8 +1,8 @@
-package com.epam.jdbc.service;
+package com.epam.jdbc.service.serviceimpl;
 
 import com.epam.jdbc.config.DBConnectionProvider;
-import com.epam.jdbc.model.Admin;
 import com.epam.jdbc.model.User;
+import com.epam.jdbc.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,7 +14,7 @@ import java.sql.SQLException;
 public class UserServiceImpl implements UserService {
 
     private final Connection connection = DBConnectionProvider.getInstance().getConnection();
-    private final Logger logger = LoggerFactory.getLogger(AdminService.class);
+    private final Logger logger = LoggerFactory.getLogger(AdminServiceImpl.class);
 
     @Override
     public User findUserByEmail(String email) {

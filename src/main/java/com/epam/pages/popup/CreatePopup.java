@@ -1,7 +1,7 @@
 package com.epam.pages.popup;
 
 import com.epam.helpers.SharedTestData;
-import com.epam.jdbc.service.UserServiceImpl;
+import com.epam.jdbc.service.serviceimpl.UserServiceImpl;
 import com.epam.pages.common.CommonPopup;
 import com.epam.pages.main.SuperAdminPage;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -134,9 +134,10 @@ public class CreatePopup extends CommonPopup {
     }
 
     public boolean checkGeneratedPasswordStructure() {
-        logger.info("Check generated password structure");
-        return passwordInput.getDomProperty("value")
-                .matches("(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$#!%*?&])[A-Za-z\\d()`~@$?!\"'^#*:.,;<>%-_\\[\\]+=|/{}&]{9,50}");
+        String generatedPassword = passwordInput.getDomProperty("value");
+        logger.info("Check {} generated password structure", generatedPassword);
+        return generatedPassword
+                .matches("(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[()`~@$?!\"'^#*:.,;<>%-_+=|/{}&])[A-Za-z\\d()`~@$?!\"'^#*:.,;<>%-_+=|/{}&]{9,50}");
     }
 
     public boolean checkThePasswordFieldIsDisabled() {

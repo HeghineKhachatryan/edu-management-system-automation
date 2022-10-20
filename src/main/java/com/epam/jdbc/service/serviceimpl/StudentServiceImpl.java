@@ -1,14 +1,15 @@
-package com.epam.jdbc.service;
+package com.epam.jdbc.service.serviceimpl;
 
 import com.epam.jdbc.config.DBConnectionProvider;
 import com.epam.jdbc.model.Student;
+import com.epam.jdbc.service.UserService;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class StudentService implements UserService<Student> {
+public class StudentServiceImpl implements UserService<Student> {
 
     private final Connection connection = DBConnectionProvider.getInstance().getConnection();
 

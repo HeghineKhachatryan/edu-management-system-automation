@@ -1,7 +1,8 @@
-package com.epam.jdbc.service;
+package com.epam.jdbc.service.serviceimpl;
 
 import com.epam.jdbc.config.DBConnectionProvider;
 import com.epam.jdbc.model.Teacher;
+import com.epam.jdbc.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,10 +11,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class TeacherService implements UserService<Teacher> {
+public class TeacherServiceImpl implements UserService<Teacher> {
 
     private final Connection connection = DBConnectionProvider.getInstance().getConnection();
-    private final Logger logger = LoggerFactory.getLogger(TeacherService.class);
+    private final Logger logger = LoggerFactory.getLogger(TeacherServiceImpl.class);
 
     @Override
     public Teacher findUserByEmail(String email) {
