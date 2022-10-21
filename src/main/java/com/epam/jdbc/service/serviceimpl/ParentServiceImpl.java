@@ -24,7 +24,7 @@ public class ParentServiceImpl implements UserService<Parent> {
                 "INNER JOIN public.parent " +
                 "ON public.user.id=public.parent.user_id " +
                 "WHERE public.user.email=?;";
-        logger.info("Find teacher by email");
+        logger.info("Find parent by email");
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();

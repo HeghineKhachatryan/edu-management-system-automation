@@ -17,7 +17,7 @@ public class CreateParentSteps extends BaseSteps {
     @Then("Check parent created by admin is added in the DB")
     public void checkParentIsAddedInTheDB() {
         assertThat(dbHelper.isUserAddedInTheDB())
-                .withFailMessage("Parent wasn't meant to be added in the DB, but was added.")
+                .withFailMessage("Parent was meant to be added in the DB, but wasn't added.")
                 .isFalse();
     }
 
