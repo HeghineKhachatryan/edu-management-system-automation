@@ -1,5 +1,6 @@
 package com.epam.pages.popup;
 
+import com.epam.helpers.ErrorMessagesProvider;
 import com.epam.helpers.SharedTestData;
 import com.epam.pages.common.CommonPopup;
 import com.epam.pages.main.SuperAdminPage;
@@ -8,9 +9,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
-
-import static com.epam.helpers.ErrorMessages.BLANK_INPUT_FIELDS;
-import static com.epam.helpers.ErrorMessages.MORE_THAN_50_SYMBOLS;
 
 public class CreatePopup extends CommonPopup {
 
@@ -163,7 +161,7 @@ public class CreatePopup extends CommonPopup {
         return errorMessagesOfBlankInputFields
                 .stream()
                 .allMatch(errMessage -> errMessage.getText()
-                        .equals(BLANK_INPUT_FIELDS.getErrorMessage()));
+                        .equals(ErrorMessagesProvider.getBlankInputFieldsErrMessage()));
     }
 
     public boolean checkErrorMessagesOfMoreSymbolsFilledInputFields() {
@@ -171,7 +169,7 @@ public class CreatePopup extends CommonPopup {
         return errorMessagesOfMoreSymbols
                 .stream()
                 .allMatch(errMessage -> errMessage.getText()
-                        .equals(MORE_THAN_50_SYMBOLS.getErrorMessage()));
+                        .equals(ErrorMessagesProvider.getMoreThan50SymbolsErrMessage()));
     }
 
     public String getErrorMessageOfExistedEmail() {

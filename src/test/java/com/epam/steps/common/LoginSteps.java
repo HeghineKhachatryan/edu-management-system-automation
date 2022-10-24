@@ -1,5 +1,6 @@
 package com.epam.steps.common;
 
+import com.epam.helpers.ErrorMessagesProvider;
 import com.epam.helpers.SharedTestData;
 import com.epam.pages.main.AdminPage;
 import com.epam.pages.main.LoginPage;
@@ -12,7 +13,6 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 
-import static com.epam.helpers.ErrorMessages.INCORRECT_LOGIN_OR_PASSWORD;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LoginSteps extends BaseSteps {
@@ -70,7 +70,7 @@ public class LoginSteps extends BaseSteps {
     public void checkErrorMessage() {
         assertThat(loginPage.getErrorMessage())
                 .withFailMessage("Error message for incorrect login/or password was different from expected one.")
-                .isEqualTo(INCORRECT_LOGIN_OR_PASSWORD.getErrorMessage());
+                .isEqualTo(ErrorMessagesProvider.getIncorrectLoginOrPasswordErrMessage());
     }
 
     @Then("Sign in as admin with generated password")
@@ -91,6 +91,6 @@ public class LoginSteps extends BaseSteps {
         loginPage.clickOnLoginButton();
         assertThat(loginPage.getErrorMessage())
                 .withFailMessage("Error message for incorrect login/or password was different from expected one.")
-                .isEqualTo(INCORRECT_LOGIN_OR_PASSWORD.getErrorMessage());
+                .isEqualTo(ErrorMessagesProvider.getIncorrectLoginOrPasswordErrMessage());
     }
 }

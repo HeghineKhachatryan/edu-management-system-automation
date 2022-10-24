@@ -1,5 +1,6 @@
 package com.epam.steps.common;
 
+import com.epam.helpers.ErrorMessagesProvider;
 import com.epam.pages.main.SuperAdminPage;
 import com.epam.pages.popup.CreatePopup;
 import com.epam.steps.BaseSteps;
@@ -9,8 +10,6 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-import static com.epam.helpers.ErrorMessages.EXISTED_EMAIL;
-import static com.epam.helpers.ErrorMessages.INVALID_EMAIL;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CreateUserSteps extends BaseSteps {
@@ -141,7 +140,7 @@ public class CreateUserSteps extends BaseSteps {
     public void checkInvalidErrorMessage() {
         assertThat(createPopup.getInvalidEmailErrorMessage())
                 .withFailMessage("Error message of invalid email is incorrect")
-                .isEqualTo(INVALID_EMAIL.getErrorMessage());
+                .isEqualTo(ErrorMessagesProvider.getInvalidEmailErrMessage());
     }
 
     @Then("Check error messages of blank input fields")
@@ -162,7 +161,7 @@ public class CreateUserSteps extends BaseSteps {
     public void checkErrorMessageOfExistedEmail() {
         assertThat(createPopup.getErrorMessageOfExistedEmail())
                 .withFailMessage("Error message of existed email is incorrect")
-                .isEqualTo(EXISTED_EMAIL.getErrorMessage());
+                .isEqualTo(ErrorMessagesProvider.getExistedEmailErrMessage());
     }
 
     @Then("Check 'Generate password' button is active")
