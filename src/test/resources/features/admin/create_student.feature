@@ -20,7 +20,7 @@ Feature: Admin page/ Students section functionality
   @TC1.10.5 @Regression @Smoke
   Scenario: Check the creation of the new student after filling in all the required fields with valid data
     When Fill in all required fields in students section create popup
-    And Save values from name, surname and email fields
+    And Save values from name, surname, password and email fields
     And Click on 'Save' button
     Then Popup is closed
     And Check student created by admin is added in the DB
@@ -30,7 +30,7 @@ Feature: Admin page/ Students section functionality
   Scenario: Check the possibility of creating new student with an existing "Student Name" and "Student Surname"
     When Fill in existed name, surname, all other required fields besides email
     And Fill non-existed email
-    And Save values from name, surname and email fields
+    And Save values from name, surname, password and email fields
     And Click on 'Generate password' button
     And Click on 'Save' button
     Then User is created and displayed in the list
@@ -64,7 +64,7 @@ Feature: Admin page/ Students section functionality
   Scenario: Check the possibility of creating new student without selecting "Linked parent" and "Linked Class" optional fields
     When Fill in all required fields in students section create popup
     Then Check that 'Linked Parent' and 'Linked Class' fields are not selected
-    And Save values from name, surname and email fields
+    And Save values from name, surname, password and email fields
     And Click on 'Save' button
     Then User is created and displayed in the list
     And Check student created by admin is added in the DB

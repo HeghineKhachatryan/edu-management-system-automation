@@ -1,7 +1,6 @@
 package com.epam.pages.popup;
 
 import com.epam.helpers.SharedTestData;
-import com.epam.jdbc.service.serviceimpl.UserServiceImpl;
 import com.epam.pages.common.CommonPopup;
 import com.epam.pages.main.SuperAdminPage;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -10,7 +9,8 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-import static com.epam.helpers.ErrorMessages.*;
+import static com.epam.helpers.ErrorMessages.BLANK_INPUT_FIELDS;
+import static com.epam.helpers.ErrorMessages.MORE_THAN_50_SYMBOLS;
 
 public class CreatePopup extends CommonPopup {
 
@@ -59,17 +59,13 @@ public class CreatePopup extends CommonPopup {
     }
 
     public void fillNonExistedEmail() {
-        String email = String.format("%s@gmail.com", RandomStringUtils.random(7, true, true));
+        String email = String.format("%s@gmail.com", System.currentTimeMillis());
         logger.info("Fill non-existed email {}", email);
-        if (new UserServiceImpl().findUserByEmail(email).getEmail() == null) {
-            fillEmail(email);
-        } else {
-            fillNonExistedEmail();
-        }
+        fillEmail(email);
     }
 
     public void saveEmailValue() {
-        SharedTestData.setLastGeneratedEmail(emailInput.getDomProperty("value"));
+        SharedTestData.setLastEmail(emailInput.getDomProperty("value"));
     }
 
     public void saveNameAndSurnameValue() {
@@ -103,6 +99,7 @@ public class CreatePopup extends CommonPopup {
         logger.info("Check fields name, surname, email, password, save button," +
                 "generate password button, X button are displayed in create popup");
         return uiHelper.checkElementsAreDisplayed(
+                title,
                 nameInput,
                 surnameInput,
                 emailInput,

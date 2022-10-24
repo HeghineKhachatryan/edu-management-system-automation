@@ -29,6 +29,6 @@ Feature: Login as different users
     And Click on 'login' button
     And Click on 'create' button and open popup
     And Fill in all required fields
-    And Save values from name, surname and email fields
+    And Save values from name, surname, password and email fields
     And Click on 'Save' button
     Then Sign in as admin with generated password

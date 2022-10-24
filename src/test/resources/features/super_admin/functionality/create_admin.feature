@@ -82,7 +82,7 @@ Feature: Super admin page/ Admin section functionality
   Scenario: Check functionality to create new admin using valid credentials
     And Fill in all required fields
     And Click on 'Generate password' button
-    And Save values from name, surname and email fields
+    And Save values from name, surname, password and email fields
     And Click on 'Save' button
     And Popup is closed
     And Check admin is added in the DB
@@ -93,7 +93,7 @@ Feature: Super admin page/ Admin section functionality
     Given Fill existed name and surname
     And Fill non-existed email
     And Click on 'Generate password' button
-    And Save values from name, surname and email fields
+    And Save values from name, surname, password and email fields
     And Click on 'Save' button
     Then Check admin is added in the DB
     Then Check new Admin is displayed on the Admins section

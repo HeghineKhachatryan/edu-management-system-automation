@@ -26,6 +26,22 @@ Feature: UI of pages
     And Click on 'create' button and open popup
     Then Check all fields are present in create popup
 
+  @TC1.9.1
+  Scenario: Check UI of Admin Page Parents section
+    Given Fill heghine9696@gmail.com and 2kB$8tU#1aO( fields
+    And Click on 'login' button
+    When Select parents section
+    Then Check all elements are present in parents section
+
+  @TC1.9.2 @TC1.9.3
+  Scenario: Check functionality of "Create" button in admin dashboard/ parents section
+    When Fill heghine9696@gmail.com and 2kB$8tU#1aO( fields
+    And Click on 'login' button
+    When Select parents section
+    And Click on 'create' button and open popup
+    Then Popup is opened
+    Then Check all fields are present in create popup
+
   @TC1.10.1 @Regression
   Scenario: Check UI of Admin page Students section
     Given Fill heghine9696@gmail.com and 2kB$8tU#1aO( fields

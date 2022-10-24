@@ -94,5 +94,4 @@ public class CreateStudentSteps extends BaseSteps {
                 .withFailMessage("Password was not hashed in the DB.")
                 .isTrue();
     }
-
 }

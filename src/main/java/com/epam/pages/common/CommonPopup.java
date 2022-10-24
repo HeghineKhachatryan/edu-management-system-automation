@@ -10,6 +10,8 @@ public class CommonPopup extends BasePage {
     protected WebElement saveButton;
     @FindBy(className = "close-btn")
     protected WebElement xButton;
+    @FindBy(tagName = "h1")
+    protected WebElement title;
 
     public void clickOnSaveButton() {
         logger.info("Click on save button");
