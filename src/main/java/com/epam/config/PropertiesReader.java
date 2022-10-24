@@ -17,12 +17,8 @@ public class PropertiesReader {
         }
     }
 
-    public static PropertiesReader getInstanceForConfigFile() {
-        return new PropertiesReader("config.properties");
-    }
-
-    public static PropertiesReader getInstanceForUserDataFile() {
-        return new PropertiesReader("user_data.properties");
+    public static PropertiesReader getInstance(String resourceName) {
+        return new PropertiesReader(resourceName);
     }
 
     private InputStream getInputStream(String fileName) {

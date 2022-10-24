@@ -4,7 +4,8 @@ import com.epam.config.PropertiesReader;
 
 public final class UserDataProvider {
 
-    private static final PropertiesReader propertiesReader = PropertiesReader.getInstanceForUserDataFile();
+    private static final PropertiesReader propertiesReader = PropertiesReader
+            .getInstance("user_data.properties");
 
     private UserDataProvider() {
     }
