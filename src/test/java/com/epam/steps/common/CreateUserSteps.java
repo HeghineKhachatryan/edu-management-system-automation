@@ -79,7 +79,7 @@ public class CreateUserSteps extends BaseSteps {
         createPopup.fillExistedSurname();
     }
 
-    @And("Save values from name, surname and email fields")
+    @And("Save values from name, surname, password and email fields")
     public void getAndSaveValuesFromRequiredFields() {
         createPopup.saveEmailValue();
         createPopup.savePasswordValue();

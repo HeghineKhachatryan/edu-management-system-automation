@@ -3,7 +3,7 @@ package com.epam.helpers;
 public class SharedTestData {
 
     private static String generatedPassword;
-    private static String lastGeneratedEmail;
+    private static String lastEmail;
     private static String nameField;
     private static String surnameField;
 
@@ -15,12 +15,12 @@ public class SharedTestData {
         generatedPassword = password;
     }
 
-    public static String getLastGeneratedEmail() {
-        return lastGeneratedEmail;
+    public static String getLastEmail() {
+        return lastEmail;
     }
 
-    public static void setLastGeneratedEmail(String email) {
-        lastGeneratedEmail = email;
+    public static void setLastEmail(String email) {
+        lastEmail = email;
     }
 
     public static String getNameField() {

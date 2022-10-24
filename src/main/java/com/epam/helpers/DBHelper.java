@@ -15,33 +15,33 @@ public class DBHelper {
 
 
     public boolean isUserAddedInTheDB() {
-        return userService.findUserByEmail(SharedTestData.getLastGeneratedEmail()).getEmail() == null;
+        return userService.findUserByEmail(SharedTestData.getLastEmail()).getEmail() == null;
     }
 
     public boolean isAdminPasswordHashed() {
         logger.info("Check password is encrypted");
-        return !adminService.findUserByEmail(SharedTestData.getLastGeneratedEmail()).getPassword()
+        return !adminService.findUserByEmail(SharedTestData.getLastEmail()).getPassword()
                 .equals(SharedTestData.getLastGeneratedPassword());
     }
 
     public boolean isTeacherPasswordHashed() {
         logger.info("Check password is encrypted");
         return !teacherService.findUserByEmail(
-                        SharedTestData.getLastGeneratedEmail()).getPassword()
+                        SharedTestData.getLastEmail()).getPassword()
                 .equals(SharedTestData.getLastGeneratedPassword());
     }
 
     public boolean isStudentPasswordHashed() {
         logger.info("Check password is encrypted");
         return !studentService.findUserByEmail(
-                        SharedTestData.getLastGeneratedEmail()).getPassword()
+                        SharedTestData.getLastEmail()).getPassword()
                 .equals(SharedTestData.getLastGeneratedPassword());
     }
 
     public boolean isParentPasswordHashed() {
         logger.info("Check password is encrypted");
         return !parentService.findUserByEmail(
-                        SharedTestData.getLastGeneratedEmail()).getPassword()
+                        SharedTestData.getLastEmail()).getPassword()
                 .equals(SharedTestData.getLastGeneratedPassword());
     }
 }

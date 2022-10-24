@@ -11,7 +11,7 @@ Feature: Admin page/ Parents section functionality
   @TC1.9.4
   Scenario: Check the creation of the new parent after filling in all the required fields with valid data
     Given Fill in all required fields
-    And Save values from name, surname and email fields
+    And Save values from name, surname, password and email fields
     When Click on 'Save' button
     Then Popup is closed
     And User is created and displayed in the list
@@ -28,7 +28,7 @@ Feature: Admin page/ Parents section functionality
     Given Fill existed name and surname
     And Fill non-existed email
     And Click on 'Generate password' button
-    And Save values from name, surname and email fields
+    And Save values from name, surname, password and email fields
     When Click on 'Save' button
     Then Check parent created by admin is added in the DB
     And User is created and displayed in the list
@@ -42,8 +42,7 @@ Feature: Admin page/ Parents section functionality
   @TC1.9.15
   Scenario: Check functionality of 'X' button of the New Parent pop-up
     Given Fill in all required fields
-    And Save values from name, surname and email fields
-    And Save value from password input field
+    And Save values from name, surname, password and email fields
     When Click on 'X' button
     Then Popup is closed
     And Click on 'create' button and open popup
@@ -55,7 +54,6 @@ Feature: Admin page/ Parents section functionality
   @TC1.9.17
   Scenario: Check how Parent password is kept in DB
     Given Fill in all required fields
-    And Save value from email input field
-    And Save value from password input field
+    And Save values from name, surname, password and email fields
     When Click on 'Save' button
     Then Check the parent password is hashed in the DB

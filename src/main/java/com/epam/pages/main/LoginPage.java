@@ -31,8 +31,8 @@ public class LoginPage extends BasePage {
         uiHelper.clickOnWebElement(loginButton);
     }
 
-    public void enterLastGeneratedEmail() {
-        String email = SharedTestData.getLastGeneratedEmail();
+    public void enterLastEmail() {
+        String email = SharedTestData.getLastEmail();
         logger.info("Fill last generated email {}", email);
         uiHelper.sendKeys(emailInput, email);
     }
