@@ -37,6 +37,7 @@ public class TeacherServiceImpl implements UserService<Teacher> {
             }
         } catch (SQLException e) {
             logger.error("Can not execute query");
+            throw new RuntimeException("Can not execute query, something went wrong");
         }
         return teacher;
     }
