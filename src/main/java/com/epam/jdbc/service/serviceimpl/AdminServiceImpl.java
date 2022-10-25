@@ -13,7 +13,6 @@ import java.sql.SQLException;
 
 public class AdminServiceImpl implements UserService<Admin> {
 
-    private final Connection connection = DBConnectionProvider.getInstance().getConnection();
     private final Logger logger = LoggerFactory.getLogger(AdminServiceImpl.class);
 
     @Override

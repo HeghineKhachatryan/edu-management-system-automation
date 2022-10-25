@@ -13,7 +13,6 @@ import java.sql.SQLException;
 
 public class TeacherServiceImpl implements UserService<Teacher> {
 
-    private final Connection connection = DBConnectionProvider.getInstance().getConnection();
     private final Logger logger = LoggerFactory.getLogger(TeacherServiceImpl.class);
 
     @Override

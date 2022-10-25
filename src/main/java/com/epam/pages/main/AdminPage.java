@@ -35,7 +35,6 @@ public class AdminPage extends CommonPage {
     }
 
     private WebElement getSectionElementByName(String section) {
-        logger.info("Get {} section", section);
         return driver.findElement(By.xpath(String.format("//a[@href='/%s']", section)));
     }
 
