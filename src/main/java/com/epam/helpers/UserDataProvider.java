@@ -37,4 +37,8 @@ public final class UserDataProvider {
     public static String getValidSurname() {
         return propertiesReader.getProperty("validSurname");
     }
+
+    public static String getAddress() {
+        return propertiesReader.getProperty("address");
+    }
 }

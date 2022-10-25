@@ -1,6 +1,7 @@
 package com.epam.steps.common;
 
 import com.epam.helpers.ErrorMessagesProvider;
+import com.epam.helpers.UserDataProvider;
 import com.epam.pages.main.SuperAdminPage;
 import com.epam.pages.popup.CreatePopup;
 import com.epam.steps.BaseSteps;
@@ -23,24 +24,42 @@ public class CreateUserSteps extends BaseSteps {
         createPopup = new CreatePopup();
     }
 
-    @When("Fill existed email")
-    public void fillExistedEmail() {
-        createPopup.fillExistedEmail();
-    }
-
-    @And("Fill name {}")
-    public void fillName(String name) {
-        createPopup.fillName(name);
-    }
-
-    @And("Fill surname {}")
-    public void fillSurname(String surname) {
-        createPopup.fillSurname(surname);
+    @Given("Fill valid name and surname")
+    public void fillValidNameAndSurname() {
+        createPopup.fillName(UserDataProvider.getValidName());
+        createPopup.fillSurname(UserDataProvider.getValidSurname());
     }
 
     @And("Fill email {}")
     public void fillEmail(String email) {
         createPopup.fillEmail(email);
+    }
+
+    @And("Fill existed email")
+    public void fillExistedEmail() {
+        createPopup.fillExistedEmail();
+    }
+
+    @And("Fill non-existed email")
+    public void fillNonExistedEmail() {
+        createPopup.fillNonExistedEmail();
+    }
+
+    @Given("Fill existed name and surname")
+    public void fillExistedNameAndSurname() {
+        createPopup.fillExistedName();
+        createPopup.fillExistedSurname();
+    }
+
+    @And("Fill in name, surname, email fields and click on 'Generate password' button")
+    public void fillInAllRequiredFields() {
+        createPopup.fillNameSurnameEmail();
+        createPopup.clickOnGeneratePasswordButton();
+    }
+
+    @Given("Fill in input fields more than 50 symbols")
+    public void fillInInputFieldsMoreThan50Symbols() {
+        createPopup.fillInputFieldsWithMoreSymbols();
     }
 
     @And("Click on 'Generate password' button")
@@ -58,7 +77,29 @@ public class CreateUserSteps extends BaseSteps {
         createPopup.clickOnXButton();
     }
 
-    @And("Popup is closed")
+    @And("Click on 'create' button and open popup")
+    public void clickOnCreateButtonAndOpenPopup() {
+        superAdminPage.clickOnCreateButton();
+    }
+
+    @And("Save value from email input field")
+    public void getValueFromEmailInputField() {
+        createPopup.saveEmailValue();
+    }
+
+    @And("Save value from password input field")
+    public void getGeneratedPasswordFromInputField() {
+        createPopup.savePasswordValue();
+    }
+
+    @And("Save values from name, surname, password and email fields")
+    public void getAndSaveValuesFromRequiredFields() {
+        createPopup.saveEmailValue();
+        createPopup.savePasswordValue();
+        createPopup.saveNameAndSurnameValue();
+    }
+
+    @Then("Popup is closed")
     public void checkPopupIsClosed() {
         assertThat(createPopup.popupIsClosed())
                 .withFailMessage("Popup is not closed, but it should be.")
@@ -72,40 +113,11 @@ public class CreateUserSteps extends BaseSteps {
                 .isFalse();
     }
 
-    @Given("Fill existed name and surname")
-    public void fillExistedNameAndSurname() {
-        createPopup.fillExistedName();
-        createPopup.fillExistedSurname();
-    }
-
-    @And("Save values from name, surname, password and email fields")
-    public void getAndSaveValuesFromRequiredFields() {
-        createPopup.saveEmailValue();
-        createPopup.savePasswordValue();
-        createPopup.saveNameAndSurnameValue();
-    }
-
-    @And("Fill in all required fields")
-    public void fillInAllRequiredFields() {
-        createPopup.fillNameSurnameEmail();
-        createPopup.clickOnGeneratePasswordButton();
-    }
-
-    @And("Save value from password input field")
-    public void getGeneratedPasswordFromInputField() {
-        createPopup.savePasswordValue();
-    }
-
     @And("Check the generated password has been changed")
     public void passwordIsChanged() {
         assertThat(createPopup.passwordIsChanged())
                 .withFailMessage("Password hasn't been changed, but it was meant to be.")
                 .isTrue();
-    }
-
-    @And("Click on 'create' button and open popup")
-    public void clickOnCreateButtonAndOpenPopup() {
-        superAdminPage.clickOnCreateButton();
     }
 
     @Then("Check all input fields are empty in create popup")
@@ -138,7 +150,8 @@ public class CreateUserSteps extends BaseSteps {
 
     @Then("Check invalid email error message")
     public void checkInvalidErrorMessage() {
-        assertThat(createPopup.getInvalidEmailErrorMessage())
+        logger.info("Check error message of invalid inputted email");
+        assertThat(createPopup.getEmailFieldErrorMessage())
                 .withFailMessage("Error message of invalid email is incorrect")
                 .isEqualTo(ErrorMessagesProvider.getInvalidEmailErrMessage());
     }
@@ -159,7 +172,8 @@ public class CreateUserSteps extends BaseSteps {
 
     @Then("Check error message of existed email")
     public void checkErrorMessageOfExistedEmail() {
-        assertThat(createPopup.getErrorMessageOfExistedEmail())
+        logger.info("Check error message of existed email");
+        assertThat(createPopup.getEmailFieldErrorMessage())
                 .withFailMessage("Error message of existed email is incorrect")
                 .isEqualTo(ErrorMessagesProvider.getExistedEmailErrMessage());
     }
@@ -176,15 +190,5 @@ public class CreateUserSteps extends BaseSteps {
         assertThat(createPopup.checkThePasswordFieldIsDisabled())
                 .withFailMessage("User is able to input data in the password field, as it is not readonly.")
                 .isTrue();
-    }
-
-    @And("Save value from email input field")
-    public void getValueFromEmailInputField() {
-        createPopup.saveEmailValue();
-    }
-
-    @And("Fill non-existed email")
-    public void fillNonExistedEmail() {
-        createPopup.fillNonExistedEmail();
     }
 }

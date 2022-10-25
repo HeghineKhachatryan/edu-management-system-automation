@@ -3,6 +3,8 @@ package com.epam.jdbc.service.serviceimpl;
 import com.epam.jdbc.config.DBConnectionProvider;
 import com.epam.jdbc.model.Student;
 import com.epam.jdbc.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,6 +14,7 @@ import java.sql.SQLException;
 public class StudentServiceImpl implements UserService<Student> {
 
     private final Connection connection = DBConnectionProvider.getInstance().getConnection();
+    private final Logger logger = LoggerFactory.getLogger(AdminServiceImpl.class);
 
     @Override
     public Student findUserByEmail(String email) {
@@ -20,6 +23,7 @@ public class StudentServiceImpl implements UserService<Student> {
                 "blood_group, date, academic_class_id, parent_id " +
                 "FROM public.user INNER JOIN public.student " +
                 "ON public.user.id=public.student.user_id WHERE public.user.email=?;";
+        logger.info("Find student by email");
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -37,7 +41,7 @@ public class StudentServiceImpl implements UserService<Student> {
                 student.setBirthDay(resultSet.getDate("date"));
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            logger.error("Can not execute query");
         }
         return student;
     }

@@ -22,6 +22,7 @@ public class UserServiceImpl implements UserService {
         String query = "SELECT * " +
                 "FROM public.\"user\"" +
                 "WHERE email=?;";
+        logger.info("Find user by email");
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -31,7 +32,7 @@ public class UserServiceImpl implements UserService {
                 user.setId(resultSet.getInt("id"));
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            logger.error("Can not execute query");
         }
         return user;
     }

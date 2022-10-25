@@ -20,9 +20,4 @@ public class SuperAdminPage extends CommonPage {
                 createButton
         );
     }
-
-    public boolean checkNewAdminIsDisplayedOnAdminsSection() {
-        logger.info("Check admin is displayed on admins section");
-        return getNameOfLastCreatedUser().equals(SharedTestData.getNameField()) && getSurnameOfLastCreatedUser().equals(SharedTestData.getSurnameField());
-    }
 }

@@ -1,5 +1,7 @@
 package com.epam.pages.popup;
 
+import com.epam.helpers.SharedTestData;
+import com.epam.helpers.UserDataProvider;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,7 +31,25 @@ public class StudentsPopup extends CreatePopup {
     private WebElement calendar;
     @FindBy(xpath = "//select[@class='ui-datepicker-year']/option")
     private List<WebElement> listOfYears;
-    private String selectedValue;
+
+    public void fillAddress() {
+        String selectedValue = UserDataProvider.getAddress();
+        logger.info("Fill address - {}", selectedValue);
+        uiHelper.sendKeys(address, selectedValue);
+    }
+
+    public void clickOnBirthDateField() {
+        uiHelper.clickOnWebElement(birthDate);
+    }
+
+    public void selectBirthday(int day, int month, int year) {
+        clickOnBirthDateField();
+        logger.info("Fill birth day - {}/{}/{}", day, month, year);
+        selectYear(year);
+        new Select(monthToSelect).selectByIndex(month - 1);
+        driver.findElement(By.xpath(String.format("//a[@data-date='%s']", day))).click();
+        SharedTestData.setSelectedValueOfStudentPopup(String.format("%s/%s/%s", day, month, year));
+    }
 
     public void fillBloodGenderBirthdayAddress() {
         logger.info("Fill blood group, gender.");
@@ -39,30 +59,16 @@ public class StudentsPopup extends CreatePopup {
         clickOnFieldAndSelectValue("gender", "Female");
     }
 
-    public void selectBirthday(int day, int month, int year) {
-        uiHelper.clickOnWebElement(birthDate);
-        logger.info("Fill birth day - {}/{}/{}", day, month, year);
-        selectYear(year);
-        new Select(monthToSelect).selectByIndex(month - 1);
-        driver.findElement(By.xpath(String.format("//a[@data-date='%s']", day))).click();
-        selectedValue = String.format("%s/%s/%s", day, month, year);
-    }
     public void clickOnFieldAndSelectValue(String fieldName, String valueToSelect) {
         logger.info("Click on field {} and select value {}", fieldName, valueToSelect);
         WebElement element = driver.findElement(By.xpath(String.format("//select[@id='%s']", fieldName)));
         element.click();
         Select select = new Select(element);
         select.selectByVisibleText(valueToSelect);
-        selectedValue = select.getWrappedElement().getText();
+        SharedTestData.setSelectedValueOfStudentPopup(select.getWrappedElement().getText());
     }
 
-    public void fillAddress() {
-        selectedValue = "Armenia, Shirak, Gyumri, Shirakatsi, 104";
-        logger.info("Fill address - {}", selectedValue);
-        uiHelper.sendKeys(address, selectedValue);
-    }
     public boolean isYearFromInterval() {
-        logger.info("User is able to select dates between interval 1900 and 3 years before moment of selection");
         return listOfYears.stream().allMatch(element -> {
             int year = Integer.parseInt(element.getText());
             return year >= 1900 && year <= (LocalDate.now().getYear() - 3);
@@ -72,12 +78,10 @@ public class StudentsPopup extends CreatePopup {
     public boolean checkValueOfSelectedField(String fieldName) {
         String text = driver.findElement(By.xpath(String.format("//select[@id='%s']", fieldName))).getText();
         logger.info("Value of selected '{}' field is - {}", fieldName, text);
-        return text.equals(selectedValue);
+        return text.equals(SharedTestData.getSelectedValueOfStudentPopup());
     }
 
     public boolean checkCalendarIsOpened() {
-        logger.info("Check calendar is opened.");
-        uiHelper.clickOnWebElement(birthDate);
         return uiHelper.checkElementsAreDisplayed(calendar);
     }
 
@@ -117,8 +121,7 @@ public class StudentsPopup extends CreatePopup {
         logger.info("User is able to select dates between interval 1900 and 3 years before moment of selection" +
                 "selected year is - {}", year);
         if (year >= 1900 && year <= (LocalDate.now().getYear() - 3)) {
-            selectedValue = String.valueOf(year);
-            new Select(yearToSelect).selectByValue(selectedValue);
+            new Select(yearToSelect).selectByValue(String.valueOf(year));
         } else {
             logger.error("{} year is not in interval", year);
             throw new IllegalArgumentException("Year needs to be in the range of 1900 and 3 years before moment of selection");
