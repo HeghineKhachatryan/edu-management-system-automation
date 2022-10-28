@@ -19,10 +19,10 @@ public class ParentServiceImpl implements UserService<Parent> {
     @Override
     public Parent findUserByEmail(String email) {
         Parent parent = new Parent();
-        String query = "SELECT public.parent.id, password, name, surname, email " +
-                "FROM public.user " +
-                "INNER JOIN public.parent " +
-                "ON public.user.id=public.parent.user_id " +
+        String query = "SELECT public.parent.id, password, name, surname, user_id " +
+                "FROM public.parent " +
+                "INNER JOIN public.user " +
+                "ON public.parent.user_id=public.user.id " +
                 "WHERE public.user.email=?;";
         logger.info("Find parent by email");
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -30,13 +30,14 @@ public class ParentServiceImpl implements UserService<Parent> {
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 parent.setId(resultSet.getInt("id"));
-                parent.setName(resultSet.getString("name"));
                 parent.setSurname(resultSet.getString("surname"));
-                parent.setEmail(resultSet.getString("email"));
                 parent.setPassword(resultSet.getString("password"));
+                parent.setUserId(resultSet.getInt("user_id"));
+                parent.setName(resultSet.getString("name"));
             }
         } catch (SQLException e) {
             logger.error("Can not execute query");
+            throw new RuntimeException("Can not execute query, something went wrong");
         }
         return parent;
     }

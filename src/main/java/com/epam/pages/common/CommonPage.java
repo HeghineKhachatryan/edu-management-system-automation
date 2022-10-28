@@ -41,16 +41,11 @@ public abstract class CommonPage extends BasePage {
 
     public String getSurnameOfLastCreatedUser() {
         String surnameOfLastCreatedUser = listItems.get(listItems.size() - 1).getText().split(" ")[1];
-        logger.info("Get name of last created user - {}", surnameOfLastCreatedUser);
+        logger.info("Get surname of last created user - {}", surnameOfLastCreatedUser);
         return surnameOfLastCreatedUser;
     }
 
     public void clickOnCreateButton() {
-        logger.info("Click on create button");
         uiHelper.clickOnWebElement(createButton);
-    }
-
-    public boolean checkCreateButtonIsPresent() {
-        return createButton.isDisplayed();
     }
 }

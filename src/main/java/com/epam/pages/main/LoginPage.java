@@ -27,17 +27,23 @@ public class LoginPage extends BasePage {
     }
 
     public void clickOnLoginButton() {
-        logger.info("Click on login button");
         uiHelper.clickOnWebElement(loginButton);
     }
 
-    public void enterLastEmail() {
+    public void loginWithLastSavedCredentials() {
+        logger.info("Login with last saved credentials");
+        fillLastEmail();
+        fillLastGeneratedPassword();
+        clickOnLoginButton();
+    }
+
+    private void fillLastEmail() {
         String email = SharedTestData.getLastEmail();
         logger.info("Fill last generated email {}", email);
         uiHelper.sendKeys(emailInput, email);
     }
 
-    public void enterLastGeneratedPassword() {
+    private void fillLastGeneratedPassword() {
         String password = SharedTestData.getLastGeneratedPassword();
         logger.info("Fill last generated password {}", password);
         uiHelper.sendKeys(passwordInput, password);

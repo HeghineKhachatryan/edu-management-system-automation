@@ -2,8 +2,7 @@ Feature: This feature will cover possible scenarios of checking password input i
   especially on teachers, students, parent sections.
 
   Background:
-    Given Fill heghine9696@gmail.com and 2kB$8tU#1aO( fields
-    And Click on 'login' button
+    Given Login as admin
 
   @TC1.8.3 @TC1.9.11 @TC1.10.12 @Regression @Smoke
   Scenario Outline: Check functionality of 'Generate password' button in create popup

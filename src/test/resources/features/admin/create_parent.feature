@@ -3,19 +3,18 @@ Feature: Admin page/ Parents section functionality
   adding new created parents to database, checking functionality of different buttons on the given page.
 
   Background: Login as admin and select students section
-    Given Fill heghine9696@gmail.com and 2kB$8tU#1aO( fields
-    And Click on 'login' button
+    Given Login as admin
     When Select parents section
     And Click on 'create' button and open popup
 
   @TC1.9.4
   Scenario: Check the creation of the new parent after filling in all the required fields with valid data
-    Given Fill in all required fields
+    Given Fill in name, surname, email fields and click on 'Generate password' button
     And Save values from name, surname, password and email fields
     When Click on 'Save' button
     Then Popup is closed
-    And User is created and displayed in the list
-    And Check parent created by admin is added in the DB
+    And User is displayed in the list
+    And Check user is added in the DB
 
   @TC1.9.5
   Scenario: Check the creation of the new parent after filling in all the required fields with invalid data
@@ -30,8 +29,8 @@ Feature: Admin page/ Parents section functionality
     And Click on 'Generate password' button
     And Save values from name, surname, password and email fields
     When Click on 'Save' button
-    Then Check parent created by admin is added in the DB
-    And User is created and displayed in the list
+    Then Check user is added in the DB
+    And User is displayed in the list
 
   @TC1.9.9
   Scenario: Check uniqueness of parent email
@@ -41,19 +40,20 @@ Feature: Admin page/ Parents section functionality
 
   @TC1.9.15
   Scenario: Check functionality of 'X' button of the New Parent pop-up
-    Given Fill in all required fields
-    And Save values from name, surname, password and email fields
+    Given Fill in name, surname, email fields and click on 'Generate password' button
+    And Save value from email input field
+    And Save value from password input field
     When Click on 'X' button
     Then Popup is closed
     And Click on 'create' button and open popup
     And Check all input fields are empty in create popup
-    And Check parent created by admin is not added in the DB
-    And Go to login page
+    And Check user is not added in the DB
     And User is not able to login using current credentials
 
   @TC1.9.17
   Scenario: Check how Parent password is kept in DB
-    Given Fill in all required fields
-    And Save values from name, surname, password and email fields
+    Given Fill in name, surname, email fields and click on 'Generate password' button
+    And Save value from email input field
+    And Save value from password input field
     When Click on 'Save' button
     Then Check the parent password is hashed in the DB

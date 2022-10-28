@@ -4,7 +4,7 @@ import com.epam.jdbc.service.serviceimpl.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DBHelper {
+public final class DBHelper {
 
     private final UserServiceImpl userService = new UserServiceImpl();
     private final AdminServiceImpl adminService = new AdminServiceImpl();

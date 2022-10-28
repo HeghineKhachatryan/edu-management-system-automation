@@ -1,6 +1,8 @@
 package com.epam.pages.popup;
 
+import com.epam.helpers.ErrorMessagesProvider;
 import com.epam.helpers.SharedTestData;
+import com.epam.helpers.UserDataProvider;
 import com.epam.pages.common.CommonPopup;
 import com.epam.pages.main.SuperAdminPage;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -8,9 +10,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
-
-import static com.epam.helpers.ErrorMessages.BLANK_INPUT_FIELDS;
-import static com.epam.helpers.ErrorMessages.MORE_THAN_50_SYMBOLS;
 
 public class CreatePopup extends CommonPopup {
 
@@ -36,20 +35,24 @@ public class CreatePopup extends CommonPopup {
     protected List<WebElement> inputFields;
 
     public void fillName(String name) {
+        logger.info("Fill name {}", name);
         uiHelper.sendKeys(nameInput, name);
     }
 
     public void fillExistedName() {
         String name = new SuperAdminPage().getNameOfLastCreatedUser();
+        logger.info("Fill existed name {}", name);
         fillName(name);
     }
 
     public void fillSurname(String surname) {
+        logger.info("Fill surname {}", surname);
         uiHelper.sendKeys(surnameInput, surname);
     }
 
     public void fillExistedSurname() {
         String surname = new SuperAdminPage().getSurnameOfLastCreatedUser();
+        logger.info("Fill existed surname {}", surname);
         fillSurname(surname);
     }
 
@@ -64,13 +67,10 @@ public class CreatePopup extends CommonPopup {
         fillEmail(email);
     }
 
-    public void saveEmailValue() {
-        SharedTestData.setLastEmail(emailInput.getDomProperty("value"));
-    }
-
-    public void saveNameAndSurnameValue() {
-        SharedTestData.setNameField(nameInput.getDomProperty("value"));
-        SharedTestData.setSurnameField(surnameInput.getDomProperty("value"));
+    public void fillExistedEmail() {
+        String existedEmail = UserDataProvider.getExistedEmail();
+        logger.info("Fill existed email");
+        uiHelper.sendKeys(emailInput, existedEmail);
     }
 
     public void fillInputFieldsWithMoreSymbols() {
@@ -80,20 +80,29 @@ public class CreatePopup extends CommonPopup {
                 .forEach(fields -> uiHelper.sendKeys(fields, generatedString));
     }
 
-    public void fillExistedEmail() {
-        uiHelper.sendKeys(emailInput, "petrosyan@gmail.com");
-    }
-
     public void fillNameSurnameEmail() {
-        fillName("Davit");
-        fillSurname("Balabekyan");
-        String generatedString = RandomStringUtils.random(7, true, true);
-        fillEmail(String.format("%s@gmail.com", generatedString));
+        uiHelper.sendKeys(nameInput, UserDataProvider.getValidName());
+        uiHelper.sendKeys(surnameInput, UserDataProvider.getValidSurname());
+        fillNonExistedEmail();
     }
 
     public void clickOnGeneratePasswordButton() {
         uiHelper.clickOnWebElement(generatePasswordButton);
     }
+
+    public void saveNameAndSurnameValue() {
+        SharedTestData.setNameField(nameInput.getDomProperty("value"));
+        SharedTestData.setSurnameField(surnameInput.getDomProperty("value"));
+    }
+
+    public void saveEmailValue() {
+        SharedTestData.setLastEmail(emailInput.getDomProperty("value"));
+    }
+
+    public void savePasswordValue() {
+        SharedTestData.setLastGeneratedPassword(passwordInput.getDomProperty("value"));
+    }
+
 
     public boolean checkAllFieldsArePresent() {
         logger.info("Check fields name, surname, email, password, save button," +
@@ -142,10 +151,6 @@ public class CreatePopup extends CommonPopup {
         return Boolean.parseBoolean(passwordInput.getAttribute("readonly"));
     }
 
-    public void savePasswordValue() {
-        SharedTestData.setLastGeneratedPassword(passwordInput.getDomProperty("value"));
-    }
-
     public boolean passwordIsChanged() {
         logger.info("Check password is changed after generating a new password");
         return !passwordInput
@@ -153,17 +158,12 @@ public class CreatePopup extends CommonPopup {
                 .equals(SharedTestData.getLastGeneratedPassword());
     }
 
-    public String getInvalidEmailErrorMessage() {
-        logger.info("Get error message of invalid inputted email");
-        return emailInvalidAndExistedErrorMessage.getText();
-    }
-
     public boolean checkErrorMessagesOfBlankInputFields() {
         logger.info("Check error messages of blank input fields");
         return errorMessagesOfBlankInputFields
                 .stream()
                 .allMatch(errMessage -> errMessage.getText()
-                        .equals(BLANK_INPUT_FIELDS.getErrorMessage()));
+                        .equals(ErrorMessagesProvider.getBlankInputFieldsErrMessage()));
     }
 
     public boolean checkErrorMessagesOfMoreSymbolsFilledInputFields() {
@@ -171,16 +171,15 @@ public class CreatePopup extends CommonPopup {
         return errorMessagesOfMoreSymbols
                 .stream()
                 .allMatch(errMessage -> errMessage.getText()
-                        .equals(MORE_THAN_50_SYMBOLS.getErrorMessage()));
-    }
-
-    public String getErrorMessageOfExistedEmail() {
-        logger.info("Get error message of existed email");
-        return emailInvalidAndExistedErrorMessage.getText();
+                        .equals(ErrorMessagesProvider.getMoreThan50SymbolsErrMessage()));
     }
 
     public boolean popupIsClosed() {
         logger.info("Popup is closed");
         return !popupWindow.isDisplayed();
+    }
+
+    public String getEmailFieldErrorMessage() {
+        return emailInvalidAndExistedErrorMessage.getText();
     }
 }

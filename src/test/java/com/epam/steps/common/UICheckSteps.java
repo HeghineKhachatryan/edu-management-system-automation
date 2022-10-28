@@ -10,28 +10,28 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class UICheckSteps {
 
-    private SuperAdminPage superAdminPage;
     private LoginPage loginPage;
+    private SuperAdminPage superAdminPage;
     private AdminPage adminPage;
 
     @Before
     public void initPages() {
-        superAdminPage = new SuperAdminPage();
         loginPage = new LoginPage();
+        superAdminPage = new SuperAdminPage();
         adminPage = new AdminPage();
-    }
-
-    @Then("Check all elements are present in super admin page")
-    public void checkAllElementsArePresentInSuperAdminPage() {
-        assertThat(superAdminPage.checkAllElementsArePresent())
-                .withFailMessage("All elements are not present in super admin page.")
-                .isTrue();
     }
 
     @Then("Check all elements are present in login page")
     public void checkAllElementsArePresentInLoginPage() {
         assertThat(loginPage.checkAllElementsArePresent())
                 .withFailMessage("All elements are present in login page")
+                .isTrue();
+    }
+
+    @Then("Check all elements are present in super admin page")
+    public void checkAllElementsArePresentInSuperAdminPage() {
+        assertThat(superAdminPage.checkAllElementsArePresent())
+                .withFailMessage("All elements are not present in super admin page.")
                 .isTrue();
     }
 
@@ -42,18 +42,10 @@ public class UICheckSteps {
                 .isTrue();
     }
 
-
-    @Then("Check all elements are present in student section")
+    @Then("Check all elements are present on the chosen section")
     public void seeAllElementsArePresentInStudentSection() {
-        assertThat(adminPage.checkUIofStudentsSection())
-                .withFailMessage("Elements are not present in student section")
-                .isTrue();
-    }
-
-    @Then("Check all elements are present in parents section")
-    public void seeAllElementsArePresentInParentsSection() {
-        assertThat(adminPage.checkUIofParentsSection())
-                .withFailMessage("Elements are not present in student section")
+        assertThat(adminPage.checkUIofStudentsAndParentsSections())
+                .withFailMessage("Elements are not present on the chosen section")
                 .isTrue();
     }
 }

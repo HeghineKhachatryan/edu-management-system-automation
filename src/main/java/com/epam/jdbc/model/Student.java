@@ -2,7 +2,7 @@ package com.epam.jdbc.model;
 
 import java.util.Date;
 
-public class Student extends User {
+public class Student extends CommonUser {
 
     private String address;
 
@@ -10,9 +10,9 @@ public class Student extends User {
 
     private String bloodGroup;
 
-    private String linkedParent;
+    private int parentId;
 
-    private String linkedClass;
+    private int academicClassId;
 
     private Date birthDay;
 
@@ -21,56 +21,47 @@ public class Student extends User {
         return address;
     }
 
-    public String getGender() {
-        return gender;
-    }
-
-    public String getBloodGroup() {
-        return bloodGroup;
-    }
-
-    public String getLinkedParent() {
-        return linkedParent;
-    }
-
-    public String getLinkedClass() {
-        return linkedClass;
-    }
-
-    public Date getBirthDay() {
-        return birthDay;
-    }
-
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getGender() {
+        return gender;
     }
 
     public void setGender(String gender) {
         this.gender = gender;
     }
 
+    public String getBloodGroup() {
+        return bloodGroup;
+    }
+
     public void setBloodGroup(String bloodGroup) {
         this.bloodGroup = bloodGroup;
     }
 
-    public void setLinkedParent(String linkedParent) {
-        this.linkedParent = linkedParent;
+    public int getParentId() {
+        return parentId;
     }
 
-    public void setLinkedClass(String linkedClass) {
-        this.linkedClass = linkedClass;
+    public void setParentId(int parentId) {
+        this.parentId = parentId;
+    }
+
+    public int getAcademicClassId() {
+        return academicClassId;
+    }
+
+    public void setAcademicClassId(int academicClassId) {
+        this.academicClassId = academicClassId;
+    }
+
+    public Date getBirthDay() {
+        return birthDay;
     }
 
     public void setBirthDay(Date birthDay) {
         this.birthDay = birthDay;
     }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
 }
