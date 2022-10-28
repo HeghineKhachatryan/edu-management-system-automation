@@ -11,6 +11,9 @@ public final class DBHelper {
     private final TeacherServiceImpl teacherService = new TeacherServiceImpl();
     private final StudentServiceImpl studentService = new StudentServiceImpl();
     private final ParentServiceImpl parentService = new ParentServiceImpl();
+
+    private final AcademicClassesServiceImpl classesServiceImpl = new AcademicClassesServiceImpl();
+
     private final Logger logger = LoggerFactory.getLogger(DBHelper.class);
 
 
@@ -43,5 +46,9 @@ public final class DBHelper {
         return !parentService.findUserByEmail(
                         SharedTestData.getLastEmail()).getPassword()
                 .equals(SharedTestData.getLastGeneratedPassword());
+    }
+
+    public boolean isClassAddedToTheDB(String academicClass) {
+        return classesServiceImpl.getIDByAcademicClass(academicClass) != -1;
     }
 }

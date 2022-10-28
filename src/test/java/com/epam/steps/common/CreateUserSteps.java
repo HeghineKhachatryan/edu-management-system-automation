@@ -99,6 +99,11 @@ public class CreateUserSteps extends BaseSteps {
         createPopup.saveNameAndSurnameValue();
     }
 
+    @And("Fill in all required fields with only spaces")
+    public void fillInAllRequiredFieldsWithOnlySpaces() {
+        createPopup.fillInputFieldsWithSpaces();
+    }
+
     @Then("Popup is closed")
     public void checkPopupIsClosed() {
         assertThat(createPopup.popupIsClosed())

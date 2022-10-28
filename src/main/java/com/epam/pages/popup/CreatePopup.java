@@ -31,7 +31,7 @@ public class CreatePopup extends CommonPopup {
     protected List<WebElement> errorMessagesOfMoreSymbols;
     @FindBy(id = "popup-container")
     protected WebElement popupWindow;
-    @FindBy(xpath = "//input[not(@readonly)]")
+    @FindBy(xpath = "//input[not(@readonly) and not(@type='hidden')]")
     protected List<WebElement> inputFields;
 
     public void fillName(String name) {
@@ -103,6 +103,11 @@ public class CreatePopup extends CommonPopup {
         SharedTestData.setLastGeneratedPassword(passwordInput.getDomProperty("value"));
     }
 
+    public void fillInputFieldsWithSpaces() {
+        logger.info("Fill in all required fields only spaces");
+        inputFields
+                .forEach(fields -> uiHelper.sendKeys(fields, "        "));
+    }
 
     public boolean checkAllFieldsArePresent() {
         logger.info("Check fields name, surname, email, password, save button," +

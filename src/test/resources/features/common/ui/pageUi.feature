@@ -54,3 +54,11 @@ Feature: UI of pages
   Scenario: Check UI of admin page
     Given Login as admin
     Then Check all elements are present on admin page
+
+  @TC1.11.1 @TC1.11.2 @1.11.3 @Regression
+  Scenario: Check UI of "Academic Classes" section and "Create" button on the "Academic Classes" section
+    Given Login as admin
+    When Select classes section
+    Then Check all elements are present on the chosen section
+    And Click on 'create' button and open popup
+    Then Check all fields are present in create popup - academic classes section
