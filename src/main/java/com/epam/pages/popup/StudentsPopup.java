@@ -32,7 +32,7 @@ public class StudentsPopup extends CreatePopup {
     @FindBy(xpath = "//select[@class='ui-datepicker-year']/option")
     private List<WebElement> listOfYears;
 
-    public void fillAddress() {
+    private void fillAddress() {
         String selectedValue = UserDataProvider.getAddress();
         logger.info("Fill address - {}", selectedValue);
         uiHelper.sendKeys(address, selectedValue);
@@ -42,7 +42,7 @@ public class StudentsPopup extends CreatePopup {
         uiHelper.clickOnWebElement(birthDate);
     }
 
-    public void selectBirthday(int day, int month, int year) {
+    private void selectBirthday(int day, int month, int year) {
         clickOnBirthDateField();
         logger.info("Fill birth day - {}/{}/{}", day, month, year);
         selectYear(year);

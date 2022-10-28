@@ -36,9 +36,9 @@ public class DBConnectionProvider {
     }
 
     public Connection getConnection() {
-        logger.info("Create DB Connection");
         try {
             if (connection == null || connection.isClosed()) {
+                logger.info("Create DB Connection");
                 connection = DriverManager.getConnection(
                         propertiesReader.getProperty("DB_URL"),
                         propertiesReader.getProperty("DB_USER"),

@@ -1,8 +1,6 @@
 package com.epam.steps.admin;
 
-import com.epam.pages.popup.CreatePopup;
 import com.epam.steps.BaseSteps;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 
 import static org.assertj.core.api.Assertions.assertThat;

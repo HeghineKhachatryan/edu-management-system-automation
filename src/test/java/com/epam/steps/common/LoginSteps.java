@@ -2,6 +2,7 @@ package com.epam.steps.common;
 
 import com.epam.helpers.ErrorMessagesProvider;
 import com.epam.helpers.SharedTestData;
+import com.epam.helpers.UserDataProvider;
 import com.epam.pages.main.AdminPage;
 import com.epam.pages.main.LoginPage;
 import com.epam.pages.main.SuperAdminPage;
@@ -46,12 +47,18 @@ public class LoginSteps extends BaseSteps {
 
     @Given("Login as super admin")
     public void loginAsSuperAdmin() {
-        loginPage.loginAsSuperAdmin();
+        logger.info("Login as super admin");
+        loginPage.fillEmail(UserDataProvider.getSuperAdminEmail());
+        loginPage.fillPassword(UserDataProvider.getSuperAdminPassword());
+        loginPage.clickOnLoginButton();
     }
 
     @Given("Login as admin")
     public void loginAsAdmin() {
-        loginPage.loginAsAdmin();
+        logger.info("Login as admin");
+        loginPage.fillEmail(UserDataProvider.getAdminEmail());
+        loginPage.fillPassword(UserDataProvider.getAdminPassword());
+        loginPage.clickOnLoginButton();
     }
 
     @Then("The user is on {} page")

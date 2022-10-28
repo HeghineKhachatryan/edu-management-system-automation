@@ -1,16 +1,19 @@
 package com.epam.jdbc.service.serviceimpl;
 
+import com.epam.jdbc.config.DBConnectionProvider;
 import com.epam.jdbc.model.User;
 import com.epam.jdbc.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserServiceImpl implements UserService<User> {
 
+    private final Connection connection = DBConnectionProvider.getInstance().getConnection();
     private final Logger logger = LoggerFactory.getLogger(AdminServiceImpl.class);
 
     @Override
@@ -24,9 +27,9 @@ public class UserServiceImpl implements UserService<User> {
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
+                user.setId(resultSet.getInt("id"));
                 user.setEmail(resultSet.getString("email"));
                 user.setRole(resultSet.getString("role"));
-                user.setId(resultSet.getInt("id"));
             }
         } catch (SQLException e) {
             logger.error("Can not execute query");

@@ -1,7 +1,6 @@
 package com.epam.pages.main;
 
 import com.epam.helpers.SharedTestData;
-import com.epam.helpers.UserDataProvider;
 import com.epam.pages.BasePage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -38,27 +37,13 @@ public class LoginPage extends BasePage {
         clickOnLoginButton();
     }
 
-    public void loginAsSuperAdmin() {
-        logger.info("Login as super admin");
-        uiHelper.sendKeys(emailInput, UserDataProvider.getSuperAdminEmail());
-        uiHelper.sendKeys(passwordInput, UserDataProvider.getSuperAdminPassword());
-        uiHelper.clickOnWebElement(loginButton);
-    }
-
-    public void loginAsAdmin() {
-        logger.info("Login as admin");
-        uiHelper.sendKeys(emailInput, UserDataProvider.getAdminEmail());
-        uiHelper.sendKeys(passwordInput, UserDataProvider.getAdminPassword());
-        uiHelper.clickOnWebElement(loginButton);
-    }
-
-    public void fillLastEmail() {
+    private void fillLastEmail() {
         String email = SharedTestData.getLastEmail();
         logger.info("Fill last generated email {}", email);
         uiHelper.sendKeys(emailInput, email);
     }
 
-    public void fillLastGeneratedPassword() {
+    private void fillLastGeneratedPassword() {
         String password = SharedTestData.getLastGeneratedPassword();
         logger.info("Fill last generated password {}", password);
         uiHelper.sendKeys(passwordInput, password);
