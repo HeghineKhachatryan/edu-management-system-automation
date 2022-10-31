@@ -33,7 +33,7 @@ Feature: This feature will cover academic years section of admin page, especiall
     When Fill 10 Nov 2022 date in start date field
     And Save start date values
     Then Check that 2043 year is greater from start date by more than ten years
-    And See that 2043 year doesn't exist in the list of selection
+    And Check that 2043 year doesn't exist in the list of selection
 
   @TC2.13.7 @Regression @Smoke
   Scenario: Check validation for minimum 30 days length of academic year

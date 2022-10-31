@@ -101,8 +101,8 @@ public class CreateYearsSteps extends BaseSteps {
                 .isTrue();
     }
 
-    @And("See that {int} year doesn't exist in the list of selection")
-    public void seeThatYearDoesnTExistInTheListOfSelection(int year) {
+    @And("Check that {int} year doesn't exist in the list of selection")
+    public void checkThatYearDoesnTExistInTheListOfSelection(int year) {
         assertThat(yearsAndVacationPopup.checkIfYearIsPresentInTheSelectList(year))
                 .withFailMessage("Year is present in the list, but it should not be.")
                 .isFalse();
