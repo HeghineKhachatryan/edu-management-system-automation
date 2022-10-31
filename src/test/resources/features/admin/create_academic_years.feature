@@ -22,7 +22,7 @@ Feature: This feature will cover academic years section of admin page, especiall
     Then Check that you can't select date before today - the day of selection
 
   @TC2.13.5 @Regression @Smoke
-  Scenario: Check validation for Start Date < End Date
+  Scenario: Check validation for Start Date > End Date
     When Fill 10 Dec 2023 date in start date field
     When Fill 10 Dec 2022 date in end date field
     And Click on 'Save' button

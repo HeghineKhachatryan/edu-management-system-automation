@@ -41,11 +41,10 @@ public class UICheckSteps {
                 .withFailMessage("Elements in admin page are not present")
                 .isTrue();
     }
-
-    @Then("Check all elements are present on the chosen section")
-    public void seeAllElementsArePresentInStudentSection() {
-        assertThat(adminPage.checkUIofStudentsAndParentsSections())
-                .withFailMessage("Elements are not present on the chosen section")
+    @Then("See all elements are present in the section")
+    public void seeAllElementsArePresentInTheSection() {
+        assertThat(adminPage.checkUIOfChosenSection())
+                .withFailMessage("Elements are not present in selected section")
                 .isTrue();
     }
 }

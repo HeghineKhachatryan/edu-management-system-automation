@@ -3,8 +3,6 @@ package com.epam.steps.admin;
 import com.epam.helpers.SharedTestData;
 import com.epam.pages.main.AdminPage;
 import com.epam.pages.popup.AcademicYearsAndVacationPopup;
-import com.epam.pages.popup.CreatePopup;
-import com.epam.pages.popup.StudentsPopup;
 import com.epam.steps.BaseSteps;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
