@@ -45,6 +45,11 @@ public class AdminPage extends CommonPage {
                 && getSurnameOfLastCreatedUser()
                 .equals(SharedTestData.getSurnameField());
     }
+    public boolean checkAcademicClassIsDisplayedInTheList() {
+        logger.info("Get last created academic class and check if it is added to the list");
+        return (listItemsHref.get(listItemsHref.size() - 1).getText())
+                .equals(SharedTestData.getAcademicClass());
+    }
 
     public void selectSection(String section) {
         uiHelper.clickOnWebElement(getSectionElementByName(section));

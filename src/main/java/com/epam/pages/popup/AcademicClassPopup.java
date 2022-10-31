@@ -10,15 +10,10 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 public class AcademicClassPopup extends CreatePopup {
-
-    @FindBy(xpath = "//div[@class='list-items']/a")
-    protected List<WebElement> listItems;
     @FindBy(id = "classNumber")
     private WebElement classNumber;
     @FindBy(xpath = "//input/following-sibling::div[@class='error']")
     protected WebElement errorMessagesOfExistedClass;
-    @FindBy(tagName = "h1")
-    private WebElement title;
 
     public boolean checkUIOfCreatePopupClassesSection() {
         logger.info("Check UI of create popup in academic classes section");
@@ -49,11 +44,5 @@ public class AcademicClassPopup extends CreatePopup {
 
     public void saveAcademicClassValue() {
         SharedTestData.setAcademicClass(classNumber.getDomProperty("value"));
-    }
-
-    public boolean checkAcademicClassIsDisplayedInTheList() {
-        logger.info("Get last created academic class and check if it is added to the list");
-        return (listItems.get(listItems.size() - 1).getText())
-                .equals(SharedTestData.getAcademicClass());
     }
 }

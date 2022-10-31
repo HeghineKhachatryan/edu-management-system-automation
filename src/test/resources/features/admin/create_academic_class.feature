@@ -1,7 +1,7 @@
 Feature: This feature will cover academic class section of admin page, especially creating new classes,
   adding courses to the created classes, checking validations according the given requirements and database integration.
 
-  Background: Login as admin and select students section
+  Background: Login as admin and select classes section
     Given Login as admin
     When Select classes section
     And Click on 'create' button and open popup
