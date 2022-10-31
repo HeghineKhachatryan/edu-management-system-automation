@@ -2,6 +2,7 @@ package com.epam.pages.popup;
 
 import com.epam.helpers.ErrorMessagesProvider;
 import com.epam.helpers.SharedTestData;
+import com.epam.helpers.UserDataProvider;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -30,13 +31,8 @@ public class AcademicClassPopup extends CreatePopup {
     }
 
     public void fillExistedAcademicClass() {
-        /////// Get existed academic class from data provider
         logger.info("Fill existed academic class from list.");
-        if (this.listItems.isEmpty()) {
-            logger.error("No elements in the list, please create one class and return");
-        } else {
-            uiHelper.sendKeys(classNumber, listItems.get(0).getText());
-        }
+            uiHelper.sendKeys(classNumber, UserDataProvider.getExistedClass());
     }
 
     public boolean checkExistedClassErrorMessage() {
@@ -46,7 +42,7 @@ public class AcademicClassPopup extends CreatePopup {
     }
 
     public void fillAcademicClass() {
-        String generateClass = RandomStringUtils.random(10,true,true);
+        String generateClass = RandomStringUtils.random(25,true,true);
         logger.info("Fill academic class with value - {}", generateClass);
         uiHelper.sendKeys(classNumber, generateClass);
     }
