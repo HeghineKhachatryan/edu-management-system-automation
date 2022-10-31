@@ -14,7 +14,7 @@ import java.sql.SQLException;
 public class UserServiceImpl implements UserService<User> {
 
     private final Connection connection = DBConnectionProvider.getInstance().getConnection();
-    private final Logger logger = LoggerFactory.getLogger(AdminServiceImpl.class);
+    private final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Override
     public User findUserByEmail(String email) {

@@ -54,4 +54,11 @@ public class AdminPage extends CommonPage {
     public void selectSection(String section) {
         uiHelper.clickOnWebElement(getSectionElementByName(section));
     }
+
+    public boolean checkAcademicYearIsDisplayedInTheList() {
+        logger.info("Get last created academic year and check if it is added to the list");
+        return (listItems.get(listItems.size() - 1).getText())
+                .equals(SharedTestData.getStartDate().getYear() + "-"
+                        + SharedTestData.getEndDate().getYear());
+    }
 }

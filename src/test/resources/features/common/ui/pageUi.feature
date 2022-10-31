@@ -62,3 +62,10 @@ Feature: UI of pages
     Then Check all elements are present on the chosen section
     And Click on 'create' button and open popup
     Then Check all fields are present in create popup - academic classes section
+
+  @TC2.13.1 @Regression
+  Scenario: Check UI of 'Create' button in 'Academic Year' section
+    Given Login as admin
+    When Select years section
+    And Click on 'create' button and open popup
+    Then Check all fields are present in create popup years section
