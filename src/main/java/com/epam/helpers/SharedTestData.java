@@ -3,6 +3,8 @@ package com.epam.helpers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.LocalDate;
+
 public final class SharedTestData {
 
     private static final Logger logger = LoggerFactory.getLogger(SharedTestData.class);
@@ -11,6 +13,9 @@ public final class SharedTestData {
     private static String nameField;
     private static String surnameField;
     private static String selectedValueOfStudentPopup;
+
+    private static LocalDate startDate;
+    private static LocalDate endDate;
 
     private SharedTestData() {
     }
@@ -63,5 +68,21 @@ public final class SharedTestData {
     public static void setSelectedValueOfStudentPopup(String selectedValue) {
         logger.info("Save selected value of student popup fields {} into SharedTestData", selectedValue);
         selectedValueOfStudentPopup = selectedValue;
+    }
+
+    public static LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public static void setStartDate(LocalDate startDate) {
+        SharedTestData.startDate = startDate;
+    }
+
+    public static LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public static void setEndDate(LocalDate endDate) {
+        SharedTestData.endDate = endDate;
     }
 }
