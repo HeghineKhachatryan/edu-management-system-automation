@@ -16,11 +16,16 @@ public final class DBHelper {
     private final VacationServiceImpl vacationService = new VacationServiceImpl();
     private final AcademicClassesServiceImpl classesServiceImpl = new AcademicClassesServiceImpl();
     private final AcademicYearsServiceImpl academicYearsService = new AcademicYearsServiceImpl();
+    private final SubjectServiceImpl subjectService = new SubjectServiceImpl();
     private final Logger logger = LoggerFactory.getLogger(DBHelper.class);
 
 
     public boolean isUserAddedInTheDB() {
         return userService.findUserByEmail(SharedTestData.getLastEmail()).getEmail() == null;
+    }
+
+    public boolean isSubjectAddedInTheDB() {
+        return subjectService.findByName(SharedTestData.getLastCreatedItemName()).getName() == null;
     }
 
     public boolean isAdminPasswordHashed() {

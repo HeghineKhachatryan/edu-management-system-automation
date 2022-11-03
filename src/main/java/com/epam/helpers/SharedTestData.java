@@ -16,6 +16,8 @@ public final class SharedTestData {
     private static LocalDate startDate;
     private static LocalDate endDate;
     private static String academicClass;
+    private static String lastCreatedItemName;
+    private static String lastInputtedTeacherName;
 
     private SharedTestData() {
     }
@@ -69,6 +71,25 @@ public final class SharedTestData {
         logger.info("Save selected value of student popup fields {} into SharedTestData", selectedValue);
         selectedValueOfStudentPopup = selectedValue;
     }
+
+    public static String getLastCreatedItemName() {
+        logger.info("Get name of the created item name {}", lastCreatedItemName);
+        return lastCreatedItemName;
+    }
+
+    public static void setLastCreatedItemName(String lastCreatedItemName) {
+        logger.info("Save value of new created item name {} into SharedTestData", lastCreatedItemName);
+        SharedTestData.lastCreatedItemName = lastCreatedItemName;
+    }
+
+    public static String getLastInputtedTeacherName() {
+        return lastInputtedTeacherName;
+    }
+
+    public static void setLastInputtedTeacherName(String lastInputtedTeacherName) {
+        SharedTestData.lastInputtedTeacherName = lastInputtedTeacherName;
+    }
+
 
     public static LocalDate getStartDate() {
         return startDate;
