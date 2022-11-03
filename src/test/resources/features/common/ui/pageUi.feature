@@ -55,7 +55,6 @@ Feature: UI of pages
     Given Login as admin
     Then Check all elements are present on admin page
 
-<<<<<<< HEAD
   @TC1.11.1 @TC1.11.2 @1.11.3 @Regression
   Scenario: Check UI of "Academic Classes" section and "Create" button on the "Academic Classes" section
     Given Login as admin
@@ -64,11 +63,18 @@ Feature: UI of pages
     And Click on 'create' button and open popup
     Then Check all fields are present in create popup - academic classes section
 
-=======
->>>>>>> 6404f16d240aaf9fab9529664ffe7e1fb48bb912
   @TC2.13.1 @Regression
   Scenario: Check UI of 'Create' button in 'Academic Year' section
     Given Login as admin
     When Select years section
     And Click on 'create' button and open popup
+    Then Check all fields are present in create popup years section
+
+  @TC2.14.1 @TC2.14.2 @TC2.14.3 @Regression
+  Scenario: Check UI of 'Vacations' section and UI of 'Create' button in the given section
+    Given Login as admin
+    When Select vacations section
+    Then Check all elements are present on the chosen section
+    When Click on 'create' button and open popup
+    Then Popup is opened
     Then Check all fields are present in create popup years section

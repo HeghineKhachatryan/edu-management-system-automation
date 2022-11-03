@@ -13,12 +13,8 @@ public final class DBHelper {
     private final TeacherServiceImpl teacherService = new TeacherServiceImpl();
     private final StudentServiceImpl studentService = new StudentServiceImpl();
     private final ParentServiceImpl parentService = new ParentServiceImpl();
-<<<<<<< HEAD
-
+    private final VacationServiceImpl vacationService = new VacationServiceImpl();
     private final AcademicClassesServiceImpl classesServiceImpl = new AcademicClassesServiceImpl();
-
-=======
->>>>>>> 6404f16d240aaf9fab9529664ffe7e1fb48bb912
     private final AcademicYearsServiceImpl academicYearsService = new AcademicYearsServiceImpl();
     private final Logger logger = LoggerFactory.getLogger(DBHelper.class);
 
@@ -54,16 +50,16 @@ public final class DBHelper {
                 .equals(SharedTestData.getLastGeneratedPassword());
     }
 
+    public boolean isVacationAddedToTheDB(LocalDate start, LocalDate end) {
+        return vacationService.getIDByStartAndEndDays(start, end) != -1;
+    }
+
     public boolean isAcademicYearAddedToTheDB(LocalDate start, LocalDate end) {
         logger.info("Get id of academic year from the DB.");
-<<<<<<< HEAD
         return academicYearsService.findIDByStartAndEndDays(start, end) != -1;
     }
 
     public boolean isClassAddedToTheDB(String academicClass) {
         return classesServiceImpl.findIDByAcademicClass(academicClass) != -1;
-=======
-        return academicYearsService.getIDByStartAndEndDays(start, end) != -1;
->>>>>>> 6404f16d240aaf9fab9529664ffe7e1fb48bb912
     }
 }
