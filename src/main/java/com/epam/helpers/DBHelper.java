@@ -11,11 +11,16 @@ public final class DBHelper {
     private final TeacherServiceImpl teacherService = new TeacherServiceImpl();
     private final StudentServiceImpl studentService = new StudentServiceImpl();
     private final ParentServiceImpl parentService = new ParentServiceImpl();
+    private final SubjectServiceImpl subjectService = new SubjectServiceImpl();
     private final Logger logger = LoggerFactory.getLogger(DBHelper.class);
 
 
     public boolean isUserAddedInTheDB() {
         return userService.findUserByEmail(SharedTestData.getLastEmail()).getEmail() == null;
+    }
+
+    public boolean isSubjectAddedInTheDB() {
+        return subjectService.findByName(SharedTestData.getLastCreatedItemName()).getName() == null;
     }
 
     public boolean isAdminPasswordHashed() {

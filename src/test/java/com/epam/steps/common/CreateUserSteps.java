@@ -101,6 +101,7 @@ public class CreateUserSteps extends BaseSteps {
 
     @Then("Popup is closed")
     public void checkPopupIsClosed() {
+        logger.info("Check popup is closed");
         assertThat(createPopup.popupIsClosed())
                 .withFailMessage("Popup is not closed, but it should be.")
                 .isTrue();
@@ -108,6 +109,7 @@ public class CreateUserSteps extends BaseSteps {
 
     @Then("Popup is opened")
     public void popupIsOpened() {
+        logger.info("Check popup is opened");
         assertThat(createPopup.popupIsClosed())
                 .withFailMessage("Popup is not opened, but it should be.")
                 .isFalse();
@@ -189,6 +191,13 @@ public class CreateUserSteps extends BaseSteps {
     public void theUserIsNotAbleToInputAnyDataInPasswordField() {
         assertThat(createPopup.checkThePasswordFieldIsDisabled())
                 .withFailMessage("User is able to input data in the password field, as it is not readonly.")
+                .isTrue();
+    }
+
+    @Then("Check blank input fields error messages are not displayed")
+    public void checkBlankInputFieldsErrorMessagesAreNotDisplayed() {
+        assertThat(createPopup.checkBlankInputFieldsErrorMessagesAreNotDisplayed())
+                .withFailMessage("Blank input fields error messages are displayed")
                 .isTrue();
     }
 }

@@ -4,41 +4,45 @@ import com.epam.config.PropertiesReader;
 
 public final class ErrorMessagesProvider {
 
-    private static final PropertiesReader propertiesReader = PropertiesReader
+    private static final PropertiesReader PROPERTIES_READER = PropertiesReader
             .getInstance("error_messages.properties");
 
     private ErrorMessagesProvider() {
     }
 
     public static String getInvalidEmailErrMessage() {
-        return propertiesReader.getProperty("invalidEmail");
+        return PROPERTIES_READER.getProperty("invalidEmail");
     }
 
     public static String getMoreThan50SymbolsErrMessage() {
-        return propertiesReader.getProperty("moreThan50Symbols");
+        return PROPERTIES_READER.getProperty("moreThan50Symbols");
     }
 
     public static String getBlankInputFieldsErrMessage() {
-        return propertiesReader.getProperty("blankInputFields");
+        return PROPERTIES_READER.getProperty("blankInputFields");
     }
 
     public static String getIncorrectLoginOrPasswordErrMessage() {
-        return propertiesReader.getProperty("incorrectLoginOrPassword");
+        return PROPERTIES_READER.getProperty("incorrectLoginOrPassword");
     }
 
     public static String getExistedEmailErrMessage() {
-        return propertiesReader.getProperty("existedEmail");
+        return PROPERTIES_READER.getProperty("existedEmail");
     }
 
     public static String getExistedAcademicClassErrMessage() {
-        return propertiesReader.getProperty("existedAcademicClass");
+        return PROPERTIES_READER.getProperty("existedAcademicClass");
     }
 
     public static String getWrongSelectedDatesErrMessage() {
-        return propertiesReader.getProperty("wrongSelectedDates");
+        return PROPERTIES_READER.getProperty("wrongSelectedDates");
     }
 
     public static String getLessThan30DaysErrMessage() {
-        return propertiesReader.getProperty("lessThan30Days");
+        return PROPERTIES_READER.getProperty("lessThan30Days");
+    }
+
+    public static String getExistedSubjectNameErrMessage() {
+        return PROPERTIES_READER.getProperty("existedSubjectName");
     }
 }

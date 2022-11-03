@@ -46,6 +46,11 @@ public class AdminPage extends CommonPage {
                 .equals(SharedTestData.getSurnameField());
     }
 
+    public boolean checkNewCreatedItemIsDisplayedOnAdminsSection() {
+        logger.info("Check new created item is displayed on admins section");
+        return getNameOfLastCreatedItem().equals(SharedTestData.getLastCreatedItemName());
+    }
+
     public void selectSection(String section) {
         uiHelper.clickOnWebElement(getSectionElementByName(section));
     }

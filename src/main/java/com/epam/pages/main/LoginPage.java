@@ -1,6 +1,7 @@
 package com.epam.pages.main;
 
 import com.epam.helpers.SharedTestData;
+import com.epam.helpers.UserDataProvider;
 import com.epam.pages.BasePage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -27,6 +28,20 @@ public class LoginPage extends BasePage {
     }
 
     public void clickOnLoginButton() {
+        uiHelper.clickOnWebElement(loginButton);
+    }
+
+    public void loginByRole(String role) {
+        switch (role) {
+            case "admin":
+                uiHelper.sendKeys(emailInput, UserDataProvider.getAdminEmail());
+                uiHelper.sendKeys(passwordInput, UserDataProvider.getAdminPassword());
+                break;
+            case "super admin":
+                uiHelper.sendKeys(emailInput, UserDataProvider.getSuperAdminEmail());
+                uiHelper.sendKeys(passwordInput, UserDataProvider.getSuperAdminPassword());
+                break;
+        }
         uiHelper.clickOnWebElement(loginButton);
     }
 
