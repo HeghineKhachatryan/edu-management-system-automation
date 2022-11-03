@@ -54,3 +54,12 @@ Feature: UI of pages
   Scenario: Check UI of admin page
     Given Login as admin
     Then Check all elements are present on admin page
+
+  @TC2.14.1 @TC2.14.2 @TC2.14.3 @Regression
+  Scenario: Check UI of 'Vacations' section and UI of 'Create' button in the given section
+    Given Login as admin
+    When Select vacations section
+    Then Check all elements are present on the chosen section
+    When Click on 'create' button and open popup
+    Then Popup is opened
+    Then Check all fields are present in create popup years section

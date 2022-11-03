@@ -44,7 +44,7 @@ public class UICheckSteps {
 
     @Then("Check all elements are present on the chosen section")
     public void seeAllElementsArePresentInStudentSection() {
-        assertThat(adminPage.checkUIofStudentsAndParentsSections())
+        assertThat(adminPage.checkUIOfSection())
                 .withFailMessage("Elements are not present on the chosen section")
                 .isTrue();
     }

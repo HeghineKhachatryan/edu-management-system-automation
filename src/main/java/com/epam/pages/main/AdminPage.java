@@ -26,7 +26,7 @@ public class AdminPage extends CommonPage {
         );
     }
 
-    public boolean checkUIofStudentsAndParentsSections() {
+    public boolean checkUIOfSection() {
         logger.info("Check elements are displayed on the given section - list, create button");
         return uiHelper.checkElementsAreDisplayed(
                 list,
@@ -48,5 +48,21 @@ public class AdminPage extends CommonPage {
 
     public void selectSection(String section) {
         uiHelper.clickOnWebElement(getSectionElementByName(section));
+    }
+
+    public boolean checkVacationIsDisplayedInTheList() {
+        logger.info("Get last created vacation and check if it is added to the list");
+        return (listItems.get(listItems.size() - 1).getText())
+                .equals(getVacationAsDisplayedInTheList());
+    }
+
+    private String getVacationAsDisplayedInTheList() {
+        return String.format("%d/%d/%s - %d/%d/%s",
+                SharedTestData.getStartDate().getMonthValue(),
+                SharedTestData.getStartDate().getDayOfMonth(),
+                String.valueOf(SharedTestData.getStartDate().getYear()).substring(2),
+                SharedTestData.getEndDate().getMonthValue(),
+                SharedTestData.getEndDate().getDayOfMonth(),
+                String.valueOf(SharedTestData.getEndDate().getYear()).substring(2));
     }
 }
