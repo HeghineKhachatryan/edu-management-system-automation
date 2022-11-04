@@ -1,6 +1,7 @@
 package com.epam.steps.admin;
 
 import com.epam.helpers.ErrorMessagesProvider;
+import com.epam.helpers.UserDataProvider;
 import com.epam.pages.main.AdminPage;
 import com.epam.pages.popup.SubjectPopup;
 import com.epam.steps.BaseSteps;
@@ -24,7 +25,7 @@ public class CreateSubjectSteps extends BaseSteps {
 
     @Given("Fill subject name")
     public void fillSubjectName() {
-        subjectPopup.fillName();
+        subjectPopup.fillSubjectName();
     }
 
     @Given("Fill name of teacher {}")
@@ -118,9 +119,9 @@ public class CreateSubjectSteps extends BaseSteps {
                 .isEqualTo(ErrorMessagesProvider.getExistedSubjectNameErrMessage());
     }
 
-    @Then("Check matched items are appeared below the Search line")
+    @Then("Check matched items appeared below the Search line")
     public void checkMatchedItemsAreAppearedBelowTheSearchLine() {
-        assertThat(subjectPopup.checkMatchedItemsAreAppearedBelowTheSearchLine())
+        assertThat(subjectPopup.checkMatchedItemsAppearedBelowTheSearchLine())
                 .withFailMessage("Matched items are not appeared")
                 .isTrue();
     }
@@ -153,6 +154,6 @@ public class CreateSubjectSteps extends BaseSteps {
         logger.info("Check the search line placeholder");
         assertThat(subjectPopup.getTheSearchLinePlaceholder())
                 .withFailMessage("There is selected item")
-                .isEqualTo("Select teachers");
+                .isEqualTo(UserDataProvider.getTeacherSearchLinePlaceholder());
     }
 }

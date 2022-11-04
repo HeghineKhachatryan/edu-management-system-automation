@@ -41,4 +41,8 @@ public final class UserDataProvider {
     public static String getAddress() {
         return PROPERTIES_READER.getProperty("address");
     }
+
+    public static String getTeacherSearchLinePlaceholder() {
+        return PROPERTIES_READER.getProperty("teacherSearchLinePlaceholder");
+    }
 }

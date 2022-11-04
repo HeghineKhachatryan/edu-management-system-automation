@@ -16,7 +16,7 @@ public class SubjectPopup extends CommonPopup {
     @FindBy(id = "teacher")
     private WebElement teacherSelect;
     @FindBy(xpath = "//*[@class='selection']/span")
-    private WebElement selectedTeachers;
+    private WebElement selectTeacherBox;
     @FindBy(className = "select2-search__field")
     private WebElement teacherSelectField;
     @FindBy(xpath = "//*[@id='select2-teacher-container']/li")
@@ -24,13 +24,13 @@ public class SubjectPopup extends CommonPopup {
     @FindBy(xpath = "//*[@id='select2-teacher-container']/li/button")
     private List<WebElement> xButtonsOfSelectedTeachers;
     @FindBy(className = "select2-selection__clear")
-    private WebElement xButtonOfTheTeacherList;
+    private WebElement xButtonOfTheTeacherSelectBox;
     @FindBy(xpath = "//*[@class='select2-results__options']/li")
-    private List<WebElement> teachers;
+    private List<WebElement> teachersInDropDownList;
     @FindBy(xpath = "//input/following-sibling::div[@class='error']/p")
     private WebElement existedSubjectNameErrorMessage;
 
-    public void fillName() {
+    public void fillSubjectName() {
         String subjectName = RandomStringUtils.random(16, true, false);
         logger.info("Fill subject name {}", subjectName);
         uiHelper.sendKeys(nameField, subjectName);
@@ -84,16 +84,16 @@ public class SubjectPopup extends CommonPopup {
 
     public boolean checkAllFieldsAndDropDownListAreEmptyInSubjectsSectionCreatePopup() {
         logger.info("Check all fields and drop-down list are empty in subject section create popup");
-        return uiHelper.checkElementsAreEmpty(nameField) && !uiHelper.areElementsSelected(teacherSelect);
+        return uiHelper.checkElementsAreEmpty(nameField) && checkThereAreNoSelectedItems();
     }
 
     public String getExistedSubjectNameErrorMessage() {
         return existedSubjectNameErrorMessage.getText();
     }
 
-    public boolean checkMatchedItemsAreAppearedBelowTheSearchLine() {
+    public boolean checkMatchedItemsAppearedBelowTheSearchLine() {
         logger.info("Check matched items are appeared below the search line");
-        return teachers.stream()
+        return teachersInDropDownList.stream()
                 .allMatch(
                         teacherName -> teacherName.getText().toLowerCase()
                                 .contains(SharedTestData.getLastInputtedTeacherName().toLowerCase())
@@ -113,11 +113,11 @@ public class SubjectPopup extends CommonPopup {
     }
 
     public void clickOnXButtonOfTheTeacherList() {
-        uiHelper.clickOnWebElement(xButtonOfTheTeacherList);
+        uiHelper.clickOnWebElement(xButtonOfTheTeacherSelectBox);
     }
 
     public boolean checkThereAreNoSelectedItems() {
-        return !selectedTeachers.getAttribute("class").contains("clearable");
+        return !selectTeacherBox.getAttribute("class").contains("clearable");
     }
 
     public String getTheSearchLinePlaceholder() {
