@@ -31,7 +31,7 @@ public class CreatePopup extends CommonPopup {
     protected List<WebElement> errorMessagesOfMoreSymbols;
     @FindBy(id = "popup-container")
     protected WebElement popupWindow;
-    @FindBy(xpath = "//input[not(@readonly)]")
+    @FindBy(xpath = "//input[not(@readonly) and not(@type='hidden')]")
     protected List<WebElement> inputFields;
 
     public void fillName(String name) {
