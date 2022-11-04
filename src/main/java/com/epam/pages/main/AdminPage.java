@@ -26,7 +26,7 @@ public class AdminPage extends CommonPage {
         );
     }
 
-    public boolean checkUIofChosenSectionSections() {
+    public boolean checkUIofChosenSection() {
         logger.info("Check elements are displayed on the given section - list, create button");
         return uiHelper.checkElementsAreDisplayed(
                 list,

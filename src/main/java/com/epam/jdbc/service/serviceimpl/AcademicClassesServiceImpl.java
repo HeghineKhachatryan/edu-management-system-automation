@@ -15,7 +15,7 @@ public class AcademicClassesServiceImpl implements AcademicClassesService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
-    public int getIDByAcademicClass(String academicClass) {
+    public int findIDByAcademicClass(String academicClass) {
         logger.info("Find ID of the given academic class.");
         int id = -1;
         String query = "SELECT id FROM public.academic_class WHERE class_number=?;";

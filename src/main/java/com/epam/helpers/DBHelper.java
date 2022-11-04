@@ -49,6 +49,6 @@ public final class DBHelper {
     }
 
     public boolean isClassAddedToTheDB(String academicClass) {
-        return classesServiceImpl.getIDByAcademicClass(academicClass) != -1;
+        return classesServiceImpl.findIDByAcademicClass(academicClass) != -1;
     }
 }

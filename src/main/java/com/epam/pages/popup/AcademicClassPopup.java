@@ -3,13 +3,13 @@ package com.epam.pages.popup;
 import com.epam.helpers.ErrorMessagesProvider;
 import com.epam.helpers.SharedTestData;
 import com.epam.helpers.UserDataProvider;
+import com.epam.pages.common.CommonPopup;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
 
-public class AcademicClassPopup extends CreatePopup {
+public class AcademicClassPopup extends CommonPopup {
     @FindBy(id = "classNumber")
     private WebElement classNumber;
     @FindBy(xpath = "//input/following-sibling::div[@class='error']")

@@ -1,4 +1,6 @@
 package com.epam.pages.popup;
 
-public class AcademicYearsAndVacationPopup extends CreatePopup {
+import com.epam.pages.common.CommonPopup;
+
+public class AcademicYearsAndVacationPopup extends CommonPopup {
 }
