@@ -53,7 +53,7 @@ public final class DBHelper {
 
     public boolean isAcademicYearAddedToTheDB(LocalDate start, LocalDate end) {
         logger.info("Get id of academic year from the DB.");
-        return academicYearsService.getIDByStartAndEndDays(start, end) != -1;
+        return academicYearsService.findIDByStartAndEndDays(start, end) != -1;
     }
 
     public boolean isClassAddedToTheDB(String academicClass) {

@@ -27,7 +27,7 @@ Feature: UI of pages
   Scenario: Check UI of Admin Page Parents section
     Given Login as admin
     When Select parents section
-    Then Check all elements are present in the section
+    Then Check all elements are present on the chosen section
 
   @TC1.9.2 @TC1.9.3
   Scenario: Check functionality of "Create" button in admin dashboard/ parents section
@@ -41,7 +41,7 @@ Feature: UI of pages
   Scenario: Check UI of Admin page Students section
     Given Login as admin
     When Select students section
-    Then Check all elements are present in the section
+    Then Check all elements are present on the chosen section
 
   @TC1.10.2 @TC1.10.3 @Regression
   Scenario: Check UI of 'create' button in admin dashboard/ students section
