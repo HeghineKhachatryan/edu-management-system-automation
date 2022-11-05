@@ -26,7 +26,7 @@ public class AdminPage extends CommonPage {
         );
     }
 
-    public boolean checkUIOfChosenSection() {
+    public boolean checkUIOfSection() {
         logger.info("Check elements are displayed on the given section - list, create button");
         return uiHelper.checkElementsAreDisplayed(
                 list,
@@ -60,7 +60,6 @@ public class AdminPage extends CommonPage {
         return (listItems.get(listItems.size() - 1).getText())
                 .equals(getVacationAsDisplayedInTheList());
     }
-
     private String getVacationAsDisplayedInTheList() {
         return String.format("%d/%d/%s - %d/%d/%s",
                 SharedTestData.getStartDate().getMonthValue(),
