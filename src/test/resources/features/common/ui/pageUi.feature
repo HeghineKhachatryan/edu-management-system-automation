@@ -27,7 +27,7 @@ Feature: UI of pages
   Scenario: Check UI of Admin Page Parents section
     Given Login as admin
     When Select parents section
-    Then Check all elements are present on the chosen section
+    Then Check all elements are present in the section
 
   @TC1.9.2 @TC1.9.3
   Scenario: Check functionality of "Create" button in admin dashboard/ parents section
@@ -41,7 +41,7 @@ Feature: UI of pages
   Scenario: Check UI of Admin page Students section
     Given Login as admin
     When Select students section
-    Then Check all elements are present on the chosen section
+    Then Check all elements are present in the section
 
   @TC1.10.2 @TC1.10.3 @Regression
   Scenario: Check UI of 'create' button in admin dashboard/ students section
@@ -55,6 +55,7 @@ Feature: UI of pages
     Given Login as admin
     Then Check all elements are present on admin page
 
+<<<<<<< HEAD
   @TC1.11.1 @TC1.11.2 @1.11.3 @Regression
   Scenario: Check UI of "Academic Classes" section and "Create" button on the "Academic Classes" section
     Given Login as admin
@@ -62,3 +63,12 @@ Feature: UI of pages
     Then Check all elements are present on the chosen section
     And Click on 'create' button and open popup
     Then Check all fields are present in create popup - academic classes section
+
+=======
+>>>>>>> 6404f16d240aaf9fab9529664ffe7e1fb48bb912
+  @TC2.13.1 @Regression
+  Scenario: Check UI of 'Create' button in 'Academic Year' section
+    Given Login as admin
+    When Select years section
+    And Click on 'create' button and open popup
+    Then Check all fields are present in create popup years section

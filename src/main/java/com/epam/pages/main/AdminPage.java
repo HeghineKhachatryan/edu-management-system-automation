@@ -26,7 +26,7 @@ public class AdminPage extends CommonPage {
         );
     }
 
-    public boolean checkUIofChosenSection() {
+    public boolean checkUIOfChosenSection() {
         logger.info("Check elements are displayed on the given section - list, create button");
         return uiHelper.checkElementsAreDisplayed(
                 list,
@@ -53,5 +53,12 @@ public class AdminPage extends CommonPage {
 
     public void selectSection(String section) {
         uiHelper.clickOnWebElement(getSectionElementByName(section));
+    }
+
+    public boolean checkAcademicYearIsDisplayedInTheList() {
+        logger.info("Get last created academic year and check if it is added to the list");
+        return (listItems.get(listItems.size() - 1).getText())
+                .equals(SharedTestData.getStartDate().getYear() + "-"
+                        + SharedTestData.getEndDate().getYear());
     }
 }
