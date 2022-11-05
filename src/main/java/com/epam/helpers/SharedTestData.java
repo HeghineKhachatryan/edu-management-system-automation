@@ -17,9 +17,6 @@ public final class SharedTestData {
     private static LocalDate endDate;
     private static String academicClass;
 
-    private static LocalDate startDate;
-    private static LocalDate endDate;
-
     private SharedTestData() {
     }
 
@@ -88,8 +85,6 @@ public final class SharedTestData {
     public static void setEndDate(LocalDate endDate) {
         SharedTestData.endDate = endDate;
     }
-<<<<<<< HEAD
-
 
     public static String getAcademicClass() {
         return academicClass;
@@ -98,7 +93,4 @@ public final class SharedTestData {
     public static void setAcademicClass(String academicClass) {
         SharedTestData.academicClass = academicClass;
     }
-
-=======
->>>>>>> 6404f16d240aaf9fab9529664ffe7e1fb48bb912
 }

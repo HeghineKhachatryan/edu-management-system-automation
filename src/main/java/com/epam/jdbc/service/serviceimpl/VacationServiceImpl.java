@@ -8,15 +8,14 @@ import org.slf4j.LoggerFactory;
 import java.sql.*;
 import java.time.LocalDate;
 
-public class AcademicYearsServiceImpl implements YearsService {
+public class VacationServiceImpl implements YearsService {
     private final Connection connection = DBConnectionProvider.getInstance().getConnection();
-    private final Logger logger = LoggerFactory.getLogger(AcademicYearsServiceImpl.class);
-
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     @Override
     public int findIDByStartAndEndDays(LocalDate startDate, LocalDate endDate) {
         int id = -1;
-        logger.info("Check if academic year is added to the DB by filling start and end dates.");
-        String query = "SELECT id FROM public.academic_year WHERE start_date=? and end_date=?;";
+        logger.info("Get ID of Vacation by start date and end date values.");
+        String query = "SELECT id FROM public.vacation WHERE start_date=? and end_date=?;";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setDate(1, Date.valueOf(startDate));
             preparedStatement.setDate(2, Date.valueOf(endDate));
@@ -25,7 +24,7 @@ public class AcademicYearsServiceImpl implements YearsService {
                 id = resultSet.getInt("id");
             }
         } catch (SQLException e) {
-            logger.error("Can not execute query. Something went wrong.");
+            logger.error("Start date and/or end date is incorrect.");
             throw new RuntimeException("Can not execute query. Something went wrong.");
         }
         return id;

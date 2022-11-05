@@ -1,5 +1,6 @@
 package com.epam.steps.admin;
 
+import com.epam.pages.main.AdminPage;
 import com.epam.pages.popup.CreatePopup;
 import com.epam.pages.popup.StudentsPopup;
 import com.epam.steps.BaseSteps;
@@ -14,11 +15,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CreateStudentSteps extends BaseSteps {
     private StudentsPopup studentsPopup;
     private CreatePopup createPopup;
+    private AdminPage adminPage;
 
     @Before
     public void initPages() {
         studentsPopup = new StudentsPopup();
         createPopup = new CreatePopup();
+        adminPage = new AdminPage();
     }
 
     @Given("Fill in all required fields and click on 'Generate password' button in students section create popup")

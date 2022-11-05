@@ -22,16 +22,6 @@ public class CreateYearsSteps extends BaseSteps {
         adminPage = new AdminPage();
     }
 
-<<<<<<< HEAD
-=======
-    @Then("Check all fields are present in create popup years section")
-    public void checkAllFieldsArePresentInCreatePopupYearsSection() {
-        assertThat(yearsAndVacationPopup.checkUIOfCreatePopupYearsSection())
-                .withFailMessage("All required elements in years section are not displayed")
-                .isTrue();
-    }
-
->>>>>>> 6404f16d240aaf9fab9529664ffe7e1fb48bb912
     @Then("Check date fields are empty in create popup")
     public void checkDateFieldsAreEmptyInCreatePopup() {
         assertThat(yearsAndVacationPopup.areDatesSelected())
@@ -70,9 +60,8 @@ public class CreateYearsSteps extends BaseSteps {
                 .withFailMessage("Error message for wrong selected dates was not shown, but it should be")
                 .isTrue();
     }
-
     @Then("Check that {int} year is greater from start date by more than ten years")
-    public void checkThatYearIsGraterFromStartDateByMoreThanTenYears(int year) {
+    public void checkThatYearIsGraterFromNowByMoreThanTenYears(int year) {
         assertThat(yearsAndVacationPopup.isYearGraterThan10Years(year))
                 .withFailMessage("Year is less than 10 years from the moment of selection")
                 .isTrue();
@@ -109,5 +98,26 @@ public class CreateYearsSteps extends BaseSteps {
         assertThat(yearsAndVacationPopup.checkIfYearIsPresentInTheSelectList(year))
                 .withFailMessage("Year is present in the list, but it should not be.")
                 .isFalse();
+    }
+
+    @And("New Vacation is not added to the DB")
+    public void newVacationIsNotAddedToTheDB() {
+        assertThat(dbHelper.isVacationAddedToTheDB(SharedTestData.getStartDate(), SharedTestData.getEndDate()))
+                .withFailMessage("Vacation is added to the db, but it should not be.")
+                .isFalse();
+    }
+
+    @And("New Vacation is added to the DB")
+    public void newVacationIsAddedToTheDB() {
+        assertThat(dbHelper.isVacationAddedToTheDB(SharedTestData.getStartDate(), SharedTestData.getEndDate()))
+                .withFailMessage("Vacation is not added to the db, but it should be.")
+                .isTrue();
+    }
+
+    @Then("Check vacation is displayed in the list")
+    public void checkVacationIsDisplayedInTheList() {
+        assertThat(adminPage.checkVacationIsDisplayedInTheList())
+                .withFailMessage("Vacation is not displayed in the list")
+                .isTrue();
     }
 }

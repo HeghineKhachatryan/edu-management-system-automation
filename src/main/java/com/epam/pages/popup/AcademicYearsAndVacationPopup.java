@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
+import java.util.*;
 
 public class AcademicYearsAndVacationPopup extends CreatePopup {
     @FindBy(id = "startDate")
@@ -20,12 +20,12 @@ public class AcademicYearsAndVacationPopup extends CreatePopup {
     private WebElement monthToSelect;
     @FindBy(className = "ui-datepicker-year")
     private WebElement yearToSelect;
-    @FindBy(xpath = "//select[@class='ui-datepicker-year']/option")
-    private List<WebElement> listOfYears;
     @FindBy(xpath = "//td[contains(@class, 'disabled') and not(contains(@class, 'other-month'))]")
     private List<WebElement> disabledDates;
     @FindBy(xpath = "//div[@class='error']/p")
     private WebElement errorMessageForWrongSelectedDates;
+    @FindBy(xpath = "//select[@class='ui-datepicker-year']/option")
+    private List<WebElement> listOfYears;
 
     public boolean checkUIOfCreatePopupYearsSection() {
         logger.info("Check UI of create popup in years section");
@@ -47,13 +47,13 @@ public class AcademicYearsAndVacationPopup extends CreatePopup {
     }
 
     public boolean checkErrorMessageForWrongSelectedDates() {
-        logger.info("Check if dates are selected wrong -> (start date < end date).");
+        logger.info("Check if dates are selected wrong - start date < end date.");
         return errorMessageForWrongSelectedDates.getText()
                 .equals(ErrorMessagesProvider.getWrongSelectedDatesErrMessage());
     }
 
     public boolean checkErrorMessageForForFillingLessThan30Days() {
-        logger.info("Check if dates are selected wrong -> (end date - start date < 30).");
+        logger.info("Check if dates are selected wrong - end date - start date < 30.");
         return errorMessageForWrongSelectedDates.getText()
                 .equals(ErrorMessagesProvider.getLessThan30DaysErrMessage());
     }
@@ -64,11 +64,6 @@ public class AcademicYearsAndVacationPopup extends CreatePopup {
             uiHelper.clickOnWebElement(startDate);
         } else if (field.contains("end")) {
             uiHelper.clickOnWebElement(endDate);
-<<<<<<< HEAD
-        } else {
-            throw new IllegalArgumentException("No such field. Please fill start date or end date values.");
-=======
->>>>>>> 6404f16d240aaf9fab9529664ffe7e1fb48bb912
         }
         new Select(yearToSelect).selectByValue(String.valueOf(year));
         new Select(monthToSelect).selectByVisibleText(month);
@@ -83,6 +78,10 @@ public class AcademicYearsAndVacationPopup extends CreatePopup {
                 && dates.getAttribute("class").contains("disabled"));
     }
 
+    private WebElement selectDay(int day) {
+        return driver.findElement(By.xpath(String.format("//a[@data-date='%s']", day)));
+    }
+
     public boolean isYearGraterThan10Years(int year) {
         logger.info("Check if filled year is grater than 10 years from the moment of selection");
         int startDateValue = SharedTestData.getStartDate().getYear();
@@ -91,16 +90,12 @@ public class AcademicYearsAndVacationPopup extends CreatePopup {
 
     public boolean checkIfYearIsPresentInTheSelectList(int year) {
         uiHelper.clickOnWebElement(endDate);
-<<<<<<< HEAD
-       return listOfYears.stream().anyMatch(years -> years.getText().equals(String.valueOf(year)));
-=======
         for (WebElement years : listOfYears) {
             if (years.getText().equals(String.valueOf(year))) {
                 return true;
             }
         }
         return false;
->>>>>>> 6404f16d240aaf9fab9529664ffe7e1fb48bb912
     }
 
     public void saveStartDateValue() {
@@ -113,9 +108,5 @@ public class AcademicYearsAndVacationPopup extends CreatePopup {
         logger.info("Save end date value");
         SharedTestData.setEndDate(LocalDate.parse(endDate.getDomProperty("value"),
                 DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-    }
-
-    private WebElement selectDay(int day) {
-        return driver.findElement(By.xpath(String.format("//a[@data-date='%s']", day)));
     }
 }
