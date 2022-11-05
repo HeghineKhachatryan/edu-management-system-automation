@@ -103,7 +103,7 @@ Feature: This feature will cover possible scenarios of checking password input i
       | courses   |
       | vacations |
 
-  @TC1.8.5 @TC1.9.16 @TC1.10.20 @TC1.11.6 @Regression @Smoke
+  @TC1.8.5 @TC1.9.16 @TC1.10.20 @TC1.11.6 @TC2.12.9 @Regression @Smoke
   Scenario Outline: Check validations/error messages for input fields when filled more than 50 symbols
     When Select <section> section
     And Click on 'create' button and open popup
@@ -117,3 +117,4 @@ Feature: This feature will cover possible scenarios of checking password input i
       | students |
       | parents  |
       | classes  |
+      | subjects |

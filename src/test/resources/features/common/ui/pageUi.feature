@@ -78,3 +78,12 @@ Feature: UI of pages
     When Click on 'create' button and open popup
     Then Popup is opened
     Then Check all fields are present in create popup years section
+
+  @TC2.12.1 @TC2.12.2 @TC2.12.3 @Regression
+  Scenario: Check UI of admin dashboard / subjects section and create subject popup
+    Given Login as admin
+    When Select subjects section
+    Then Check all elements are present on the chosen section
+    And Click on 'create' button and open popup
+    Then Popup is opened
+    And Check all elements are present in create popup - subjects section

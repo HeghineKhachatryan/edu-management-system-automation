@@ -179,8 +179,12 @@ public class CreatePopup extends CommonPopup {
                         .equals(ErrorMessagesProvider.getMoreThan50SymbolsErrMessage()));
     }
 
+    public boolean checkBlankInputFieldsErrorMessagesAreNotDisplayed() {
+        logger.info("Check error messages are not displayed");
+        return errorMessagesOfBlankInputFields.isEmpty();
+    }
+
     public boolean popupIsClosed() {
-        logger.info("Popup is closed");
         return !popupWindow.isDisplayed();
     }
 

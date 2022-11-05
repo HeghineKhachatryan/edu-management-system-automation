@@ -4,44 +4,48 @@ import com.epam.config.PropertiesReader;
 
 public final class UserDataProvider {
 
-    private static final PropertiesReader propertiesReader = PropertiesReader
+    private static final PropertiesReader PROPERTIES_READER = PropertiesReader
             .getInstance("user_data.properties");
 
     private UserDataProvider() {
     }
 
     public static String getSuperAdminEmail() {
-        return propertiesReader.getProperty("superAdminEmail");
+        return PROPERTIES_READER.getProperty("superAdminEmail");
     }
 
     public static String getSuperAdminPassword() {
-        return propertiesReader.getProperty("superAdminPassword");
+        return PROPERTIES_READER.getProperty("superAdminPassword");
     }
 
     public static String getAdminEmail() {
-        return propertiesReader.getProperty("adminEmail");
+        return PROPERTIES_READER.getProperty("adminEmail");
     }
 
     public static String getAdminPassword() {
-        return propertiesReader.getProperty("adminPassword");
+        return PROPERTIES_READER.getProperty("adminPassword");
     }
 
     public static String getExistedEmail() {
-        return propertiesReader.getProperty("existedEmail");
+        return PROPERTIES_READER.getProperty("existedEmail");
     }
 
     public static String getValidName() {
-        return propertiesReader.getProperty("validName");
+        return PROPERTIES_READER.getProperty("validName");
     }
 
     public static String getValidSurname() {
-        return propertiesReader.getProperty("validSurname");
+        return PROPERTIES_READER.getProperty("validSurname");
     }
 
     public static String getAddress() {
-        return propertiesReader.getProperty("address");
+        return PROPERTIES_READER.getProperty("address");
+    }
+
+    public static String getTeacherSearchLinePlaceholder() {
+        return PROPERTIES_READER.getProperty("teacherSearchLinePlaceholder");
     }
     public static String getExistedClass() {
-        return propertiesReader.getProperty("existedClass");
+        return PROPERTIES_READER.getProperty("existedClass");
     }
 }

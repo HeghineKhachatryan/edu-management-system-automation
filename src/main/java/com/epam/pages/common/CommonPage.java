@@ -47,6 +47,10 @@ public abstract class CommonPage extends BasePage {
         return surnameOfLastCreatedUser;
     }
 
+    public String getNameOfLastCreatedItem() {
+        return listItemsHref.get(listItemsHref.size() - 1).getText();
+    }
+
     public void clickOnCreateButton() {
         uiHelper.clickOnWebElement(createButton);
     }

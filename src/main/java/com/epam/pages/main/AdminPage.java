@@ -50,6 +50,10 @@ public class AdminPage extends CommonPage {
         return (listItemsHref.get(listItemsHref.size() - 1).getText())
                 .equals(SharedTestData.getAcademicClass());
     }
+    public boolean checkNewCreatedItemIsDisplayedOnAdminsSection() {
+        logger.info("Check new created item is displayed on admins section");
+        return getNameOfLastCreatedItem().equals(SharedTestData.getLastCreatedItemName());
+    }
 
     public void selectSection(String section) {
         uiHelper.clickOnWebElement(getSectionElementByName(section));
