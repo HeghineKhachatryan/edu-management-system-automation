@@ -12,7 +12,7 @@ public class VacationServiceImpl implements YearsService {
     private final Connection connection = DBConnectionProvider.getInstance().getConnection();
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     @Override
-    public int getIDByStartAndEndDays(LocalDate startDate, LocalDate endDate) {
+    public int findIDByStartAndEndDays(LocalDate startDate, LocalDate endDate) {
         int id = -1;
         logger.info("Get ID of Vacation by start date and end date values.");
         String query = "SELECT id FROM public.vacation WHERE start_date=? and end_date=?;";
@@ -25,7 +25,7 @@ public class VacationServiceImpl implements YearsService {
             }
         } catch (SQLException e) {
             logger.error("Start date and/or end date is incorrect.");
-            throw new RuntimeException(e);
+            throw new RuntimeException("Can not execute query. Something went wrong.");
         }
         return id;
     }

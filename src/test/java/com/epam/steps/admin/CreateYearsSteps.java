@@ -22,12 +22,6 @@ public class CreateYearsSteps extends BaseSteps {
         adminPage = new AdminPage();
     }
 
-    @Then("Check all fields are present in create popup years section")
-    public void checkAllFieldsArePresentInCreatePopupYearsSection() {
-        assertThat(yearsAndVacationPopup.checkUIOfCreatePopupYearsSection())
-                .withFailMessage("All required elements in years section are not displayed")
-                .isTrue();
-    }
     @Then("Check date fields are empty in create popup")
     public void checkDateFieldsAreEmptyInCreatePopup() {
         assertThat(yearsAndVacationPopup.areDatesSelected())
@@ -66,7 +60,7 @@ public class CreateYearsSteps extends BaseSteps {
                 .withFailMessage("Error message for wrong selected dates was not shown, but it should be")
                 .isTrue();
     }
-    @Then("Check that {int} year is greater from now by more than ten years")
+    @Then("Check that {int} year is greater from start date by more than ten years")
     public void checkThatYearIsGraterFromNowByMoreThanTenYears(int year) {
         assertThat(yearsAndVacationPopup.isYearGraterThan10Years(year))
                 .withFailMessage("Year is less than 10 years from the moment of selection")

@@ -51,7 +51,7 @@ public final class DBHelper {
     }
 
     public boolean isVacationAddedToTheDB(LocalDate start, LocalDate end) {
-        return vacationService.getIDByStartAndEndDays(start, end) != -1;
+        return vacationService.findIDByStartAndEndDays(start, end) != -1;
     }
 
     public boolean isAcademicYearAddedToTheDB(LocalDate start, LocalDate end) {

@@ -2,6 +2,7 @@ package com.epam.pages.popup;
 
 import com.epam.helpers.ErrorMessagesProvider;
 import com.epam.helpers.SharedTestData;
+import com.epam.pages.common.CommonPopup;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,7 +12,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class AcademicYearsAndVacationPopup extends CreatePopup {
+public class AcademicYearsAndVacationPopup extends CommonPopup {
     @FindBy(id = "startDate")
     private WebElement startDate;
     @FindBy(id = "endDate")
@@ -89,18 +90,11 @@ public class AcademicYearsAndVacationPopup extends CreatePopup {
     public boolean checkIfYearIsPresentInTheSelectList(int year) {
         uiHelper.clickOnWebElement(endDate);
         return listOfYears.stream().anyMatch(years -> years.getText().equals(String.valueOf(year)));
-        for (WebElement years : listOfYears) {
-            if (years.getText().equals(String.valueOf(year))) {
-                return true;
-            }
-        }
-        return false;
     }
 
     private WebElement selectDay(int day) {
         return driver.findElement(By.xpath(String.format("//a[@data-date='%s']", day)));
     }
-
 
     public void saveStartDateValue() {
         logger.info("Save start date value");
