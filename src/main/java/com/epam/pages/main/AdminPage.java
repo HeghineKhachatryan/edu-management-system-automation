@@ -26,7 +26,7 @@ public class AdminPage extends CommonPage {
         );
     }
 
-    public boolean checkUIofStudentsAndParentsSections() {
+    public boolean checkUIofChosenSection() {
         logger.info("Check elements are displayed on the given section - list, create button");
         return uiHelper.checkElementsAreDisplayed(
                 list,
@@ -44,6 +44,11 @@ public class AdminPage extends CommonPage {
                 .equals(SharedTestData.getNameField())
                 && getSurnameOfLastCreatedUser()
                 .equals(SharedTestData.getSurnameField());
+    }
+    public boolean checkAcademicClassIsDisplayedInTheList() {
+        logger.info("Get last created academic class and check if it is added to the list");
+        return (listItemsHref.get(listItemsHref.size() - 1).getText())
+                .equals(SharedTestData.getAcademicClass());
     }
 
     public void selectSection(String section) {

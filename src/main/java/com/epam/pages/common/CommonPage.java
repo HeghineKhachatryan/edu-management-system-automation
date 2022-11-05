@@ -18,6 +18,8 @@ public abstract class CommonPage extends BasePage {
     protected WebElement list;
     @FindBy(xpath = "//div[@class='list-items']/p")
     protected List<WebElement> listItems;
+    @FindBy(xpath = "//div[@class='list-items']/a")
+    protected List<WebElement> listItemsHref;
     @FindBy(linkText = "Settings")
     protected WebElement settingsSection;
 

@@ -41,4 +41,7 @@ public final class UserDataProvider {
     public static String getAddress() {
         return propertiesReader.getProperty("address");
     }
+    public static String getExistedClass() {
+        return propertiesReader.getProperty("existedClass");
+    }
 }
