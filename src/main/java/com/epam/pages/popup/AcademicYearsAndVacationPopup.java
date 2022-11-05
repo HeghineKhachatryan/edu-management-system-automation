@@ -64,8 +64,11 @@ public class AcademicYearsAndVacationPopup extends CreatePopup {
             uiHelper.clickOnWebElement(startDate);
         } else if (field.contains("end")) {
             uiHelper.clickOnWebElement(endDate);
+<<<<<<< HEAD
         } else {
             throw new IllegalArgumentException("No such field. Please fill start date or end date values.");
+=======
+>>>>>>> 6404f16d240aaf9fab9529664ffe7e1fb48bb912
         }
         new Select(yearToSelect).selectByValue(String.valueOf(year));
         new Select(monthToSelect).selectByVisibleText(month);
@@ -88,7 +91,16 @@ public class AcademicYearsAndVacationPopup extends CreatePopup {
 
     public boolean checkIfYearIsPresentInTheSelectList(int year) {
         uiHelper.clickOnWebElement(endDate);
+<<<<<<< HEAD
        return listOfYears.stream().anyMatch(years -> years.getText().equals(String.valueOf(year)));
+=======
+        for (WebElement years : listOfYears) {
+            if (years.getText().equals(String.valueOf(year))) {
+                return true;
+            }
+        }
+        return false;
+>>>>>>> 6404f16d240aaf9fab9529664ffe7e1fb48bb912
     }
 
     public void saveStartDateValue() {

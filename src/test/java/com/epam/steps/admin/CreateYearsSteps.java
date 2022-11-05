@@ -22,6 +22,16 @@ public class CreateYearsSteps extends BaseSteps {
         adminPage = new AdminPage();
     }
 
+<<<<<<< HEAD
+=======
+    @Then("Check all fields are present in create popup years section")
+    public void checkAllFieldsArePresentInCreatePopupYearsSection() {
+        assertThat(yearsAndVacationPopup.checkUIOfCreatePopupYearsSection())
+                .withFailMessage("All required elements in years section are not displayed")
+                .isTrue();
+    }
+
+>>>>>>> 6404f16d240aaf9fab9529664ffe7e1fb48bb912
     @Then("Check date fields are empty in create popup")
     public void checkDateFieldsAreEmptyInCreatePopup() {
         assertThat(yearsAndVacationPopup.areDatesSelected())
