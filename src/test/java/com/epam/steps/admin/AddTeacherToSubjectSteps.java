@@ -44,12 +44,17 @@ public class AddTeacherToSubjectSteps extends BaseSteps {
 
     @And("Teacher for subject is not displayed on the list")
     public void teacherForSubjectIsNotDisplayedOnTheList() {
-        assertThat(subjectPage.getTeacherListSize()).isEqualTo(SharedTestData.getListSize());
+        assertThat(subjectPage.getTeacherListSize())
+                .withFailMessage("Teacher for subject is displayed on the list, but should not be")
+                .isEqualTo(SharedTestData.getListSize());
     }
 
     @And("Teacher for subject is displayed on the list")
     public void teacherForSubjectIsDisplayedOnTheList() {
-        assertThat(subjectPage.getTeacherListSize()).isGreaterThan(SharedTestData.getListSize());
+        assertThat(subjectPage.getTeacherListSize())
+                .withFailMessage(subjectPage.getTeacherListSize() +
+                        " is not greater than " + SharedTestData.getListSize())
+                .isGreaterThan(SharedTestData.getListSize());
     }
 
     @And("Check Teacher for {} subject is not added to the DB")

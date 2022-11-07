@@ -127,17 +127,18 @@ public class SubjectPopup extends CommonPopup {
 
     public boolean checkUIofAddTeachersPopup() {
         logger.info("Check UI of add teacher popup - teachers select field, xButton and Save button");
-        return uiHelper.checkElementsAreDisplayed
-                (teacherSelectField,
+        return uiHelper.checkElementsAreDisplayed(
+                        teacherSelectField,
                         xButton,
-                        saveButton);
+                        saveButton
+                );
     }
 
     public boolean checkErrorMessagesOfBlankSelection() {
         logger.info("Check error messages of blank input fields");
         return errorMessageForSubjectsPopup
                 .getText()
-                .equals(ErrorMessagesProvider.getSelectionError());
+                .equals(ErrorMessagesProvider.getSelectionErrMessage());
     }
 
     public void saveQuantityOfMatchedItemsResult() {
@@ -161,6 +162,7 @@ public class SubjectPopup extends CommonPopup {
         logger.info("Get count of selected teachers in the box.");
         return SharedTestData.getSelectedTeachersCountInTheBox();
     }
+
     public void saveCountOfSelectedTeachersInTheBox() {
         logger.info("Save count of selected teachers in the box.");
         SharedTestData.setSelectedTeachersCountInTheBox(listOfSelectedTeachers.size());

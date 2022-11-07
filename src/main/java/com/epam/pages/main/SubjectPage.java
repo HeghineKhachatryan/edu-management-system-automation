@@ -5,6 +5,8 @@ import com.epam.pages.common.CommonPage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.Collections;
+
 public class SubjectPage extends CommonPage {
 
     @FindBy(xpath = "//div[@class='sidebar2']/a[@href='/subjects/Languages/teachers']")
