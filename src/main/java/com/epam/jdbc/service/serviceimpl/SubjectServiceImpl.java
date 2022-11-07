@@ -34,4 +34,42 @@ public class SubjectServiceImpl implements SubjectService {
         }
         return subject;
     }
+
+    @Override
+    public int findSubjectIdBySubjectName(String subjectName) {
+        logger.info("Find ID of the given subject.");
+        int id = -1;
+        String query = "SELECT id FROM public.subject WHERE public.subject.name=?;";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, subjectName);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                id = resultSet.getInt("id");
+            }
+        } catch (SQLException e) {
+            logger.error("Can not execute query.");
+            throw new RuntimeException(e);
+        }
+        return id;
+    }
+
+    @Override
+    public int findTeachersCountByConnectedSubjectId(int subjectID) {
+        logger.info("Find count of teachers linked to the subject by the given subject id.");
+        int countOfTeachers = 0;
+        String query = "SELECT teacher_id FROM public.subject_teacher_mapping WHERE subject_id=?;";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, subjectID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                if (resultSet.getInt("teacher_id") != 0) {
+                    countOfTeachers++;
+                }
+            }
+        } catch (SQLException e) {
+            logger.error("Can not execute query.");
+            throw new RuntimeException(e);
+        }
+        return countOfTeachers;
+    }
 }

@@ -87,3 +87,12 @@ Feature: UI of pages
     And Click on 'create' button and open popup
     Then Popup is opened
     And Check all elements are present in create popup - subjects section
+
+  @TC2.41.1 @Regression
+  Scenario: Check UI of 'Add' popup in Subjects dashboard after selecting subject
+    Given Login as admin
+    When Select subjects section
+    And Click on the Languages subject in the list
+    And Select teachers section in subject dashboard
+    And Click on 'Add' button and open popup
+    Then Check all elements are present in subject dashboard teachers section
