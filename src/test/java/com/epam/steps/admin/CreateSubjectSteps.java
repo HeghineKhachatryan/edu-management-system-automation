@@ -76,7 +76,7 @@ public class CreateSubjectSteps extends BaseSteps {
 
     @Then("Check all elements are present in create popup - subjects section")
     public void checkAllElementsArePresentInCreatePopupInSubjectsSection() {
-        assertThat(subjectPopup.checkAllElementsArePresent())
+        assertThat(subjectPopup.checkAllElementsArePresentInCreatePopup())
                 .withFailMessage("Elements are not present on the chosen section")
                 .isTrue();
     }

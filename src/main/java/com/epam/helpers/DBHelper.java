@@ -67,4 +67,12 @@ public final class DBHelper {
     public boolean isClassAddedToTheDB(String academicClass) {
         return classesServiceImpl.findIDByAcademicClass(academicClass) != -1;
     }
+
+    public int findCountOfTeachersAddedToTheSubject(String subjectName) {
+        return subjectService.findTeachersCountByConnectedSubjectId(getSubjectID(subjectName));
+    }
+
+    private int getSubjectID(String subjectName) {
+        return subjectService.findSubjectIdBySubjectName(subjectName);
+    }
 }

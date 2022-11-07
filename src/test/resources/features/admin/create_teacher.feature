@@ -27,7 +27,6 @@ Feature: Admin page/ Teacher section functionality
   @TC1.8.11 @Regression @Smoke
   Scenario: Check functionality to create New Teacher using valid credentials
     Given Fill in name, surname, email fields and click on 'Generate password' button
-    And Click on 'Generate password' button
     And Save values from name, surname, password and email fields
     When Click on 'Save' button
     Then Popup is closed

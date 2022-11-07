@@ -18,6 +18,10 @@ public final class SharedTestData {
     private static String academicClass;
     private static String lastCreatedItemName;
     private static String lastInputtedTeacherName;
+    private static int listSize;
+    public static int resultOfMatchedSearch;
+    private static int teachersCountLinkedToSubject;
+    private static int selectedTeachersCountInTheBox;
 
     private SharedTestData() {
     }
@@ -113,5 +117,36 @@ public final class SharedTestData {
 
     public static void setAcademicClass(String academicClass) {
         SharedTestData.academicClass = academicClass;
+    }
+    public static int getListSize() {
+        return listSize;
+    }
+
+    public static void setListSize(int listSize) {
+        SharedTestData.listSize = listSize;
+    }
+
+    public static int getResultOfMatchedSearch() {
+        return resultOfMatchedSearch;
+    }
+
+    public static void setResultOfMatchedSearch(int resultOfMatchedSearch) {
+        SharedTestData.resultOfMatchedSearch = resultOfMatchedSearch;
+    }
+
+    public static int getTeachersCountLinkedToSubject() {
+        return teachersCountLinkedToSubject;
+    }
+
+    public static void setTeachersCountLinkedToSubject(int teachersCountLinkedToSubject) {
+        SharedTestData.teachersCountLinkedToSubject = teachersCountLinkedToSubject;
+    }
+
+    public static int getSelectedTeachersCountInTheBox() {
+        return selectedTeachersCountInTheBox;
+    }
+
+    public static void setSelectedTeachersCountInTheBox(int selectedTeachersCountInTheBox) {
+        SharedTestData.selectedTeachersCountInTheBox = selectedTeachersCountInTheBox;
     }
 }

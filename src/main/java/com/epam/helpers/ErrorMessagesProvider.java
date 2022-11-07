@@ -45,4 +45,8 @@ public final class ErrorMessagesProvider {
     public static String getExistedSubjectNameErrMessage() {
         return PROPERTIES_READER.getProperty("existedSubjectName");
     }
+
+    public static String getSelectionErrMessage() {
+        return PROPERTIES_READER.getProperty("selectionError");
+    }
 }
