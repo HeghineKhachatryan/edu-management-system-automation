@@ -1,8 +1,8 @@
 package com.epam.jdbc.service.serviceimpl;
 
 import com.epam.jdbc.config.DBConnectionProvider;
-import com.epam.jdbc.model.User;
-import com.epam.jdbc.service.UserService;
+import com.epam.jdbc.model.AcademicCourse;
+import com.epam.jdbc.service.AcademicCourseService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,31 +11,30 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UserServiceImpl implements UserService<User> {
+public class AcademicCourseServiceImpl implements AcademicCourseService {
 
     private final Connection connection = DBConnectionProvider.getInstance().getConnection();
-    private final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
-    public User findUserByEmail(String email) {
-        User user = new User();
+    public AcademicCourse findByName(String academicCourseName) {
+        AcademicCourse academicCourse = new AcademicCourse();
         String query = "SELECT * " +
-                "FROM public.\"user_table\"" +
-                "WHERE email=?;";
-        logger.info("Find user by email");
+                "FROM public.\"academic_course\"" +
+                "WHERE name=?;";
+        logger.info("Find academic course by name");
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1, email);
+            preparedStatement.setString(1, academicCourseName);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                user.setId(resultSet.getInt("id"));
-                user.setEmail(resultSet.getString("email"));
-                user.setRole(resultSet.getString("role"));
+                academicCourse.setId(resultSet.getInt("id"));
+                academicCourse.setName(resultSet.getString("name"));
+                academicCourse.setSubjectId(resultSet.getInt("subject_id"));
             }
         } catch (SQLException e) {
             logger.error("Can not execute query");
             throw new RuntimeException("Can not execute query, something went wrong");
         }
-        return user;
+        return academicCourse;
     }
-
 }

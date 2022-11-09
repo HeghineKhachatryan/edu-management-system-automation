@@ -12,7 +12,7 @@ import java.time.Duration;
 public class WaitHelper {
 
     private final WebDriver driver = Driver.getDriver();
-    private final Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+    private final Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
     public void waitElementToBeClickable(final WebElement target) {
         wait.until(ExpectedConditions.elementToBeClickable(target));

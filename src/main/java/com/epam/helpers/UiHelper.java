@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
+import java.util.List;
 
 public final class UiHelper {
 
@@ -24,6 +25,10 @@ public final class UiHelper {
 
     public boolean checkElementsAreDisplayed(WebElement... elements) {
         return Arrays.stream(elements).allMatch(WebElement::isDisplayed);
+    }
+
+    public boolean checkElementsAreDisplayed(List<WebElement> elements) {
+        return elements.stream().allMatch(WebElement::isDisplayed);
     }
 
     public boolean checkElementsAreEmpty(WebElement... elements) {

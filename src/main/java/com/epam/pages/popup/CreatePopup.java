@@ -27,7 +27,7 @@ public class CreatePopup extends CommonPopup {
     protected WebElement emailInvalidAndExistedErrorMessage;
     @FindBy(xpath = "//input/following-sibling::div[@class='error']")
     protected List<WebElement> errorMessagesOfBlankInputFields;
-    @FindBy(xpath = "//input[@class='form_input' and not(@readonly)]/following-sibling::div[not(preceding-sibling::input[@id='date'])]")
+    @FindBy(xpath = "//input[@class='form_input' and not(@readonly)]/following-sibling::div[not(preceding-sibling::input[@id='date']) and not(preceding-sibling::*[self::select])]")
     protected List<WebElement> errorMessagesOfMoreSymbols;
     @FindBy(id = "popup-container")
     protected WebElement popupWindow;

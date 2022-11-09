@@ -49,4 +49,8 @@ public final class ErrorMessagesProvider {
     public static String getSelectionErrMessage() {
         return PROPERTIES_READER.getProperty("selectionError");
     }
+
+    public static String getExistedAcademicCourseErrMessage() {
+        return PROPERTIES_READER.getProperty("existedAcademicCourse");
+    }
 }
