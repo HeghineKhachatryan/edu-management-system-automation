@@ -47,12 +47,12 @@ public class AdminPage extends CommonPage {
     }
     public boolean checkAcademicClassIsDisplayedInTheList() {
         logger.info("Get last created academic class and check if it is added to the list");
-        return (listItemsHref.get(listItemsHref.size() - 1).getText())
-                .equals(SharedTestData.getAcademicClass());
+        return getNameOfLastCreatedItemHref()
+                .equals(SharedTestData.getValueOfitem());
     }
     public boolean checkNewCreatedItemIsDisplayedOnAdminsSection() {
         logger.info("Check new created item is displayed on admins section");
-        return getNameOfLastCreatedItem().equals(SharedTestData.getLastCreatedItemName());
+        return getNameOfLastCreatedItemHref().equals(SharedTestData.getLastCreatedItemName());
     }
 
     public void selectSection(String section) {
@@ -63,6 +63,11 @@ public class AdminPage extends CommonPage {
         logger.info("Get last created vacation and check if it is added to the list");
         return (listItems.get(listItems.size() - 1).getText())
                 .equals(getVacationAsDisplayedInTheList());
+    }
+
+    public boolean checkClassIsDisplayedInCoursesPage() {
+        logger.info("Get last created {} academic class and check if it is added to the list", SharedTestData.getValueOfitem());
+        return checkListContainsName(SharedTestData.getValueOfitem());
     }
     private String getVacationAsDisplayedInTheList() {
         return String.format("%d/%d/%s - %d/%d/%s",

@@ -29,7 +29,7 @@ public class SubjectPopup extends CommonPopup {
     @FindBy(xpath = "//*[@class='select2-results__options']/li")
     private List<WebElement> teachersInDropDownList;
     @FindBy(className = "error")
-    private WebElement errorMessageForSubjectsPopup;
+    private WebElement errorMessageForSelectionFields;
 
     public void fillSubjectName() {
         String subjectName = RandomStringUtils.random(16, true, false);
@@ -89,7 +89,7 @@ public class SubjectPopup extends CommonPopup {
     }
 
     public String getExistedSubjectNameErrorMessage() {
-        return errorMessageForSubjectsPopup.getText();
+        return errorMessageForSelectionFields.getText();
     }
 
     public boolean checkMatchedItemsAppearedBelowTheSearchLine() {
@@ -135,8 +135,8 @@ public class SubjectPopup extends CommonPopup {
     }
 
     public boolean checkErrorMessagesOfBlankSelection() {
-        logger.info("Check error messages of blank input fields");
-        return errorMessageForSubjectsPopup
+        logger.info("Check error messages of blank selection fields");
+        return errorMessageForSelectionFields
                 .getText()
                 .equals(ErrorMessagesProvider.getSelectionErrMessage());
     }

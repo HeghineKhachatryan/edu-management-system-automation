@@ -1,14 +1,17 @@
 package com.epam.pages.popup;
 
+import com.epam.helpers.ErrorMessagesProvider;
 import com.epam.helpers.SharedTestData;
 import com.epam.helpers.UserDataProvider;
 import com.epam.pages.common.CommonPopup;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AcademicCoursePopup extends CommonPopup {
 
@@ -16,7 +19,11 @@ public class AcademicCoursePopup extends CommonPopup {
     private WebElement academicCourseNameField;
     @FindBy(id = "subject")
     private WebElement subjectsSelect;
-    @FindBy(xpath = "//input/following-sibling::div[@class='error']")
+    @FindBy(id = "academicClass")
+    private WebElement academicClassSelect;
+    @FindBy(id = "teacher")
+    private WebElement teacherSelect;
+    @FindBy(xpath = "//*/following-sibling::div[@class='error']")
     private WebElement existedAcademicCourseErrMessage;
 
     public void fillAcademicCourseName() {
@@ -42,20 +49,6 @@ public class AcademicCoursePopup extends CommonPopup {
         );
     }
 
-    public void clickOnSubjectSelect() {
-        uiHelper.clickOnWebElement(subjectsSelect);
-    }
-
-    public void selectSubject() {
-        logger.info("Select subject");
-        Select select = new Select(subjectsSelect);
-        select.selectByIndex(1);
-    }
-
-    public void saveValueOfSelectedSubject() {
-        SharedTestData.setLastSelectedSubject(new Select(subjectsSelect).getFirstSelectedOption().getText());
-    }
-
     public String getExistedAcademicCourseNameErrMessage() {
         return existedAcademicCourseErrMessage.getText();
     }
@@ -77,13 +70,54 @@ public class AcademicCoursePopup extends CommonPopup {
                 && !uiHelper.areElementsSelected(subjectsSelect);
     }
 
-    public boolean checkDropdownOpensWithListOfSubjects() {
-        List<WebElement> options = new Select(subjectsSelect).getOptions();
-        return options.size() > 1 && uiHelper.checkElementsAreDisplayed(options);
+    public boolean checkErrorMessagesOfBlankSelectRequiredFields() {
+        logger.info("Check error messages of blank selection fields");
+        return getExistedAcademicCourseNameErrMessage()
+                        .equals(ErrorMessagesProvider.getBlankSelectFieldsErrMessage());
     }
 
-    public boolean checkTheUserChoiceIsDisplayedInTheSubjectField() {
-        return new Select(subjectsSelect).getFirstSelectedOption().getText()
-                .equals(SharedTestData.getLastSelectedSubject());
+    public boolean checkAllElementsArePresentInAddClassPopupClassesSection() {
+        logger.info("Check elements are present in add class popup academic classes section - " +
+                "title, teachers and classes selects, xButton and save button");
+        return uiHelper.checkElementsAreDisplayed(
+                title,
+                teacherSelect,
+                academicClassSelect,
+                xButton,
+                saveButton
+        );
+    }
+
+    public void clickOnDropDown(String name) {
+        logger.info("Click on {} select and open dropdown", name);
+        uiHelper.clickOnWebElement(mapOfElements(name));
+    }
+
+    public boolean areListOptionsPresent(String name) {
+        logger.info("Check if options to select from {} dropdown are present", name);
+        String xpath = String.format("//select[@id='%s']/option", name);
+        return uiHelper.checkElementsAreDisplayed(driver.findElements(By.xpath(xpath)));
+    }
+
+    public void selectFirstItem(String dropDownList) {
+        logger.info("Select first item from the {} dropdown list", dropDownList);
+        new Select(mapOfElements(dropDownList)).selectByIndex(1);
+    }
+
+    public void saveValueOfSelectedItem(String value) {
+        SharedTestData.setValueOfitem(new Select(mapOfElements(value)).getFirstSelectedOption().getText());
+    }
+
+    public boolean checkTheUserChoiceIsDisplayedInTheField(String value) {
+        return new Select(mapOfElements(value)).getFirstSelectedOption().getText()
+                .equals(SharedTestData.getValueOfitem());
+    }
+
+    private WebElement mapOfElements(String name) {
+        Map<String, WebElement> map = new HashMap<>();
+        map.put("academicClass", academicClassSelect);
+        map.put("teachers", teacherSelect);
+        map.put("subject", subjectsSelect);
+        return map.get(name);
     }
 }

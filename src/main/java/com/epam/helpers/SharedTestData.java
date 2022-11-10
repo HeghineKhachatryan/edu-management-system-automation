@@ -15,14 +15,13 @@ public final class SharedTestData {
     private static String selectedValueOfStudentPopup;
     private static LocalDate startDate;
     private static LocalDate endDate;
-    private static String academicClass;
+    private static String valueOfitem;
     private static String lastCreatedItemName;
     private static String lastInputtedTeacherName;
     private static int listSize;
     public static int resultOfMatchedSearch;
     private static int teachersCountLinkedToSubject;
     private static int selectedTeachersCountInTheBox;
-    private static String lastSelectedSubject;
 
     private SharedTestData() {
     }
@@ -112,12 +111,12 @@ public final class SharedTestData {
         SharedTestData.endDate = endDate;
     }
 
-    public static String getAcademicClass() {
-        return academicClass;
+    public static String getValueOfitem() {
+        return valueOfitem;
     }
 
-    public static void setAcademicClass(String academicClass) {
-        SharedTestData.academicClass = academicClass;
+    public static void setValueOfitem(String valueOfitem) {
+        SharedTestData.valueOfitem = valueOfitem;
     }
 
     public static int getListSize() {
@@ -150,13 +149,5 @@ public final class SharedTestData {
 
     public static void setSelectedTeachersCountInTheBox(int selectedTeachersCountInTheBox) {
         SharedTestData.selectedTeachersCountInTheBox = selectedTeachersCountInTheBox;
-    }
-
-    public static String getLastSelectedSubject() {
-        return lastSelectedSubject;
-    }
-
-    public static void setLastSelectedSubject(String lastSelectedSubject) {
-        SharedTestData.lastSelectedSubject = lastSelectedSubject;
     }
 }

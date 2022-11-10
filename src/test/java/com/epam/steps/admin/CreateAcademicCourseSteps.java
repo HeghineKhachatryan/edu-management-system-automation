@@ -38,21 +38,6 @@ public class CreateAcademicCourseSteps extends BaseSteps {
         academicCoursePopup.fillCaseSensitiveAcademicCourseName();
     }
 
-    @Given("Select subject")
-    public void selectSubject() {
-        academicCoursePopup.selectSubject();
-    }
-
-    @Given("Click on 'Subject' select")
-    public void clickOnSubjectSelect() {
-        academicCoursePopup.clickOnSubjectSelect();
-    }
-
-    @And("Save value of selected subject")
-    public void saveValueOfSelectedSubject() {
-        academicCoursePopup.saveValueOfSelectedSubject();
-    }
-
     @Then("Check all fields are present in create popup - academic course section")
     public void checkAllFieldsArePresentInCreatePopupAcademicCourseSection() {
         assertThat(academicCoursePopup.checkUIOfCreatePopupCoursesSection())
@@ -96,22 +81,5 @@ public class CreateAcademicCourseSteps extends BaseSteps {
         assertThat(academicCoursePopup.getExistedAcademicCourseNameErrMessage())
                 .withFailMessage("Existed academic course name is wrong")
                 .isEqualTo(ErrorMessagesProvider.getExistedAcademicCourseErrMessage());
-    }
-
-    @Given("Click on 'Subject' select and check dropdown opens with list of subjects")
-    public void clickOnSubjectSelectAndCheckDropdownOpensWithListOfSubjects() {
-        academicCoursePopup.clickOnSubjectSelect();
-        logger.info("Check dropdown opens with list of subjects");
-        assertThat(academicCoursePopup.checkDropdownOpensWithListOfSubjects())
-                .withFailMessage("Dropdown is not opened or there aro no select options")
-                .isTrue();
-    }
-
-    @And("Check the user choice is displayed in the 'Subject' field")
-    public void checkTheUserChoiceIsDisplayedInTheSubjectField() {
-        logger.info("Check the user choice is displayed in the 'Subject' field");
-        assertThat(academicCoursePopup.checkTheUserChoiceIsDisplayedInTheSubjectField())
-                .withFailMessage("The user choice is not displayed in the 'Subject' field")
-                .isTrue();
     }
 }

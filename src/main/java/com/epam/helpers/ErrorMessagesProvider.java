@@ -21,6 +21,9 @@ public final class ErrorMessagesProvider {
     public static String getBlankInputFieldsErrMessage() {
         return PROPERTIES_READER.getProperty("blankInputFields");
     }
+    public static String getBlankSelectFieldsErrMessage() {
+        return PROPERTIES_READER.getProperty("blankSelectFields");
+    }
 
     public static String getIncorrectLoginOrPasswordErrMessage() {
         return PROPERTIES_READER.getProperty("incorrectLoginOrPassword");

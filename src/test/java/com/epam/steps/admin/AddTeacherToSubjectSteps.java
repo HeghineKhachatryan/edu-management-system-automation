@@ -20,9 +20,9 @@ public class AddTeacherToSubjectSteps extends BaseSteps {
         subjectPopup = new SubjectPopup();
     }
 
-    @And("Click on the {} subject in the list")
-    public void clickOnTheSubjectInTheList(String subjectName) {
-        subjectPage.clickOnSubjectFromTheList(subjectName);
+    @And("Click on the {} item in the list")
+    public void clickOnTheSubjectInTheList(String itemName) {
+        subjectPage.clickOnItemFromTheList(itemName);
     }
 
     @And("Click on 'Add' button and open popup")
@@ -37,9 +37,9 @@ public class AddTeacherToSubjectSteps extends BaseSteps {
                 .isTrue();
     }
 
-    @And("Select teachers section in subject dashboard")
-    public void selectTeachersSectionInSubjectDashboard() {
-        subjectPage.clickOnTeachersSection();
+    @And("Select {} section in the dashboard")
+    public void selectSectionInDashboard(String section) {
+        subjectPage.clickOnSectionByText(section);
     }
 
     @And("Teacher for subject is not displayed on the list")
@@ -93,7 +93,7 @@ public class AddTeacherToSubjectSteps extends BaseSteps {
 
     @And("Save linked teachers count for {} subject from DB and list size from subject section")
     public void saveLinkedTeachersCountForSubjectFromDBAndListSizeFromSubjectSection(String subjectName) {
-        subjectPage.setTeacherListSize();
+        subjectPage.setListSize();
         subjectPopup.saveCountOfSelectedTeachersInTheBox();
         int dbCount = dbHelper.findCountOfTeachersAddedToTheSubject(subjectName);
         logger.info("Save teachers count '{}' linked to '{}' subject to shared test data",

@@ -1,8 +1,10 @@
 package com.epam.steps.common;
 
+import com.epam.pages.main.AcademicCoursesPage;
 import com.epam.pages.main.AdminPage;
 import com.epam.pages.main.LoginPage;
 import com.epam.pages.main.SuperAdminPage;
+import com.epam.pages.popup.AcademicCoursePopup;
 import com.epam.pages.popup.AcademicYearsAndVacationPopup;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Then;
@@ -15,6 +17,8 @@ public class UICheckSteps {
     private SuperAdminPage superAdminPage;
     private AdminPage adminPage;
     private AcademicYearsAndVacationPopup yearsAndVacationPopup;
+    private AcademicCoursesPage coursesPage;
+    private AcademicCoursePopup coursesPopup;
 
     @Before
     public void initPages() {
@@ -22,6 +26,8 @@ public class UICheckSteps {
         superAdminPage = new SuperAdminPage();
         adminPage = new AdminPage();
         yearsAndVacationPopup = new AcademicYearsAndVacationPopup();
+        coursesPage = new AcademicCoursesPage();
+        coursesPopup = new AcademicCoursePopup();
     }
 
     @Then("Check all elements are present in login page")
@@ -55,6 +61,20 @@ public class UICheckSteps {
     @Then("Check all fields are present in create popup years section")
     public void checkAllFieldsArePresentInCreatePopupYearsSection() {
         assertThat(yearsAndVacationPopup.checkUIOfCreatePopupYearsSection())
+                .withFailMessage("All required elements in years section are not displayed")
+                .isTrue();
+    }
+
+    @Then("Check all elements are present in chosen section of academic course")
+    public void checkAllElementsArePresentInClassesSectionOfAcademicCourse() {
+        assertThat(coursesPage.checkAllElementsAreDisplayedInSection())
+                .withFailMessage("Not all elements are present in chosen section of academic course")
+                .isTrue();
+    }
+
+    @Then("Check all elements are present in 'Add Class' popup Classes section")
+    public void checkAllElementsArePresentInAddClassPopupClassesSection() {
+        assertThat(coursesPopup.checkAllElementsArePresentInAddClassPopupClassesSection())
                 .withFailMessage("All required elements in years section are not displayed")
                 .isTrue();
     }
