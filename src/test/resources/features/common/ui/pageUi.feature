@@ -96,3 +96,12 @@ Feature: UI of pages
     And Select teachers section in subject dashboard
     And Click on 'Add' button and open popup
     Then Check all elements are present in subject dashboard teachers section
+
+  @TC3.21.1 @TC3.21.2 @TC3.21.3 @Regression @Smoke
+  Scenario: Check UI of Admin Page Academic Course section and create popup
+    Given Login as admin
+    And Select courses section
+    Then Check all elements are present on the chosen section
+    And Click on 'create' button and open popup
+    Then Popup is opened
+    Then Check all fields are present in create popup - academic course section

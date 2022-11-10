@@ -17,6 +17,7 @@ public final class DBHelper {
     private final AcademicClassesServiceImpl classesServiceImpl = new AcademicClassesServiceImpl();
     private final AcademicYearsServiceImpl academicYearsService = new AcademicYearsServiceImpl();
     private final SubjectServiceImpl subjectService = new SubjectServiceImpl();
+    private final AcademicCourseServiceImpl academicCourseService = new AcademicCourseServiceImpl();
     private final Logger logger = LoggerFactory.getLogger(DBHelper.class);
 
 
@@ -74,5 +75,9 @@ public final class DBHelper {
 
     private int getSubjectID(String subjectName) {
         return subjectService.findSubjectIdBySubjectName(subjectName);
+    }
+
+    public boolean isAcademicCourseIsAddedInTheDB() {
+        return academicCourseService.findByName(SharedTestData.getLastCreatedItemName()).getName() != null;
     }
 }

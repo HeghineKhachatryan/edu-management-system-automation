@@ -82,7 +82,7 @@ Feature: This feature will cover possible scenarios of checking password input i
       | parents  | invalid@gm.ail.com  |
       | students | i@gmail.com         |
 
-  @TC1.8.7 @TC1.9.6 @TC1.10.6 @TC1.11.4 @TC2.12.7 @TC2.13.3 @TC2.14.6 @Regression @Smoke
+  @TC1.8.7 @TC1.9.6 @TC1.10.6 @TC1.11.4 @TC2.12.7 @TC2.13.3 @TC2.14.6 @TC3.21.7 @Regression @Smoke
   Scenario Outline: Check the creation of the new item after not filling in all the required fields
     When Select <section> section
     And Click on 'create' button and open popup
@@ -103,7 +103,7 @@ Feature: This feature will cover possible scenarios of checking password input i
       | courses   |
       | vacations |
 
-  @TC1.8.5 @TC1.9.16 @TC1.10.20 @TC1.11.6 @TC2.12.9 @Regression @Smoke
+  @TC1.8.5 @TC1.9.16 @TC1.10.20 @TC1.11.6 @TC2.12.9 @TC3.21.11 @Regression @Smoke
   Scenario Outline: Check validations/error messages for input fields when filled more than 50 symbols
     When Select <section> section
     And Click on 'create' button and open popup
@@ -118,3 +118,4 @@ Feature: This feature will cover possible scenarios of checking password input i
       | parents  |
       | classes  |
       | subjects |
+      | courses  |

@@ -21,9 +21,9 @@ public class TeacherServiceImpl implements UserService<Teacher> {
         Teacher teacher = new Teacher();
         String query = "SELECT public.teacher.id, password, name, surname, user_id " +
                 "FROM public.teacher " +
-                "INNER JOIN public.user " +
-                "ON public.teacher.user_id=public.user.id " +
-                "WHERE public.user.email=?;";
+                "INNER JOIN public.user_table " +
+                "ON public.teacher.user_id=public.user_table.id " +
+                "WHERE public.user_table.email=?;";
         logger.info("Find teacher by email");
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, email);

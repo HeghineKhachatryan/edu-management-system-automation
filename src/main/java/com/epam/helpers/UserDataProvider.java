@@ -48,4 +48,12 @@ public final class UserDataProvider {
     public static String getExistedClass() {
         return PROPERTIES_READER.getProperty("existedClass");
     }
+
+    public static String getExistedAcademicCourse() {
+        return PROPERTIES_READER.getProperty("existedAcademicCourse");
+    }
+
+    public static String getExistedSubject() {
+        return PROPERTIES_READER.getProperty("existedSubject");
+    }
 }

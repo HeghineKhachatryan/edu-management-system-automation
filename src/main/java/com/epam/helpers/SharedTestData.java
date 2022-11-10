@@ -22,6 +22,7 @@ public final class SharedTestData {
     public static int resultOfMatchedSearch;
     private static int teachersCountLinkedToSubject;
     private static int selectedTeachersCountInTheBox;
+    private static String lastSelectedSubject;
 
     private SharedTestData() {
     }
@@ -118,6 +119,7 @@ public final class SharedTestData {
     public static void setAcademicClass(String academicClass) {
         SharedTestData.academicClass = academicClass;
     }
+
     public static int getListSize() {
         return listSize;
     }
@@ -148,5 +150,13 @@ public final class SharedTestData {
 
     public static void setSelectedTeachersCountInTheBox(int selectedTeachersCountInTheBox) {
         SharedTestData.selectedTeachersCountInTheBox = selectedTeachersCountInTheBox;
+    }
+
+    public static String getLastSelectedSubject() {
+        return lastSelectedSubject;
+    }
+
+    public static void setLastSelectedSubject(String lastSelectedSubject) {
+        SharedTestData.lastSelectedSubject = lastSelectedSubject;
     }
 }
