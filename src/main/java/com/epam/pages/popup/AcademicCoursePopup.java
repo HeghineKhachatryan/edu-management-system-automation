@@ -1,8 +1,8 @@
 package com.epam.pages.popup;
 
 import com.epam.helpers.SharedTestData;
+import com.epam.helpers.UserDataProvider;
 import com.epam.pages.common.CommonPopup;
-import com.epam.pages.main.AdminPage;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -27,13 +27,13 @@ public class AcademicCoursePopup extends CommonPopup {
     }
 
     public void fillExistedAcademicCourseName() {
-        String existedAcademicCourseName = new AdminPage().getNameOfLastCreatedItem();
+        String existedAcademicCourseName = UserDataProvider.getExistedAcademicCourse();
         logger.info("Fill existed academic course name {}", existedAcademicCourseName);
         uiHelper.sendKeys(academicCourseNameField, existedAcademicCourseName);
     }
 
     public void fillCaseSensitiveAcademicCourseName() {
-        String existedAcademicCourseName = new AdminPage().getNameOfLastCreatedItem();
+        String existedAcademicCourseName = UserDataProvider.getExistedAcademicCourse();
         char firstCharacter = existedAcademicCourseName.charAt(0);
         uiHelper.sendKeys(academicCourseNameField, Character
                 .isLowerCase(firstCharacter)

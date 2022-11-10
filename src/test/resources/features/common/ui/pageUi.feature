@@ -105,10 +105,3 @@ Feature: UI of pages
     And Click on 'create' button and open popup
     Then Popup is opened
     Then Check all fields are present in create popup - academic course section
-
-  @TC1.8.1 @Regression
-  Scenario: Check UI of 'create' popup in admin dashboard/ teacher section
-    Given Login as admin
-    When Select teachers section
-    And Click on 'create' button and open popup
-    Then Check all fields are present in create popup

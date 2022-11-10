@@ -109,9 +109,9 @@ public class CreateAcademicCourseSteps extends BaseSteps {
 
     @And("Check the user choice is displayed in the 'Subject' field")
     public void checkTheUserChoiceIsDisplayedInTheSubjectField() {
-        logger.info("Check 'Subject' dropdown is closed");
+        logger.info("Check the user choice is displayed in the 'Subject' field");
         assertThat(academicCoursePopup.checkTheUserChoiceIsDisplayedInTheSubjectField())
-                .withFailMessage("Dropdown is not closed")
+                .withFailMessage("The user choice is not displayed in the 'Subject' field")
                 .isTrue();
     }
 }
