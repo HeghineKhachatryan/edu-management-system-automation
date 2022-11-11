@@ -2,18 +2,13 @@ package com.epam.pages.main;
 
 import com.epam.helpers.SharedTestData;
 import com.epam.pages.common.CommonPage;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-
-import java.util.Collections;
+import org.openqa.selenium.By;
 
 public class SubjectPage extends CommonPage {
 
-    @FindBy(xpath = "//div[@class='sidebar2']/a[@href='/subjects/Languages/teachers']")
-    private WebElement teachersSection;
-
-    public void clickOnTeachersSection() {
-        uiHelper.clickOnWebElement(teachersSection);
+    public void clickOnSectionByText(String sectionText) {
+        String section = String.format("//div[contains(@class,'debar2')]/a[text()='%s']", sectionText);
+        uiHelper.clickOnWebElement(driver.findElement(By.xpath(section)));
     }
 
     public void clickOnAddButton() {
@@ -24,14 +19,14 @@ public class SubjectPage extends CommonPage {
         return listItems.size();
     }
 
-    public void setTeacherListSize() {
-        logger.info("Set teachers list size assigned for subjects");
+    public void setListSize() {
+        logger.info("Set list size assigned for last created item to SharedTest data.");
         SharedTestData.setListSize(listItems.size());
     }
 
-    public void clickOnSubjectFromTheList(String subjectName) {
-        logger.info("Click on subject from the list using subject name and index");
-        uiHelper.clickOnWebElement(listItemsHref.get(getIndexOfSubjectFromList(subjectName)));
+    public void clickOnItemFromTheList(String itemName) {
+        logger.info("Click on item from the list using item name and index");
+        uiHelper.clickOnWebElement(listItemsHref.get(getIndexOfSubjectFromList(itemName)));
     }
 
     private int getIndexOfSubjectFromList(String subjectName) {

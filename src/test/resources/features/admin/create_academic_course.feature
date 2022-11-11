@@ -9,7 +9,7 @@ Feature: This feature will cover academic course section of admin page, especial
   @TC3.21.4 @Regression
   Scenario: Check functionality of 'X' icon on the "New Subjects" pop-up
     Given Fill academic course name
-    And Select subject
+    When Select the first item from subject dropdown list
     When Click on 'X' button
     Then Popup is closed
     And Click on 'create' button and open popup
@@ -19,15 +19,17 @@ Feature: This feature will cover academic course section of admin page, especial
 
   @TC3.21.5 @Regression
   Scenario: Check functionality of "Subject" drop-down
-    Given Click on 'Subject' select and check dropdown opens with list of subjects
-    When Select subject
-    And Save value of selected subject
-    Then Check the user choice is displayed in the 'Subject' field
+    When Click on subject dropdown
+    Then Check the list of created subject in the dropdown list
+    When Select the first item from subject dropdown list
+    And Save value of selected subject item
+    Then Check the user choice is displayed in the subject field
 
   @TC3.21.6 @Regression
   Scenario: Check the creation of new academic course after inputting valid data in mandatory fields
     Given Fill academic course name
-    And Select subject
+    When Select the first item from subject dropdown list
+    And Save value of selected subject item
     When Click on 'Save' button
     Then Popup is closed
     And Check academic course is displayed in the list
@@ -42,13 +44,13 @@ Feature: This feature will cover academic course section of admin page, especial
   @TC3.21.9 @Regression @Smoke
   Scenario: Check the uniques of the Academic Course Name
     Given Fill existed academic course name
-    And Select subject
+    When Select the first item from subject dropdown list
     When Click on 'Save' button
     Then Check error message of existed academic course name
 
   @TC3.21.10 @Regression @Smoke
   Scenario: Check case sensitivity of academic course name
     Given Fill case sensitive existed academic course name
-    And Select subject
+    When Select the first item from subject dropdown list
     When Click on 'Save' button
     Then Check error message of existed academic course name

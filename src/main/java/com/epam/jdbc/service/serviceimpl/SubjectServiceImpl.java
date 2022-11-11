@@ -48,7 +48,7 @@ public class SubjectServiceImpl implements SubjectService {
             }
         } catch (SQLException e) {
             logger.error("Can not execute query.");
-            throw new RuntimeException(e);
+            throw new RuntimeException("Can not execute query. Something went wrong.");
         }
         return id;
     }
@@ -68,7 +68,7 @@ public class SubjectServiceImpl implements SubjectService {
             }
         } catch (SQLException e) {
             logger.error("Can not execute query.");
-            throw new RuntimeException(e);
+            throw new RuntimeException("Can not execute query. Something went wrong.");
         }
         return countOfTeachers;
     }

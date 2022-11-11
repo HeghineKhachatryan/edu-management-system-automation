@@ -62,6 +62,10 @@ public class CreateUserSteps extends BaseSteps {
         createPopup.fillInputFieldsWithMoreSymbols();
     }
 
+    @Given("Fill in input fields with not allowed symbols")
+    public void fillInInputFieldsWithNotAllowedSymbols() {
+        createPopup.fillInputFieldsWithNotAllowedSymbols();
+    }
     @And("Click on 'Generate password' button")
     public void clickOnGeneratePasswordButton() {
         createPopup.clickOnGeneratePasswordButton();
@@ -152,6 +156,13 @@ public class CreateUserSteps extends BaseSteps {
     public void checkErrorMessagesOfMoreSymbolsFilledInputFields() {
         assertThat(createPopup.checkErrorMessagesOfMoreSymbolsFilledInputFields())
                 .withFailMessage("Error message of more symbols is incorrect")
+                .isTrue();
+    }
+
+    @Then("Check error message of filling not allowed symbols")
+    public void checkErrorMessagesOfNotAllowedSymbolsFilledInputFields() {
+        assertThat(createPopup.checkErrorMessagesOfNotAllowedSymbolsFilledInputFields())
+                .withFailMessage("Error message of not allowed symbols is incorrect")
                 .isTrue();
     }
 

@@ -43,6 +43,6 @@ public class AcademicClassPopup extends CommonPopup {
     }
 
     public void saveAcademicClassValue() {
-        SharedTestData.setAcademicClass(classNumber.getDomProperty("value"));
+        SharedTestData.setValueOfitem(classNumber.getDomProperty("value"));
     }
 }

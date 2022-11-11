@@ -6,6 +6,7 @@ import com.epam.helpers.UserDataProvider;
 import com.epam.pages.common.CommonPopup;
 import com.epam.pages.main.SuperAdminPage;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.RegExUtils;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -76,6 +77,13 @@ public class CreatePopup extends CommonPopup {
     public void fillInputFieldsWithMoreSymbols() {
         String generatedString = RandomStringUtils.random(51, true, true);
         logger.info("50 symbols in name field are {}", generatedString);
+        inputFields
+                .forEach(fields -> uiHelper.sendKeys(fields, generatedString));
+    }
+
+    public void fillInputFieldsWithNotAllowedSymbols() {
+        String generatedString = RandomStringUtils.random(10,33,39,false,false);
+        logger.info("Fill text field with not allowed symbols {}", generatedString);
         inputFields
                 .forEach(fields -> uiHelper.sendKeys(fields, generatedString));
     }
@@ -177,6 +185,14 @@ public class CreatePopup extends CommonPopup {
                 .stream()
                 .allMatch(errMessage -> errMessage.getText()
                         .equals(ErrorMessagesProvider.getMoreThan50SymbolsErrMessage()));
+    }
+
+    public boolean checkErrorMessagesOfNotAllowedSymbolsFilledInputFields() {
+        logger.info("Check error messages for inputting not allowed symbols");
+        return errorMessagesOfMoreSymbols
+                .stream()
+                .allMatch(errMessage -> errMessage.getText()
+                        .equals(ErrorMessagesProvider.getNotAllowedSymbolsErrMessage()));
     }
 
     public boolean checkBlankInputFieldsErrorMessagesAreNotDisplayed() {

@@ -119,3 +119,17 @@ Feature: This feature will cover possible scenarios of checking password input i
       | classes  |
       | subjects |
       | courses  |
+
+  @Regression @Smoke
+  Scenario Outline: Check error message for filling not allowed symbols
+    When Select <section> section
+    And Click on 'create' button and open popup
+    When Fill in input fields with not allowed symbols
+    And Click on 'Save' button
+    Then Check error message of filling not allowed symbols
+
+    Examples:
+      | section  |
+      | classes  |
+      | subjects |
+      | courses  |

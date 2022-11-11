@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.List;
 
 public class AcademicYearsAndVacationPopup extends CreatePopup {
     @FindBy(id = "startDate")

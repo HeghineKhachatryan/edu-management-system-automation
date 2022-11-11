@@ -37,4 +37,24 @@ public class AcademicCourseServiceImpl implements AcademicCourseService {
         }
         return academicCourse;
     }
+
+    @Override
+    public int findAcademicCourseIdByLinkedClassId(int academicClassId) {
+        logger.info("Find ID of the given academic course.");
+        int id = -1;
+        String query = "SELECT academic_course_id " +
+                "FROM public.academic_class_academic_course_mapping " +
+                "WHERE academic_class_id=?;";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, academicClassId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                id = resultSet.getInt("academic_course_id");
+            }
+        } catch (SQLException e) {
+            logger.error("Can not execute query.");
+            throw new RuntimeException("Can not execute query. Something went wrong.");
+        }
+        return id;
+    }
 }

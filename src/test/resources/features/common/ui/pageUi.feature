@@ -92,8 +92,8 @@ Feature: UI of pages
   Scenario: Check UI of 'Add' popup in Subjects dashboard after selecting subject
     Given Login as admin
     When Select subjects section
-    And Click on the Languages subject in the list
-    And Select teachers section in subject dashboard
+    And Click on the Languages item in the list
+    And Select Teachers section in the dashboard
     And Click on 'Add' button and open popup
     Then Check all elements are present in subject dashboard teachers section
 
@@ -105,3 +105,20 @@ Feature: UI of pages
     And Click on 'create' button and open popup
     Then Popup is opened
     Then Check all fields are present in create popup - academic course section
+
+  @TC3.21.12 @TC3.35.1 @Regression @Smoke
+  Scenario: Check UI of "Classes" section in the right navigation menu of academic course page
+    Given Login as admin
+    When Select courses section
+    And Click on the English item in the list
+    Then Check all elements are present in chosen section of academic course
+
+  @TC3.35.2 @TC3.35.3 @Regression @Smoke
+  Scenario: Check UI of "Add Class" pop-up elements in Academic course Classes section
+    Given Login as admin
+    When Select courses section
+    And Click on the English item in the list
+    And Select Classes section in the dashboard
+    And Click on 'Add' button and open popup
+    Then Popup is opened
+    And Check all elements are present in 'Add Class' popup Classes section

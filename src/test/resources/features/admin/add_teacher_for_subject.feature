@@ -4,8 +4,8 @@ Feature: This feature will cover subject section of admin page, especially addin
   Background: Login as admin, go to subject section and select one of the existed subjects
     Given Login as admin
     When Select subjects section
-    And Click on the Languages subject in the list
-    And Select teachers section in subject dashboard
+    And Click on the Languages item in the list
+    And Select Teachers section in the dashboard
     And Click on 'Add' button and open popup
 
   @TC2.41.2 @Regression @Smoke
@@ -38,8 +38,7 @@ Feature: This feature will cover subject section of admin page, especially addin
   Scenario: Check 'Select item' and 'Clear all selected items' functionality in the "Teachers" Multi-select drop-list
     Given Click on the 'Teachers' drop-down list
     When Fill name of teacher gay
-    And Select teacher Gayane Hovhannisyan
-    And Select teacher Gayush Poghosyan
+    And Select teacher
     Then Check selected items are shown with the 'x' icon
     And Click on 'X' button of the teacher list
     And Check selected items are deleted from drop-list fragment
@@ -47,7 +46,7 @@ Feature: This feature will cover subject section of admin page, especially addin
   @TC2.41.8 @Regression @Smoke
   Scenario: Check "Remove item" functionality in the "Teachers" Multi-select drop-list
     Given Click on the 'Teachers' drop-down list
-    When Select teacher Gayush Poghosyan
+    When Select teacher
     Then Check selected items are shown with the 'x' icon
     And Click on 'X' button of the selected teacher
     And Check selected items are deleted from drop-list fragment

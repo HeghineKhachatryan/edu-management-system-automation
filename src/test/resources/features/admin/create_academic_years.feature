@@ -30,7 +30,7 @@ Feature: This feature will cover academic years section of admin page, especiall
 
   @TC2.13.6 @Regression @Smoke
   Scenario: Check validation for maximum 10 year length of academic year not counting months
-    When Fill 10 Nov 2022 date in start date field
+    When Fill 10 Nov 2024 date in start date field
     And Save start date values
     Then Check that 2043 year is greater from start date by more than ten years
     And Check that 2043 year doesn't exist in the list of selection

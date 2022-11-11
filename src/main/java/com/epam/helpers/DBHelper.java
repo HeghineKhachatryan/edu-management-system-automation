@@ -68,15 +68,20 @@ public final class DBHelper {
     public boolean isClassAddedToTheDB(String academicClass) {
         return classesServiceImpl.findIDByAcademicClass(academicClass) != -1;
     }
+    public int findAcademicClassIdByName(String academicClass) {
+        return classesServiceImpl.findIDByAcademicClass(academicClass);
+    }
+
+    public boolean isAcademicClassAddedToAcademicCourse(String academicClassName) {
+        return academicCourseService.findAcademicCourseIdByLinkedClassId(findAcademicClassIdByName(academicClassName)) != -1;
+    }
 
     public int findCountOfTeachersAddedToTheSubject(String subjectName) {
         return subjectService.findTeachersCountByConnectedSubjectId(getSubjectID(subjectName));
     }
-
     private int getSubjectID(String subjectName) {
         return subjectService.findSubjectIdBySubjectName(subjectName);
     }
-
     public boolean isAcademicCourseIsAddedInTheDB() {
         return academicCourseService.findByName(SharedTestData.getLastCreatedItemName()).getName() != null;
     }
