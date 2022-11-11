@@ -18,6 +18,10 @@ public final class ErrorMessagesProvider {
         return PROPERTIES_READER.getProperty("moreThan50Symbols");
     }
 
+    public static String getNotAllowedSymbolsErrMessage() {
+        return PROPERTIES_READER.getProperty("notAllowedSymbols");
+    }
+
     public static String getBlankInputFieldsErrMessage() {
         return PROPERTIES_READER.getProperty("blankInputFields");
     }

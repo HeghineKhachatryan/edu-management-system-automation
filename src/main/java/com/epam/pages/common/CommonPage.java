@@ -52,7 +52,7 @@ public abstract class CommonPage extends BasePage {
     }
 
     public boolean checkListContainsName(String name) {
-        return listItems.stream().anyMatch(element -> element.getText().equals(name));
+        return listItems.stream().anyMatch(element -> element.getText().startsWith(name));
     }
 
     public void clickOnCreateButton() {

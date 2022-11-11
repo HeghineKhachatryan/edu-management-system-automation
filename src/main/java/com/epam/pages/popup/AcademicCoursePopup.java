@@ -25,6 +25,7 @@ public class AcademicCoursePopup extends CommonPopup {
     private WebElement teacherSelect;
     @FindBy(xpath = "//*/following-sibling::div[@class='error']")
     private WebElement existedAcademicCourseErrMessage;
+    private final Map<String, WebElement> map = new HashMap<>();
 
     public void fillAcademicCourseName() {
         String academicCourseName = RandomStringUtils.random(16, true, false);
@@ -90,7 +91,7 @@ public class AcademicCoursePopup extends CommonPopup {
 
     public void clickOnDropDown(String name) {
         logger.info("Click on {} select and open dropdown", name);
-        uiHelper.clickOnWebElement(mapOfElements(name));
+        uiHelper.clickOnWebElement(getElementByNameFromMap(name));
     }
 
     public boolean areListOptionsPresent(String name) {
@@ -101,23 +102,26 @@ public class AcademicCoursePopup extends CommonPopup {
 
     public void selectFirstItem(String dropDownList) {
         logger.info("Select first item from the {} dropdown list", dropDownList);
-        new Select(mapOfElements(dropDownList)).selectByIndex(1);
+        new Select(getElementByNameFromMap(dropDownList)).selectByIndex(1);
     }
 
     public void saveValueOfSelectedItem(String value) {
-        SharedTestData.setValueOfitem(new Select(mapOfElements(value)).getFirstSelectedOption().getText());
+        SharedTestData.setValueOfitem(new Select(getElementByNameFromMap(value)).getFirstSelectedOption().getText());
     }
 
     public boolean checkTheUserChoiceIsDisplayedInTheField(String value) {
-        return new Select(mapOfElements(value)).getFirstSelectedOption().getText()
+        return new Select(getElementByNameFromMap(value)).getFirstSelectedOption().getText()
                 .equals(SharedTestData.getValueOfitem());
     }
 
-    private WebElement mapOfElements(String name) {
-        Map<String, WebElement> map = new HashMap<>();
-        map.put("academicClass", academicClassSelect);
-        map.put("teachers", teacherSelect);
-        map.put("subject", subjectsSelect);
-        return map.get(name);
+    private WebElement getElementByNameFromMap(String name) {
+        return getMapOfElements().get(name);
+    }
+
+    private Map<String, WebElement> getMapOfElements() {
+        map.putIfAbsent("academicClass",academicClassSelect);
+        map.putIfAbsent("teachers", teacherSelect);
+        map.putIfAbsent("subject", subjectsSelect);
+        return map;
     }
 }
