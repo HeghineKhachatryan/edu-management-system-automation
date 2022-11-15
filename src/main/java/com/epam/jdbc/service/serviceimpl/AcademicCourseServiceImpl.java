@@ -57,4 +57,25 @@ public class AcademicCourseServiceImpl implements AcademicCourseService {
         }
         return id;
     }
+
+    @Override
+    public int findTeachersCountByLinkedCourseId(int academicCourseId) {
+        logger.info("Find count of teachers linked to the course by the given course id.");
+        int countOfTeachers = 0;
+        String query = "SELECT teacher_id FROM public.academic_course_teacher_mapping WHERE academic_course_id=?;";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, academicCourseId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                if (resultSet.getInt("teacher_id") != 0) {
+                    countOfTeachers++;
+                }
+            }
+        } catch (SQLException e) {
+            logger.error("Can not execute query.");
+            throw new RuntimeException("Can not execute query. Something went wrong.");
+        }
+        return countOfTeachers;
+    }
+
 }

@@ -7,6 +7,7 @@ import com.epam.pages.main.SuperAdminPage;
 import com.epam.pages.popup.AcademicCoursePopup;
 import com.epam.pages.popup.AcademicYearsAndVacationPopup;
 import io.cucumber.java.Before;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -75,7 +76,14 @@ public class UICheckSteps {
     @Then("Check all elements are present in 'Add Class' popup Classes section")
     public void checkAllElementsArePresentInAddClassPopupClassesSection() {
         assertThat(coursesPopup.checkAllElementsArePresentInAddClassPopupClassesSection())
-                .withFailMessage("All required elements in years section are not displayed")
+                .withFailMessage("All required elements in 'Add Class' popup Classes section are not displayed")
+                .isTrue();
+    }
+
+    @And("Check all elements are present in 'Add Teacher' popup Teachers section")
+    public void checkAllElementsArePresentInAddClassPopupTeachersSection() {
+        assertThat(coursesPopup.checkAllElementsArePresentInAddTeachersPopupClassesSection())
+                .withFailMessage("All required elements in 'Add Teacher' popup Classes section are not displayed")
                 .isTrue();
     }
 }

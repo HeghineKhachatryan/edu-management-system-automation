@@ -16,7 +16,7 @@ Feature: This feature will cover subject section of admin page, especially addin
     Then Popup is closed
     When Click on 'Add' button and open popup
     Then Check there is no selected item
-    And Teacher for subject is not displayed on the list
+    And Teacher for item is not displayed on the list
     And Check Teacher for Languages subject is not added to the DB
 
   @TC2.41.3 @Regression @Smoke

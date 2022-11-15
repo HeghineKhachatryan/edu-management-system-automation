@@ -79,8 +79,16 @@ public final class DBHelper {
     public int findCountOfTeachersAddedToTheSubject(String subjectName) {
         return subjectService.findTeachersCountByConnectedSubjectId(getSubjectID(subjectName));
     }
+
+    public int findCountOfTeachersAddedToTheCourse(String courseName) {
+        return academicCourseService.findTeachersCountByLinkedCourseId(getCourseID(courseName));
+    }
     private int getSubjectID(String subjectName) {
         return subjectService.findSubjectIdBySubjectName(subjectName);
+    }
+
+    private int getCourseID(String courseName) {
+        return academicCourseService.findByName(courseName).getId();
     }
     public boolean isAcademicCourseIsAddedInTheDB() {
         return academicCourseService.findByName(SharedTestData.getLastCreatedItemName()).getName() != null;
