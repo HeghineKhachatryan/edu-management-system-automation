@@ -135,7 +135,6 @@ public class AcademicCoursePopup extends CommonPopup {
     }
 
     public void selectTheFirstTeacher() {
-        uiHelper.clickOnWebElement(selectTeachersBox);
         uiHelper.clickOnWebElement(listOfTeachersOptions.get(0));
     }
 

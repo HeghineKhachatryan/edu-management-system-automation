@@ -124,7 +124,7 @@ public class CreateSubjectSteps extends BaseSteps {
     @Then("Check selected items are shown with the 'x' icon")
     public void checkSelectedItemIsShownWithTheXIcon() {
         assertThat(subjectPopup.checkSelectedItemsAreShownWithTheXIcon())
-                .withFailMessage("Selected item is not shown")
+                .withFailMessage("Selected item's 'X' button is not shown")
                 .isTrue();
     }
 

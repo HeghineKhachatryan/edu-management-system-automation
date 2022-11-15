@@ -25,21 +25,6 @@ public class AddTeachersForCoursesSteps extends BaseSteps {
         coursesPopup.selectTheFirstTeacher();
     }
 
-    @And("Check teacher for {} course is not added in the DB")
-    public void checkTeacherForAcademicCourseIsNotAddedInTheDB(String courseName) {
-        assertThat(isTeacherForCourseAddedToTheDB(courseName))
-                .withFailMessage("Teacher for course is added to the DB, but should not be")
-                .isFalse();
-    }
-
-    private boolean isTeacherForCourseAddedToTheDB(String courseName) {
-        int dbCount = dbHelper.findCountOfTeachersAddedToTheCourse(courseName);
-        int sharedCount = SharedTestData.getTeachersCountLinkedToItem();
-        logger.info("Count of teachers linked to {} academic course in the DB is {}, count of teachers in the list is {}," +
-                "count of selected teachers is {}", courseName, dbCount, sharedCount, coursesPopup.getCountOfSelectedTeachers());
-        return (dbCount - sharedCount) == coursesPopup.getCountOfSelectedTeachers();
-    }
-
     @And("Save linked teachers count for {} course from DB and list size from section")
     public void saveLinkedTeachersCountForCourseFromDBAndListSizeFromSection(String courseName) {
         adminPage.setListSize();
@@ -55,5 +40,27 @@ public class AddTeachersForCoursesSteps extends BaseSteps {
         assertThat(coursesPopup.checkDropDownListIsOpened())
                 .withFailMessage("Drop down list is not opened, but it should be")
                 .isTrue();
+    }
+
+    @And("Check teacher for {} course is added in the DB")
+    public void checkTeacherForEnglishCourseIsAddedInTheDB(String courseName) {
+        assertThat(isTeacherForCourseAddedToTheDB(courseName))
+                .withFailMessage("Teacher for course is not added to the DB, but should be")
+                .isTrue();
+    }
+
+    @And("Check teacher for {} course is not added in the DB")
+    public void checkTeacherForAcademicCourseIsNotAddedInTheDB(String courseName) {
+        assertThat(isTeacherForCourseAddedToTheDB(courseName))
+                .withFailMessage("Teacher for course is added to the DB, but should not be")
+                .isFalse();
+    }
+
+    private boolean isTeacherForCourseAddedToTheDB(String courseName) {
+        int dbCount = dbHelper.findCountOfTeachersAddedToTheCourse(courseName);
+        int sharedCount = SharedTestData.getTeachersCountLinkedToItem();
+        logger.info("Count of teachers linked to {} academic course in the DB is {}, count of teachers in the list is {}," +
+                "count of selected teachers is {}", courseName, dbCount, sharedCount, coursesPopup.getCountOfSelectedTeachers());
+        return (dbCount - sharedCount) == coursesPopup.getCountOfSelectedTeachers();
     }
 }

@@ -10,19 +10,40 @@ Feature: This feature will cover academic course section of admin page, especial
 
   @TC3.34.4 @Regression @Smoke
   Scenario: Check functionality of 'X' icon on the "New Teacher" pop-up
+    Given Click on the 'Teachers' drop-down list
     When Select item from 'select teachers' dropdown list
     And Save linked teachers count for English course from DB and list size from section
     And Click on 'X' button
     Then Popup is closed
     When Click on 'Add' button and open popup
     Then Check there is no selected item
-    And Teacher for item is not displayed on the list
+    And Check teacher for item is not displayed on the list
     And Check teacher for English course is not added in the DB
 
-  @TC3.34.5 @Regression @Smoke
+  @TC3.34.5 @TC3.34.6 @Regression @Smoke
   Scenario: Check functionality of "Teachers" Multi-selected drop-list
     Given Click on the 'Teachers' drop-down list
     Then Check the search line placeholder
     And Check multi-select drop-down list is opened
-    When Fill name of teacher ir
+    When Fill name of teacher ik
     Then Check matched items appeared below the Search line
+
+  @TC3.34.8 @Regression @Smoke
+  Scenario: Check functionality of 'remove' students from "Teachers" Multi-selected drop-list(one by one)
+    Given Click on the 'Teachers' drop-down list
+    When Select item from 'select teachers' dropdown list
+    Then Check selected items are shown with the 'x' icon
+    And Click on 'X' button of the selected teacher
+    And Check selected items are deleted from drop-list fragment
+
+  @TC3.34.9 @Regression @Smoke
+  Scenario: Check functionality of 'X' button (clear all selected items)
+    Given Click on the 'Teachers' drop-down list
+    When Select item from 'select teachers' dropdown list
+    And Click on 'X' button of the teacher list
+    And Check selected items are deleted from drop-list fragment
+
+  @TC3.34.11 @Regression @Smoke
+  Scenario: Check mandatoriness of teachers input filed
+    When Click on 'Save' button
+    Then Check error messages of blank selections

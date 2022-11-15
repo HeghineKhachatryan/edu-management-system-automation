@@ -50,6 +50,7 @@ public class SubjectServiceImpl implements SubjectService {
             logger.error("Can not execute query.");
             throw new RuntimeException("Can not execute query. Something went wrong.");
         }
+        logger.info("ID of {} subject in the DB is: {}", subjectName, id);
         return id;
     }
 
@@ -57,19 +58,18 @@ public class SubjectServiceImpl implements SubjectService {
     public int findTeachersCountByConnectedSubjectId(int subjectID) {
         logger.info("Find count of teachers linked to the subject by the given subject id.");
         int countOfTeachers = 0;
-        String query = "SELECT teacher_id FROM public.subject_teacher_mapping WHERE subject_id=?;";
+        String query = "SELECT COUNT(teacher_id) as total FROM public.subject_teacher_mapping WHERE subject_id=?;";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, subjectID);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                if (resultSet.getInt("teacher_id") != 0) {
-                    countOfTeachers++;
-                }
+            if (resultSet.next()) {
+                countOfTeachers = resultSet.getInt("total");
             }
         } catch (SQLException e) {
             logger.error("Can not execute query.");
             throw new RuntimeException("Can not execute query. Something went wrong.");
         }
+        logger.info("Count of teachers linked to subject in the DB is {}", countOfTeachers);
         return countOfTeachers;
     }
 }
