@@ -28,6 +28,17 @@ Feature: This feature will cover academic course section of admin page, especial
     When Fill name of teacher ik
     Then Check matched items appeared below the Search line
 
+  @TC3.34.7 @Regression @Smoke
+  Scenario: Check validations of the teachers list in the "Add Teacher" Multi-selected drop-list
+    Given Click on the 'Teachers' drop-down list
+    When Fill name of teacher ik
+    Then Check matched items appeared below the Search line
+    And Save quantity of matched items result and clear search box
+    When Fill name of teacher IK
+    And  Check matched items appeared below the Search line
+    Then Check result quantity is the same as was in the previous search
+    Then Check only teachers who are added for subject linked to English course is displayed and can be selected
+
   @TC3.34.8 @Regression @Smoke
   Scenario: Check functionality of 'remove' students from "Teachers" Multi-selected drop-list(one by one)
     Given Click on the 'Teachers' drop-down list

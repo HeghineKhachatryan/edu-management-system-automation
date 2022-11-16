@@ -10,9 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class AcademicCoursePopup extends CommonPopup {
 
@@ -162,5 +160,17 @@ public class AcademicCoursePopup extends CommonPopup {
     public boolean checkDropDownListIsOpened() {
         logger.info("Check multi-select drop-down list is opened.");
         return uiHelper.checkElementsAreDisplayed(dropDownList);
+    }
+
+    public List<String> getListOfSelectionOptions() {
+        logger.info("Get list of selection options");
+        List<String> options = new ArrayList<>();
+        listOfTeachersOptions.forEach(element -> options.add(element.getText()));
+        return options;
+    }
+
+    public boolean listContainsNames(List<String> list) {
+        logger.info("Check if list contains another list's options");
+        return new HashSet<>(list).containsAll(getListOfSelectionOptions());
     }
 }

@@ -10,6 +10,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class SubjectServiceImpl implements SubjectService {
 
@@ -20,7 +24,7 @@ public class SubjectServiceImpl implements SubjectService {
     public Subject findByName(String name) {
         Subject subject = new Subject();
         String query = "select * from subject where name=?";
-        logger.info("Find subject by name");
+        logger.info("Find subject by {} name", name);
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, name);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -71,5 +75,24 @@ public class SubjectServiceImpl implements SubjectService {
         }
         logger.info("Count of teachers linked to subject in the DB is {}", countOfTeachers);
         return countOfTeachers;
+    }
+
+    public List<Integer> findTeachersIdByConnectedSubjectId(int subjectID) {
+        logger.info("Find teachers linked to the subject by the given subject id.");
+        List<Integer> idList = new ArrayList<>();
+        String query = "SELECT teacher_id FROM public.subject_teacher_mapping WHERE subject_id=?;";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, subjectID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                if (resultSet.getInt("teacher_id") != 0) {
+                   idList.add(resultSet.getInt("teacher_id"));
+                }
+            }
+        } catch (SQLException e) {
+            logger.error("Can not execute query.");
+            throw new RuntimeException("Can not execute query. Something went wrong.");
+        }
+        return idList;
     }
 }

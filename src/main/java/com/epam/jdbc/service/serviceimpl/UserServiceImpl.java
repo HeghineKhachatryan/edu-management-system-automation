@@ -18,6 +18,7 @@ public class UserServiceImpl implements UserService<User> {
 
     @Override
     public User findUserByEmail(String email) {
+        logger.info("Find user by {} email", email);
         User user = new User();
         String query = "SELECT * " +
                 "FROM public.\"user_table\"" +

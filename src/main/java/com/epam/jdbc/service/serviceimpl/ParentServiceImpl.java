@@ -18,6 +18,7 @@ public class ParentServiceImpl implements UserService<Parent> {
 
     @Override
     public Parent findUserByEmail(String email) {
+        logger.info("Find user by {} email", email);
         Parent parent = new Parent();
         String query = "SELECT public.parent.id, password, name, surname, user_id " +
                 "FROM public.parent " +

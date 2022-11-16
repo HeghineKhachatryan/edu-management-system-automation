@@ -6,7 +6,11 @@ import com.epam.pages.popup.AcademicCoursePopup;
 import com.epam.steps.BaseSteps;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -20,6 +24,7 @@ public class AddTeachersForCoursesSteps extends BaseSteps {
         coursesPopup = new AcademicCoursePopup();
         adminPage = new AdminPage();
     }
+
     @When("Select item from 'select teachers' dropdown list")
     public void selectItemFromSelectTeachersDropdownList() {
         coursesPopup.selectTheFirstTeacher();
@@ -62,5 +67,16 @@ public class AddTeachersForCoursesSteps extends BaseSteps {
         logger.info("Count of teachers linked to {} academic course in the DB is {}, count of teachers in the list is {}," +
                 "count of selected teachers is {}", courseName, dbCount, sharedCount, coursesPopup.getCountOfSelectedTeachers());
         return (dbCount - sharedCount) == coursesPopup.getCountOfSelectedTeachers();
+    }
+
+    @Then("Check only teachers who are added for subject linked to {} course is displayed and can be selected")
+    public void checkOnlyTeachersWhoAreAddedForSubjectLinkedToEnglishCourseIsDisplayedAndCanBeSelected(String courseName) {
+        logger.info("Check only teachers who are added for subject linked to {} course is displayed and can be selected",
+                courseName);
+        assertThat(coursesPopup.listContainsNames(
+                        dbHelper.findTeachersNameAndSurnameByAcademicCourseName(courseName)))
+                .withFailMessage("not only teachers who are added for subject and is linked to course" +
+                        " are displayed and can be selected")
+                .isTrue();
     }
 }

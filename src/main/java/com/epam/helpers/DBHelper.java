@@ -5,6 +5,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public final class DBHelper {
 
@@ -68,8 +70,19 @@ public final class DBHelper {
     public boolean isClassAddedToTheDB(String academicClass) {
         return classesServiceImpl.findIDByAcademicClass(academicClass) != -1;
     }
+
     public int findAcademicClassIdByName(String academicClass) {
         return classesServiceImpl.findIDByAcademicClass(academicClass);
+    }
+
+    public List<String> findTeachersNameAndSurnameByAcademicCourseName(String academicCourse) {
+        logger.info("Find teachers name and surname by their IDs, using connected subject ID and academic course name");
+        return teacherService.findTeacherNameAndSurnameById(
+                subjectService.findTeachersIdByConnectedSubjectId(
+                        academicCourseService.findByName(academicCourse)
+                                .getSubjectId()
+                )
+        );
     }
 
     public boolean isAcademicClassAddedToAcademicCourse(String academicClassName) {
@@ -83,6 +96,7 @@ public final class DBHelper {
     public int findCountOfTeachersAddedToTheCourse(String courseName) {
         return academicCourseService.findTeachersCountByLinkedCourseId(getCourseID(courseName));
     }
+
     private int getSubjectID(String subjectName) {
         return subjectService.findSubjectIdBySubjectName(subjectName);
     }
@@ -90,6 +104,7 @@ public final class DBHelper {
     private int getCourseID(String courseName) {
         return academicCourseService.findByName(courseName).getId();
     }
+
     public boolean isAcademicCourseIsAddedInTheDB() {
         return academicCourseService.findByName(SharedTestData.getLastCreatedItemName()).getName() != null;
     }

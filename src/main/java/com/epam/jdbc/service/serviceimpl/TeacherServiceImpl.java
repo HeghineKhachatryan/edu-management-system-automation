@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TeacherServiceImpl implements UserService<Teacher> {
 
@@ -18,6 +20,7 @@ public class TeacherServiceImpl implements UserService<Teacher> {
 
     @Override
     public Teacher findUserByEmail(String email) {
+        logger.info("Find user by {} email", email);
         Teacher teacher = new Teacher();
         String query = "SELECT public.teacher.id, password, name, surname, user_id " +
                 "FROM public.teacher " +
@@ -40,5 +43,25 @@ public class TeacherServiceImpl implements UserService<Teacher> {
             throw new RuntimeException("Can not execute query, something went wrong");
         }
         return teacher;
+    }
+
+    public List<String> findTeacherNameAndSurnameById(List<Integer> idList) {
+        logger.info("Find teacher's names and surnames by their IDs using List of teacher's id and add them to list.");
+        List<String> nameList = new ArrayList<>();
+        String query = "SELECT name, surname FROM public.teacher WHERE id=?;";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            for (Integer id : idList) {
+                preparedStatement.setInt(1, id);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                if (resultSet.next()){
+                nameList.add(String.format("%s %s", resultSet.getString("name"),
+                        resultSet.getString("surname")));
+                }
+            }
+        } catch (SQLException e) {
+            logger.error("Can not execute query");
+            throw new RuntimeException("Can not execute query, something went wrong");
+        }
+        return nameList;
     }
 }

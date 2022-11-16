@@ -18,6 +18,7 @@ public class AdminServiceImpl implements UserService<Admin> {
 
     @Override
     public Admin findUserByEmail(String email) {
+        logger.info("Find user by {} email", email);
         Admin admin = new Admin();
         String query = "SELECT public.admin.id, password, username, surname, user_id " +
                 "FROM public.admin " +
