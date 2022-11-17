@@ -67,9 +67,9 @@ public class AcademicCourseServiceImpl implements AcademicCourseService {
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, academicCourseId);
             ResultSet resultSet = preparedStatement.executeQuery();
-          if (resultSet.next()) {
-              countOfTeachers = resultSet.getInt("total");
-          }
+            if (resultSet.next()) {
+                countOfTeachers = resultSet.getInt("total");
+            }
         } catch (SQLException e) {
             logger.error("Can not execute query.");
             throw new RuntimeException("Can not execute query. Something went wrong.");

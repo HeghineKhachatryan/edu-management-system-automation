@@ -64,11 +64,6 @@ public class AdminPage extends CommonPage {
         return (listItems.get(listItems.size() - 1).getText())
                 .equals(getVacationAsDisplayedInTheList());
     }
-
-    public boolean checkCreatedItemIsDisplayedInCoursesPage() {
-        logger.info("Get last created {} item for academic course and check if it is added to the list", SharedTestData.getValueOfitem());
-        return checkListContainsName(SharedTestData.getValueOfitem());
-    }
     private String getVacationAsDisplayedInTheList() {
         return String.format("%d/%d/%s - %d/%d/%s",
                 SharedTestData.getStartDate().getMonthValue(),
@@ -86,8 +81,8 @@ public class AdminPage extends CommonPage {
                         + SharedTestData.getEndDate().getYear());
     }
 
-    public int getTeacherListSize() {
-        logger.info("Get teachers list size linked to item");
+    public int getListSize() {
+        logger.info("Get list size linked to item");
         return listItems.size();
     }
 

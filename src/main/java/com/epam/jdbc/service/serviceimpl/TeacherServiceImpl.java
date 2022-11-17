@@ -27,7 +27,6 @@ public class TeacherServiceImpl implements UserService<Teacher> {
                 "INNER JOIN public.user_table " +
                 "ON public.teacher.user_id=public.user_table.id " +
                 "WHERE public.user_table.email=?;";
-        logger.info("Find teacher by email");
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();

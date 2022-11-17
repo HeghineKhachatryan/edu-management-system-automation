@@ -25,7 +25,6 @@ public class AdminServiceImpl implements UserService<Admin> {
                 "INNER JOIN public.user_table " +
                 "ON public.admin.user_id=public.user_table.id " +
                 "WHERE public.user_table.email=?;";
-        logger.info("Find admin by email");
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();

@@ -9,9 +9,6 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AddTeachersForCoursesSteps extends BaseSteps {
@@ -49,6 +46,7 @@ public class AddTeachersForCoursesSteps extends BaseSteps {
 
     @And("Check teacher for {} course is added in the DB")
     public void checkTeacherForEnglishCourseIsAddedInTheDB(String courseName) {
+        logger.info("Check teacher for {} course is added in the DB", courseName);
         assertThat(isTeacherForCourseAddedToTheDB(courseName))
                 .withFailMessage("Teacher for course is not added to the DB, but should be")
                 .isTrue();
@@ -56,6 +54,7 @@ public class AddTeachersForCoursesSteps extends BaseSteps {
 
     @And("Check teacher for {} course is not added in the DB")
     public void checkTeacherForAcademicCourseIsNotAddedInTheDB(String courseName) {
+        logger.info("Check teacher for {} course is not added in the DB", courseName);
         assertThat(isTeacherForCourseAddedToTheDB(courseName))
                 .withFailMessage("Teacher for course is added to the DB, but should not be")
                 .isFalse();
