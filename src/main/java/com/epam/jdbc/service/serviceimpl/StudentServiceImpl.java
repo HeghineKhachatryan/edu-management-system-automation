@@ -25,7 +25,6 @@ public class StudentServiceImpl implements UserService<Student> {
                 "FROM public.student INNER JOIN public.user_table " +
                 "ON public.student.user_id=public.user_table.id " +
                 "WHERE public.user_table.email=?;";
-        logger.info("Find student by email");
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
