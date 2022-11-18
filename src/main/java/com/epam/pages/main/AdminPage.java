@@ -45,6 +45,13 @@ public class AdminPage extends CommonPage {
                 && getSurnameOfLastCreatedUser()
                 .equals(SharedTestData.getSurnameField());
     }
+
+    public boolean checkNewAdminIsDisplayedOnSuperAdminPage() {
+        logger.info("Check new admin is displayed");
+        String nameAndSurname = String.format("%s %s", SharedTestData.getNameField(), SharedTestData.getSurnameField());
+        return getNameAndSurnameOfLastCreatedAdmin()
+                .equals(nameAndSurname);
+    }
     public boolean checkAcademicClassIsDisplayedInTheList() {
         logger.info("Get last created academic class and check if it is added to the list");
         return getNameOfLastCreatedItemHref()

@@ -16,12 +16,6 @@ Feature: Admin page/ Parents section functionality
     And User is displayed in the list
     And Check user is added in the DB
 
-  @TC1.9.5
-  Scenario: Check the creation of the new parent after filling in all the required fields with invalid data
-    Given Fill in input fields more than 50 symbols
-    When Click on 'Save' button
-    Then Check error messages of more symbols filled input fields
-
   @TC1.9.7
   Scenario: Check the possibility of creating new parent with an existing "Parent Name" and "Parent Surname"
     Given Fill existed name and surname
