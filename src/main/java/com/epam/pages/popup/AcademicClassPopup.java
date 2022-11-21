@@ -37,7 +37,7 @@ public class AcademicClassPopup extends CommonPopup {
     }
 
     public void fillAcademicClass() {
-        String generateClass = RandomStringUtils.random(25,true,true);
+        String generateClass = RandomStringUtils.random(15,true,true);
         logger.info("Fill academic class with value - {}", generateClass);
         uiHelper.sendKeys(classNumber, generateClass);
     }

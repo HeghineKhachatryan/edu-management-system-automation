@@ -18,13 +18,13 @@ public class ParentServiceImpl implements UserService<Parent> {
 
     @Override
     public Parent findUserByEmail(String email) {
+        logger.info("Find user by {} email", email);
         Parent parent = new Parent();
         String query = "SELECT public.parent.id, password, name, surname, user_id " +
                 "FROM public.parent " +
                 "INNER JOIN public.user_table " +
                 "ON public.parent.user_id=public.user_table.id " +
                 "WHERE public.user_table.email=?;";
-        logger.info("Find parent by email");
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();

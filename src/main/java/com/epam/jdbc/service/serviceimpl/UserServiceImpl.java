@@ -18,11 +18,11 @@ public class UserServiceImpl implements UserService<User> {
 
     @Override
     public User findUserByEmail(String email) {
+        logger.info("Find user by {} email", email);
         User user = new User();
         String query = "SELECT * " +
                 "FROM public.\"user_table\"" +
                 "WHERE email=?;";
-        logger.info("Find user by email");
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();

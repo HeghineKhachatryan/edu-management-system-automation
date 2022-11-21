@@ -29,6 +29,7 @@ public class AcademicClassesServiceImpl implements AcademicClassesService {
             logger.error("Academic class does not exists.");
             throw new RuntimeException(e);
         }
+        logger.info("ID of {} academic class in the DB is: {}", academicClass, id);
         return id;
     }
 }

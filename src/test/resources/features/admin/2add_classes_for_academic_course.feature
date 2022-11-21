@@ -27,9 +27,10 @@ Feature: This feature will cover academic course section of admin page, especial
     When Select the first item from academicClass dropdown list
     And Select the first item from teachers dropdown list
     And Save value of selected academicClass item
+    And Save list size from section
     And Click on 'Save' button
     Then Popup is closed
-    And Check class for academic course is displayed in the list
+    And Check created item for academic course is displayed in the list
     And Check class for academic course is added in the DB
 
   @TC3.35.7 @TC3.35.8 @TC3.35.9 @Regression @Smoke

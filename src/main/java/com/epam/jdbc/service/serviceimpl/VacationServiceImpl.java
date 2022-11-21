@@ -27,6 +27,7 @@ public class VacationServiceImpl implements YearsService {
             logger.error("Start date and/or end date is incorrect.");
             throw new RuntimeException("Can not execute query. Something went wrong.");
         }
+        logger.info("ID of vacation in the DB is: {}", id);
         return id;
     }
 }

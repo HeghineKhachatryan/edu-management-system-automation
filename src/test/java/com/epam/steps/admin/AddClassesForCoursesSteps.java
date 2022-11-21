@@ -11,7 +11,7 @@ import io.cucumber.java.en.When;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class Add_Classes_For_Courses_Steps extends BaseSteps {
+public class AddClassesForCoursesSteps extends BaseSteps {
     private AcademicCoursePopup coursesPopup;
     private AdminPage adminPage;
 
@@ -55,12 +55,12 @@ public class Add_Classes_For_Courses_Steps extends BaseSteps {
                 .isTrue();
     }
 
-    @And("Check class for academic course is displayed in the list")
-    public void checkClassForAcademicCourseIsAddedToTheList() {
-        logger.info("Check class for academic course is displayed in the list");
-        assertThat(adminPage.checkClassIsDisplayedInCoursesPage())
-                .withFailMessage("Newly created academic class is not displayed in the list, but it should be")
-                .isTrue();
+    @And("Check created item for academic course is displayed in the list")
+    public void checkCreatedItemForAcademicCourseIsDisplayedInTheList() {
+        logger.info("Check created item for academic course is displayed in the list");
+        assertThat(adminPage.getListSize())
+                .withFailMessage("Classes for item is not displayed in the list, but should be")
+                .isGreaterThan(SharedTestData.getListSize());
     }
 
     @And("Check class for academic course is added in the DB")
@@ -78,5 +78,10 @@ public class Add_Classes_For_Courses_Steps extends BaseSteps {
         assertThat(coursesPopup.checkErrorMessagesOfBlankSelectRequiredFields())
                 .withFailMessage("Error message is incorrect")
                 .isTrue();
+    }
+
+    @And("Save list size from section")
+    public void saveListSizeFromSection() {
+        adminPage.setListSize();
     }
 }

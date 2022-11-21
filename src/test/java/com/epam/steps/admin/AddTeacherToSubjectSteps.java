@@ -1,6 +1,7 @@
 package com.epam.steps.admin;
 
 import com.epam.helpers.SharedTestData;
+import com.epam.pages.main.AdminPage;
 import com.epam.pages.main.SubjectPage;
 import com.epam.pages.popup.SubjectPopup;
 import com.epam.steps.BaseSteps;
@@ -13,11 +14,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class AddTeacherToSubjectSteps extends BaseSteps {
     private SubjectPage subjectPage;
     private SubjectPopup subjectPopup;
+    private AdminPage adminPage;
 
     @Before
     public void initPages() {
         subjectPage = new SubjectPage();
         subjectPopup = new SubjectPopup();
+        adminPage = new AdminPage();
     }
 
     @And("Click on the {} item in the list")
@@ -42,17 +45,17 @@ public class AddTeacherToSubjectSteps extends BaseSteps {
         subjectPage.clickOnSectionByText(section);
     }
 
-    @And("Teacher for subject is not displayed on the list")
+    @And("Check teacher for item is not displayed on the list")
     public void teacherForSubjectIsNotDisplayedOnTheList() {
-        assertThat(subjectPage.getTeacherListSize())
-                .withFailMessage("Teacher for subject is displayed on the list, but should not be")
+        assertThat(adminPage.getListSize())
+                .withFailMessage("Teacher for item is displayed on the list, but should not be")
                 .isEqualTo(SharedTestData.getListSize());
     }
 
-    @And("Teacher for subject is displayed on the list")
-    public void teacherForSubjectIsDisplayedOnTheList() {
-        assertThat(subjectPage.getTeacherListSize())
-                .withFailMessage(subjectPage.getTeacherListSize() +
+    @And("Check teacher for item is displayed on the list")
+    public void teacherForItemIsDisplayedOnTheList() {
+        assertThat(adminPage.getListSize())
+                .withFailMessage(adminPage.getListSize() +
                         " is not greater than " + SharedTestData.getListSize())
                 .isGreaterThan(SharedTestData.getListSize());
     }
@@ -93,17 +96,17 @@ public class AddTeacherToSubjectSteps extends BaseSteps {
 
     @And("Save linked teachers count for {} subject from DB and list size from subject section")
     public void saveLinkedTeachersCountForSubjectFromDBAndListSizeFromSubjectSection(String subjectName) {
-        subjectPage.setListSize();
+        adminPage.setListSize();
         subjectPopup.saveCountOfSelectedTeachersInTheBox();
         int dbCount = dbHelper.findCountOfTeachersAddedToTheSubject(subjectName);
         logger.info("Save teachers count '{}' linked to '{}' subject to shared test data",
                 dbCount, subjectName);
-        SharedTestData.setTeachersCountLinkedToSubject(dbCount);
+        SharedTestData.setTeachersCountLinkedToItem(dbCount);
     }
 
     private boolean isTeacherForSubjectAddedToTheDB(String subjectName) {
         int dbCount = dbHelper.findCountOfTeachersAddedToTheSubject(subjectName);
-        int sharedCount = SharedTestData.getTeachersCountLinkedToSubject();
+        int sharedCount = SharedTestData.getTeachersCountLinkedToItem();
         logger.info("Count of teachers linked to subject in the DB is {}, count of teachers in the list is {}," +
                 "count of selected teachers is {}", dbCount, sharedCount, subjectPopup.getCountOfSelectedTeachers());
         return (dbCount - sharedCount) == subjectPopup.getCountOfSelectedTeachers();

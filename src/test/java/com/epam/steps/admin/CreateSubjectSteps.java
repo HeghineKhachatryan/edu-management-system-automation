@@ -69,11 +69,6 @@ public class CreateSubjectSteps extends BaseSteps {
         subjectPopup.saveValueFromSubjectNameField();
     }
 
-    @And("Save value of selected teacher")
-    public void saveValueOfSelectedTeacher() {
-        subjectPopup.saveValueOfSelectedTeacher();
-    }
-
     @Then("Check all elements are present in create popup - subjects section")
     public void checkAllElementsArePresentInCreatePopupInSubjectsSection() {
         assertThat(subjectPopup.checkAllElementsArePresentInCreatePopup())
@@ -129,7 +124,7 @@ public class CreateSubjectSteps extends BaseSteps {
     @Then("Check selected items are shown with the 'x' icon")
     public void checkSelectedItemIsShownWithTheXIcon() {
         assertThat(subjectPopup.checkSelectedItemsAreShownWithTheXIcon())
-                .withFailMessage("Selected item is not shown")
+                .withFailMessage("Selected item's 'X' button is not shown")
                 .isTrue();
     }
 

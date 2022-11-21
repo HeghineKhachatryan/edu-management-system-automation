@@ -10,6 +10,8 @@ import org.apache.commons.lang3.RegExUtils;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.List;
 
 public class CreatePopup extends CommonPopup {
@@ -44,6 +46,15 @@ public class CreatePopup extends CommonPopup {
         String name = new SuperAdminPage().getNameOfLastCreatedUser();
         logger.info("Fill existed name {}", name);
         fillName(name);
+    }
+
+    public void fillExistedAdminNameAndSurname() {
+        String[] nameAndSurname = new SuperAdminPage().getNameAndSurnameOfLastCreatedAdmin().split(" ");
+        String name = nameAndSurname[0];
+        String surname = nameAndSurname[1];
+        logger.info("Fill existed name {} and surname {}", name, surname);
+        fillName(name);
+        fillSurname(surname);
     }
 
     public void fillSurname(String surname) {

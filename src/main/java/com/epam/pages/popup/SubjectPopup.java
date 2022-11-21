@@ -69,10 +69,6 @@ public class SubjectPopup extends CommonPopup {
         SharedTestData.setLastCreatedItemName(nameField.getDomProperty("value"));
     }
 
-    public void saveValueOfSelectedTeacher() {
-        SharedTestData.setLastCreatedItemName(listOfSelectedTeachers.get(listOfSelectedTeachers.size() - 1).getText());
-    }
-
     public boolean checkAllElementsArePresentInCreatePopup() {
         return uiHelper.checkElementsAreDisplayed(
                 title,

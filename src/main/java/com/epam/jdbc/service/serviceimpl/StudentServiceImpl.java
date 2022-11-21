@@ -18,13 +18,13 @@ public class StudentServiceImpl implements UserService<Student> {
 
     @Override
     public Student findUserByEmail(String email) {
+        logger.info("Find user by {} email", email);
         Student student = new Student();
         String query = "SELECT public.student.id, name, surname, password, address, gender, " +
                 "blood_group, date, academic_class_id, parent_id, user_id " +
                 "FROM public.student INNER JOIN public.user_table " +
                 "ON public.student.user_id=public.user_table.id " +
                 "WHERE public.user_table.email=?;";
-        logger.info("Find student by email");
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();

@@ -84,17 +84,17 @@ Feature: Super admin page/ Admin section functionality
     When Click on 'Save' button
     Then Popup is closed
     And Check user is added in the DB
-    Then User is displayed in the list
+    Then User is displayed in the list on super admin page
 
   @TC1.6.12 @Regression @Smoke
   Scenario: Check possibility of creating new admin with an existing 'Admin name' and 'Admin Surname'
-    Given Fill existed name and surname
+    Given Fill existed admin's name and surname
     And Fill non-existed email
     And Click on 'Generate password' button
     And Save values from name, surname, password and email fields
     When Click on 'Save' button
     Then Check user is added in the DB
-    And User is displayed in the list
+    And User is displayed in the list on super admin page
 
   @TC1.6.13 @Regression @Smoke
   Scenario: Check how password is kept in DB

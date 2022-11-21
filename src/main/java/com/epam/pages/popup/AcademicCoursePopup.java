@@ -10,8 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class AcademicCoursePopup extends CommonPopup {
 
@@ -25,6 +24,14 @@ public class AcademicCoursePopup extends CommonPopup {
     private WebElement teacherSelect;
     @FindBy(xpath = "//*/following-sibling::div[@class='error']")
     private WebElement existedAcademicCourseErrMessage;
+    @FindBy(xpath = "//span[@role='combobox']")
+    private WebElement selectTeachersBox;
+    @FindBy(xpath = "//ul[@id='select2-teacher-results']/li")
+    private List<WebElement> listOfTeachersOptions;
+    @FindBy(id = "select2-teacher-results")
+    private WebElement dropDownList;
+    @FindBy(xpath = "//*[@id='select2-teacher-container']/li")
+    private List<WebElement> listOfSelectedTeachers;
     private final Map<String, WebElement> map = new HashMap<>();
 
     public void fillAcademicCourseName() {
@@ -89,6 +96,17 @@ public class AcademicCoursePopup extends CommonPopup {
         );
     }
 
+    public boolean checkAllElementsArePresentInAddTeachersPopupClassesSection() {
+        logger.info("Check elements are present in add teacher popup academic classes section - " +
+                "title, teachers and classes selects, xButton and save button");
+        return uiHelper.checkElementsAreDisplayed(
+                title,
+                selectTeachersBox,
+                xButton,
+                saveButton
+        );
+    }
+
     public void clickOnDropDown(String name) {
         logger.info("Click on {} select and open dropdown", name);
         uiHelper.clickOnWebElement(getElementByNameFromMap(name));
@@ -114,6 +132,10 @@ public class AcademicCoursePopup extends CommonPopup {
                 .equals(SharedTestData.getValueOfitem());
     }
 
+    public void selectTheFirstTeacher() {
+        uiHelper.clickOnWebElement(listOfTeachersOptions.get(0));
+    }
+
     private WebElement getElementByNameFromMap(String name) {
         return getMapOfElements().get(name);
     }
@@ -123,5 +145,32 @@ public class AcademicCoursePopup extends CommonPopup {
         map.putIfAbsent("teachers", teacherSelect);
         map.putIfAbsent("subject", subjectsSelect);
         return map;
+    }
+
+    public int getCountOfSelectedTeachers() {
+        logger.info("Get count of selected teachers in the box.");
+        return SharedTestData.getSelectedTeachersCountInTheBox();
+    }
+
+    public void saveCountOfSelectedTeachersInTheBox() {
+        logger.info("Save count of selected teachers in the box.");
+        SharedTestData.setSelectedTeachersCountInTheBox(listOfSelectedTeachers.size());
+    }
+
+    public boolean checkDropDownListIsOpened() {
+        logger.info("Check multi-select drop-down list is opened.");
+        return uiHelper.checkElementsAreDisplayed(dropDownList);
+    }
+
+    public List<String> getListOfSelectionOptions() {
+        logger.info("Get list of selection options");
+        List<String> options = new ArrayList<>();
+        listOfTeachersOptions.forEach(element -> options.add(element.getText()));
+        return options;
+    }
+
+    public boolean listContainsNames(List<String> list) {
+        logger.info("Check if list contains another list's options");
+        return new HashSet<>(list).containsAll(getListOfSelectionOptions());
     }
 }

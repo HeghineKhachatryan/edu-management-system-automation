@@ -28,6 +28,7 @@ public class AcademicYearsServiceImpl implements YearsService {
             logger.error("Can not execute query. Something went wrong.");
             throw new RuntimeException("Can not execute query. Something went wrong.");
         }
+        logger.info("ID of date in the DB is: {}", id);
         return id;
     }
 }

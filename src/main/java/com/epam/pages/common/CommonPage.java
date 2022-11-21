@@ -34,15 +34,19 @@ public abstract class CommonPage extends BasePage {
         logger.info("Get name and surname - {}", surnameAndName);
         return surnameAndName;
     }
-
+    public String getNameAndSurnameOfLastCreatedAdmin() {
+        String nameOfLastCreatedUser = listItems.get(listItems.size() - 1).getText();
+        logger.info("Get name of last created admin - {}", nameOfLastCreatedUser);
+        return nameOfLastCreatedUser;
+    }
     public String getNameOfLastCreatedUser() {
-        String nameOfLastCreatedUser = listItems.get(listItems.size() - 1).getText().split(" ")[0];
+        String nameOfLastCreatedUser = listItemsHref.get(listItemsHref.size() - 1).getText().split(" ")[0];
         logger.info("Get name of last created user - {}", nameOfLastCreatedUser);
         return nameOfLastCreatedUser;
     }
 
     public String getSurnameOfLastCreatedUser() {
-        String surnameOfLastCreatedUser = listItems.get(listItems.size() - 1).getText().split(" ")[1];
+        String surnameOfLastCreatedUser = listItemsHref.get(listItemsHref.size() - 1).getText().split(" ")[1];
         logger.info("Get surname of last created user - {}", surnameOfLastCreatedUser);
         return surnameOfLastCreatedUser;
     }

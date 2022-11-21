@@ -45,6 +45,13 @@ public class AdminPage extends CommonPage {
                 && getSurnameOfLastCreatedUser()
                 .equals(SharedTestData.getSurnameField());
     }
+
+    public boolean checkNewAdminIsDisplayedOnSuperAdminPage() {
+        logger.info("Check new admin is displayed");
+        String nameAndSurname = String.format("%s %s", SharedTestData.getNameField(), SharedTestData.getSurnameField());
+        return getNameAndSurnameOfLastCreatedAdmin()
+                .equals(nameAndSurname);
+    }
     public boolean checkAcademicClassIsDisplayedInTheList() {
         logger.info("Get last created academic class and check if it is added to the list");
         return getNameOfLastCreatedItemHref()
@@ -64,11 +71,6 @@ public class AdminPage extends CommonPage {
         return (listItems.get(listItems.size() - 1).getText())
                 .equals(getVacationAsDisplayedInTheList());
     }
-
-    public boolean checkClassIsDisplayedInCoursesPage() {
-        logger.info("Get last created {} academic class and check if it is added to the list", SharedTestData.getValueOfitem());
-        return checkListContainsName(SharedTestData.getValueOfitem());
-    }
     private String getVacationAsDisplayedInTheList() {
         return String.format("%d/%d/%s - %d/%d/%s",
                 SharedTestData.getStartDate().getMonthValue(),
@@ -84,5 +86,15 @@ public class AdminPage extends CommonPage {
         return (listItems.get(listItems.size() - 1).getText())
                 .equals(SharedTestData.getStartDate().getYear() + "-"
                         + SharedTestData.getEndDate().getYear());
+    }
+
+    public int getListSize() {
+        logger.info("Get list size linked to item");
+        return listItems.size();
+    }
+
+    public void setListSize() {
+        logger.info("Set list size assigned for last created item to SharedTest data.");
+        SharedTestData.setListSize(listItems.size());
     }
 }
