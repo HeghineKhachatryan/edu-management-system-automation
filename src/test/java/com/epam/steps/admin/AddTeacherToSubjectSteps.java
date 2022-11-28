@@ -101,12 +101,12 @@ public class AddTeacherToSubjectSteps extends BaseSteps {
         int dbCount = dbHelper.findCountOfTeachersAddedToTheSubject(subjectName);
         logger.info("Save teachers count '{}' linked to '{}' subject to shared test data",
                 dbCount, subjectName);
-        SharedTestData.setTeachersCountLinkedToItem(dbCount);
+        SharedTestData.setCountLinkedToItem(dbCount);
     }
 
     private boolean isTeacherForSubjectAddedToTheDB(String subjectName) {
         int dbCount = dbHelper.findCountOfTeachersAddedToTheSubject(subjectName);
-        int sharedCount = SharedTestData.getTeachersCountLinkedToItem();
+        int sharedCount = SharedTestData.getCountLinkedToItem();
         logger.info("Count of teachers linked to subject in the DB is {}, count of teachers in the list is {}," +
                 "count of selected teachers is {}", dbCount, sharedCount, subjectPopup.getCountOfSelectedTeachers());
         return (dbCount - sharedCount) == subjectPopup.getCountOfSelectedTeachers();

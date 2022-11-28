@@ -60,4 +60,12 @@ public final class ErrorMessagesProvider {
     public static String getExistedAcademicCourseErrMessage() {
         return PROPERTIES_READER.getProperty("existedAcademicCourse");
     }
+
+    public static String getErrMessageForNotSelectingCourses() {
+        return PROPERTIES_READER.getProperty("noCoursesSelected");
+    }
+
+    public static String getErrMessageOfBlankDates() {
+        return PROPERTIES_READER.getProperty("blankDates");
+    }
 }

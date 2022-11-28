@@ -47,9 +47,9 @@ public class CreateYearsSteps extends BaseSteps {
         yearsAndVacationPopup.saveEndDateValue();
     }
 
-    @Then("Check that you can't select date before today - the day of selection")
-    public void checkThatYouCanTSelectDateBeforeTodayTheDayOfSelection() {
-        assertThat(yearsAndVacationPopup.isDateBeforeTodayEnabled())
+    @Then("Check that you can't select {} date before today - the day of selection")
+    public void checkThatYouCanTSelectDateBeforeTodayTheDayOfSelection(String date) {
+        assertThat(yearsAndVacationPopup.isDateBeforeTodayEnabled(date))
                 .withFailMessage("Days before today are not disabled.")
                 .isTrue();
     }

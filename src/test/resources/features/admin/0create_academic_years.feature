@@ -19,7 +19,9 @@ Feature: This feature will cover academic years section of admin page, especiall
 
   @TC2.13.4 @Regression
   Scenario: Check validations for inputted dates being in the future
-    Then Check that you can't select date before today - the day of selection
+    Then Check that you can't select start date before today - the day of selection
+    When Click on 'Save' button
+    And Check that you can't select end date before today - the day of selection
 
   @TC2.13.5 @Regression @Smoke
   Scenario: Check validation for Start Date > End Date

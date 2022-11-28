@@ -58,3 +58,13 @@ Feature: This feature will cover academic course section of admin page, especial
   Scenario: Check mandatoriness of teachers input filed
     When Click on 'Save' button
     Then Check error messages of blank selections
+
+  @TC3.34.10 @Regression @Smoke
+  Scenario: Check functionality of adding teachers in Academic Class
+    Given Click on the 'Teachers' drop-down list
+    When Select item from 'select teachers' dropdown list
+    And Save linked teachers count for English course from DB and list size from section
+    And Click on 'Save' button
+    Then Popup is closed
+    And Check teacher for item is displayed on the list
+    And Check teacher for English course is added in the DB

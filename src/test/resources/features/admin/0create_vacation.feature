@@ -29,7 +29,7 @@ Feature: This feature will cover vacation section of admin page, especially crea
 
   @TC2.14.7 @Regression
   Scenario: Check validations for inputted dates being in the future
-    Then Check that you can't select date before today - the day of selection
+    Then Check that you can't select start date before today - the day of selection
 
   @TC2.14.8 @Regression @Smoke
   Scenario: Check validation for Start Date < End Date

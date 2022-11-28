@@ -12,7 +12,7 @@ public final class SharedTestData {
     private static String lastEmail;
     private static String nameField;
     private static String surnameField;
-    private static String selectedValueOfStudentPopup;
+    private static String selectedValueOfPopup;
     private static LocalDate startDate;
     private static LocalDate endDate;
     private static String valueOfitem;
@@ -20,7 +20,7 @@ public final class SharedTestData {
     private static String lastInputtedTeacherName;
     private static int listSize;
     public static int resultOfMatchedSearch;
-    private static int teachersCountLinkedToItem;
+    private static int countLinkedToItem;
     private static int selectedTeachersCountInTheBox;
 
     private SharedTestData() {
@@ -66,14 +66,14 @@ public final class SharedTestData {
         surnameField = surname;
     }
 
-    public static String getSelectedValueOfStudentPopup() {
-        logger.info("Get selected value of student popup field {} from SharedTestData", selectedValueOfStudentPopup);
-        return selectedValueOfStudentPopup;
+    public static String getSelectedValueOfPopup() {
+        logger.info("Get selected value of student popup field {} from SharedTestData", selectedValueOfPopup);
+        return selectedValueOfPopup;
     }
 
-    public static void setSelectedValueOfStudentPopup(String selectedValue) {
+    public static void setSelectedValueOfPopup(String selectedValue) {
         logger.info("Save selected value of student popup fields {} into SharedTestData", selectedValue);
-        selectedValueOfStudentPopup = selectedValue;
+        selectedValueOfPopup = selectedValue;
     }
 
     public static String getLastCreatedItemName() {
@@ -135,12 +135,12 @@ public final class SharedTestData {
         SharedTestData.resultOfMatchedSearch = resultOfMatchedSearch;
     }
 
-    public static int getTeachersCountLinkedToItem() {
-        return teachersCountLinkedToItem;
+    public static int getCountLinkedToItem() {
+        return countLinkedToItem;
     }
 
-    public static void setTeachersCountLinkedToItem(int teachersCountLinkedToItem) {
-        SharedTestData.teachersCountLinkedToItem = teachersCountLinkedToItem;
+    public static void setCountLinkedToItem(int countLinkedToItem) {
+        SharedTestData.countLinkedToItem = countLinkedToItem;
     }
 
     public static int getSelectedTeachersCountInTheBox() {

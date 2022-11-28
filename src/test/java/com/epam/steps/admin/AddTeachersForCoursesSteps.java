@@ -34,7 +34,7 @@ public class AddTeachersForCoursesSteps extends BaseSteps {
         int dbCount = dbHelper.findCountOfTeachersAddedToTheCourse(courseName);
         logger.info("Save teachers count '{}' linked to '{}' course to shared test data",
                 dbCount, courseName);
-        SharedTestData.setTeachersCountLinkedToItem(dbCount);
+        SharedTestData.setCountLinkedToItem(dbCount);
     }
 
     @And("Check multi-select drop-down list is opened")
@@ -62,7 +62,7 @@ public class AddTeachersForCoursesSteps extends BaseSteps {
 
     private boolean isTeacherForCourseAddedToTheDB(String courseName) {
         int dbCount = dbHelper.findCountOfTeachersAddedToTheCourse(courseName);
-        int sharedCount = SharedTestData.getTeachersCountLinkedToItem();
+        int sharedCount = SharedTestData.getCountLinkedToItem();
         logger.info("Count of teachers linked to {} academic course in the DB is {}, count of teachers in the list is {}," +
                 "count of selected teachers is {}", courseName, dbCount, sharedCount, coursesPopup.getCountOfSelectedTeachers());
         return (dbCount - sharedCount) == coursesPopup.getCountOfSelectedTeachers();
