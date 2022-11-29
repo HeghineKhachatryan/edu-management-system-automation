@@ -20,6 +20,8 @@ public class AcademicCoursePopup extends CommonPopup {
     private WebElement subjectsSelect;
     @FindBy(id = "academicClass")
     private WebElement academicClassSelect;
+    @FindBy(id = "course")
+    private WebElement academicCourseSelect;
     @FindBy(id = "teacher")
     private WebElement teacherSelect;
     @FindBy(xpath = "//*/following-sibling::div[@class='error']")
@@ -142,6 +144,7 @@ public class AcademicCoursePopup extends CommonPopup {
 
     private Map<String, WebElement> getMapOfElements() {
         map.putIfAbsent("academicClass",academicClassSelect);
+        map.putIfAbsent("academicCourse",academicCourseSelect);
         map.putIfAbsent("teachers", teacherSelect);
         map.putIfAbsent("subject", subjectsSelect);
         return map;
