@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 public class SubjectPage extends CommonPage {
 
     public void clickOnSectionByText(String sectionText) {
-        String section = String.format("//div[contains(@class,'debar2')]/a[text()='%s']", sectionText);
+        String section = String.format("//div[contains(@class,'debar2')]//a[text()='%s']", sectionText);
         uiHelper.clickOnWebElement(driver.findElement(By.xpath(section)));
     }
 

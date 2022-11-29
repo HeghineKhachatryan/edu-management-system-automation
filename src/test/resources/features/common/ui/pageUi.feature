@@ -132,3 +132,14 @@ Feature: UI of pages
     And Click on 'Add' button and open popup
     Then Popup is opened
     And Check all elements are present in 'Add Teacher' popup Teachers section
+
+  @TC3.36.1 @TC3.36.2 @TC3.36.3 @TC3.36.4 @Regression @Smoke
+  Scenario: Check UI of "Courses" section and UI of "New Course" popup in Academic Classes page
+    Given Login as admin
+    When Select classes section
+    And Click on the 1A item in the list
+    And Select Courses section in the dashboard
+    Then Check all elements are present in chosen section of academic class
+    When Click on 'Add' button and open popup
+    Then Popup is opened
+    And Check all elements are present in 'New Course' popup Classes section
