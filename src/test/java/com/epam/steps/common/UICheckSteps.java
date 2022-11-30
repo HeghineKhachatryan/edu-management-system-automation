@@ -1,9 +1,7 @@
 package com.epam.steps.common;
 
-import com.epam.pages.main.AcademicCoursesPage;
-import com.epam.pages.main.AdminPage;
-import com.epam.pages.main.LoginPage;
-import com.epam.pages.main.SuperAdminPage;
+import com.epam.pages.main.*;
+import com.epam.pages.popup.AcademicClassPopup;
 import com.epam.pages.popup.AcademicCoursePopup;
 import com.epam.pages.popup.AcademicYearsAndVacationPopup;
 import io.cucumber.java.Before;
@@ -20,6 +18,8 @@ public class UICheckSteps {
     private AcademicYearsAndVacationPopup yearsAndVacationPopup;
     private AcademicCoursesPage coursesPage;
     private AcademicCoursePopup coursesPopup;
+    private AcademicClassPage academicClassPage;
+    private AcademicClassPopup academicClassPopup;
 
     @Before
     public void initPages() {
@@ -29,6 +29,8 @@ public class UICheckSteps {
         yearsAndVacationPopup = new AcademicYearsAndVacationPopup();
         coursesPage = new AcademicCoursesPage();
         coursesPopup = new AcademicCoursePopup();
+        academicClassPage = new AcademicClassPage();
+        academicClassPopup = new AcademicClassPopup();
     }
 
     @Then("Check all elements are present in login page")
@@ -84,6 +86,20 @@ public class UICheckSteps {
     public void checkAllElementsArePresentInAddClassPopupTeachersSection() {
         assertThat(coursesPopup.checkAllElementsArePresentInAddTeachersPopupClassesSection())
                 .withFailMessage("All required elements in 'Add Teacher' popup Classes section are not displayed")
+                .isTrue();
+    }
+
+    @Then("Check all elements are present in chosen section of academic class")
+    public void checkAllElementsArePresentInCoursesSectionOfAcademicClass() {
+        assertThat(academicClassPage.checkAllElementsArePresentInSection())
+                .withFailMessage("Not all elements are displayed")
+                .isTrue();
+    }
+
+    @And("Check all elements are present in 'New Course' popup Classes section")
+    public void checkAllElementsArePresentInNewCoursePopupClassesSection() {
+        assertThat(academicClassPopup.checkAllElementsArePresentInNewCoursePopupClassesSection())
+                .withFailMessage("All required elements in 'New Courses' popup Classes section are not displayed")
                 .isTrue();
     }
 }

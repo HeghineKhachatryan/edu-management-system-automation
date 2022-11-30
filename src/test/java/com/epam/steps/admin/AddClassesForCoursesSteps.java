@@ -55,11 +55,11 @@ public class AddClassesForCoursesSteps extends BaseSteps {
                 .isTrue();
     }
 
-    @And("Check created item for academic course is displayed in the list")
+    @And("Check created item is displayed in the list")
     public void checkCreatedItemForAcademicCourseIsDisplayedInTheList() {
         logger.info("Check created item for academic course is displayed in the list");
         assertThat(adminPage.getListSize())
-                .withFailMessage("Classes for item is not displayed in the list, but should be")
+                .withFailMessage("Item is not displayed in the list, but should be")
                 .isGreaterThan(SharedTestData.getListSize());
     }
 

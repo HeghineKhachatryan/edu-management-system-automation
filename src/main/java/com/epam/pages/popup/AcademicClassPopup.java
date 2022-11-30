@@ -13,7 +13,11 @@ public class AcademicClassPopup extends CommonPopup {
     @FindBy(id = "classNumber")
     private WebElement classNumber;
     @FindBy(xpath = "//input/following-sibling::div[@class='error']")
-    protected WebElement errorMessagesOfExistedClass;
+    private WebElement errorMessagesOfExistedClass;
+    @FindBy(id = "course")
+    private WebElement academicCourseSelect;
+    @FindBy(id = "teacher")
+    private WebElement teacherSelect;
 
     public boolean checkUIOfCreatePopupClassesSection() {
         logger.info("Check UI of create popup in academic classes section");
@@ -22,6 +26,18 @@ public class AcademicClassPopup extends CommonPopup {
                 xButton,
                 saveButton,
                 title
+        );
+    }
+
+    public boolean checkAllElementsArePresentInNewCoursePopupClassesSection() {
+        logger.info("Check elements are present in New Course popup academic classes section - " +
+                "title, teachers and courses selects, xButton and save button");
+        return uiHelper.checkElementsAreDisplayed(
+                title,
+                teacherSelect,
+                academicCourseSelect,
+                xButton,
+                saveButton
         );
     }
 
