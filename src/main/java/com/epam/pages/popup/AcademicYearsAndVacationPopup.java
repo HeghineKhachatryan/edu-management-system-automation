@@ -70,10 +70,14 @@ public class AcademicYearsAndVacationPopup extends CreatePopup {
         selectDay(day).click();
     }
 
-    public boolean isDateBeforeTodayEnabled() {
-        logger.info("Check if dates before today are enabled for selection.");
+    public boolean isDateBeforeTodayEnabled(String field) {
+        logger.info("Check if {} dates before today are enabled for selection.", field);
         int day = LocalDate.now().getDayOfMonth();
-        uiHelper.clickOnWebElement(startDate);
+        if (field.contains("start")) {
+            uiHelper.clickOnWebElement(startDate);
+        } else if (field.contains("end")) {
+            uiHelper.clickOnWebElement(endDate);
+        }
         return disabledDates.stream().allMatch(dates -> (Integer.parseInt(dates.getText()) < day)
                 && dates.getAttribute("class").contains("disabled"));
     }

@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AcademicCourseServiceImpl implements AcademicCourseService {
 
@@ -39,24 +41,27 @@ public class AcademicCourseServiceImpl implements AcademicCourseService {
     }
 
     @Override
-    public int findAcademicCourseIdByLinkedClassId(int academicClassId) {
-        logger.info("Find ID of the given academic course.");
-        int id = -1;
+    public List<Integer> findAcademicCourseIdsByLinkedClassId(int academicClassId) {
+        logger.info("Find IDs of academic courses linked to academic class with {} id.", academicClassId);
+        List<Integer> ids = new ArrayList<>();
         String query = "SELECT academic_course_id " +
                 "FROM public.academic_class_academic_course_mapping " +
                 "WHERE academic_class_id=?;";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, academicClassId);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                id = resultSet.getInt("academic_course_id");
+            while (resultSet.next()) {
+                if (resultSet.getInt("academic_course_id") != 0) {
+                    ids.add(resultSet.getInt("academic_course_id"));
+                }
             }
         } catch (SQLException e) {
             logger.error("Can not execute query.");
             throw new RuntimeException("Can not execute query. Something went wrong.");
         }
-        logger.info("ID of academic course in the DB is: {}", id);
-        return id;
+        logger.info("IDs count of academic courses linked to academic class with {} id in the DB is:" +
+                "{}", academicClassId, ids.size());
+        return ids;
     }
 
     @Override
@@ -76,6 +81,26 @@ public class AcademicCourseServiceImpl implements AcademicCourseService {
         }
         logger.info("Count of teachers linked to academic course in the DB is {}", countOfTeachers);
         return countOfTeachers;
+    }
+
+    @Override
+    public List<String> findCourseNamesByIds(List<Integer> academicCourseIds) {
+        logger.info("Find academic courses names by the given list of course ids.");
+        List<String> courseNames = new ArrayList<>();
+        String query = "SELECT name FROM academic_course WHERE id =?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            for (Integer courseId : academicCourseIds) {
+                preparedStatement.setInt(1, courseId);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                if (resultSet.next()) {
+                    courseNames.add(resultSet.getString("name"));
+                }
+            }
+        } catch (SQLException e) {
+            logger.error("Can not execute query.");
+            throw new RuntimeException("Can not execute query. Something went wrong.");
+        }
+        return courseNames;
     }
 
 }

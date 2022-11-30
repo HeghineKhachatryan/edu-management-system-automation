@@ -6,12 +6,9 @@ import com.epam.helpers.UserDataProvider;
 import com.epam.pages.common.CommonPopup;
 import com.epam.pages.main.SuperAdminPage;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.RegExUtils;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.List;
 
 public class CreatePopup extends CommonPopup {
@@ -34,7 +31,7 @@ public class CreatePopup extends CommonPopup {
     protected List<WebElement> errorMessagesOfMoreSymbols;
     @FindBy(id = "popup-container")
     protected WebElement popupWindow;
-    @FindBy(xpath = "//input[not(@readonly) and not(@type='hidden')]")
+    @FindBy(xpath = "//input[not(@readonly) and not(@type='hidden') and not(@type='file')]")
     protected List<WebElement> inputFields;
 
     public void fillName(String name) {
@@ -93,7 +90,7 @@ public class CreatePopup extends CommonPopup {
     }
 
     public void fillInputFieldsWithNotAllowedSymbols() {
-        String generatedString = RandomStringUtils.random(10,33,39,false,false);
+        String generatedString = RandomStringUtils.random(10, 33, 39, false, false);
         logger.info("Fill text field with not allowed symbols {}", generatedString);
         inputFields
                 .forEach(fields -> uiHelper.sendKeys(fields, generatedString));

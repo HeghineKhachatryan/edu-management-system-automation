@@ -1,6 +1,7 @@
 package com.epam.helpers;
 
 import com.epam.jdbc.service.serviceimpl.*;
+import io.cucumber.java.sl.In;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,6 +19,7 @@ public final class DBHelper {
     private final AcademicClassesServiceImpl classesServiceImpl = new AcademicClassesServiceImpl();
     private final AcademicYearsServiceImpl academicYearsService = new AcademicYearsServiceImpl();
     private final SubjectServiceImpl subjectService = new SubjectServiceImpl();
+    private final TimeTableServiceImpl timeTableService = new TimeTableServiceImpl();
     private final AcademicCourseServiceImpl academicCourseService = new AcademicCourseServiceImpl();
     private final Logger logger = LoggerFactory.getLogger(DBHelper.class);
 
@@ -74,6 +76,13 @@ public final class DBHelper {
         return classesServiceImpl.findIDByAcademicClass(academicClass);
     }
 
+    public int findCountOfCoursesForTimetableByAcademicClassName(String academicClass) {
+        return timeTableService.findCountOfCoursesAddedToTimetableByAcademicClassId(findAcademicClassIdByName(academicClass));
+    }
+
+    public void deleteTimetableByAcademicClassId(String academicClassName) {
+        timeTableService.deleteTimetableByAcademicClassId(findAcademicClassIdByName(academicClassName));
+    }
     public List<String> findTeachersNameAndSurnameByAcademicCourseName(String academicCourse) {
         logger.info("Find teachers name and surname by their IDs, using connected subject ID and academic course name");
         return teacherService.findTeacherNameAndSurnameById(
@@ -84,8 +93,19 @@ public final class DBHelper {
         );
     }
 
+    public List<String> findCourseNamesByIdsAndClassName(String academicClassName) {
+        logger.info("find course names by given list of ids and academic class name");
+        return academicCourseService.
+                findCourseNamesByIds(
+                        academicCourseService
+                                .findAcademicCourseIdsByLinkedClassId(
+                                        findAcademicClassIdByName(academicClassName)
+                                )
+                );
+    }
+
     public boolean isAcademicClassAddedToAcademicCourse(String academicClassName) {
-        return academicCourseService.findAcademicCourseIdByLinkedClassId(findAcademicClassIdByName(academicClassName)) != -1;
+        return academicCourseService.findAcademicCourseIdsByLinkedClassId(findAcademicClassIdByName(academicClassName)).size() != 0;
     }
 
     public int findCountOfTeachersAddedToTheSubject(String subjectName) {

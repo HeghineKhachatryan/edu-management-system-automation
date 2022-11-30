@@ -21,4 +21,8 @@ public class WaitHelper {
     public void waitElementToBeVisible(final WebElement target) {
         wait.until(ExpectedConditions.visibilityOf(target));
     }
+
+    public boolean waitAlertToBePresent() {
+       return wait.until(ExpectedConditions.alertIsPresent()) != null;
+    }
 }

@@ -132,3 +132,21 @@ Feature: UI of pages
     And Click on 'Add' button and open popup
     Then Popup is opened
     And Check all elements are present in 'Add Teacher' popup Teachers section
+
+  @TC4.38.1 @TC4.38.2 @TC4.38.3 @TC4.38.4 @TC4.38.5 @Regression
+  Scenario: Check UI of "Timetable" section in the right navigation menu of academic class page
+    Given Login as admin
+    When Select classes section
+    And Click on the 1A item in the list
+    And Select Timetable section in the dashboard
+    Then Check all elements are present in timetable section
+    When Click on Create Timetable button in timetable page
+    Then Check all elements are present in opened timetable page
+    When Click on '+' button
+    Then  Check popup for chosen day of week is opened
+    And Check all elements are present in 'Add lesson' popup
+    Then Click on 'X' button
+    And Check popup for chosen day of week is closed
+    When Select classes section
+    Then Check alert is present
+    And Accept alert and leave the page

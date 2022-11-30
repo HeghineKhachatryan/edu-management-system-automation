@@ -1,12 +1,6 @@
 package com.epam.helpers;
 
 import com.epam.config.PropertiesReader;
-import com.epam.core.driver.Driver;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public final class UserDataProvider {
 

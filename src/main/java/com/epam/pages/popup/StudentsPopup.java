@@ -48,7 +48,7 @@ public class StudentsPopup extends CreatePopup {
         selectYear(year);
         new Select(monthToSelect).selectByIndex(month - 1);
         driver.findElement(By.xpath(String.format("//a[@data-date='%s']", day))).click();
-        SharedTestData.setSelectedValueOfStudentPopup(String.format("%s/%s/%s", day, month, year));
+        SharedTestData.setSelectedValueOfPopup(String.format("%s/%s/%s", day, month, year));
     }
 
     public void fillBloodGenderBirthdayAddress() {
@@ -65,7 +65,7 @@ public class StudentsPopup extends CreatePopup {
         element.click();
         Select select = new Select(element);
         select.selectByVisibleText(valueToSelect);
-        SharedTestData.setSelectedValueOfStudentPopup(select.getWrappedElement().getText());
+        SharedTestData.setSelectedValueOfPopup(select.getWrappedElement().getText());
     }
 
     public boolean isYearFromInterval() {
@@ -78,7 +78,7 @@ public class StudentsPopup extends CreatePopup {
     public boolean checkValueOfSelectedField(String fieldName) {
         String text = driver.findElement(By.xpath(String.format("//select[@id='%s']", fieldName))).getText();
         logger.info("Value of selected '{}' field is - {}", fieldName, text);
-        return text.equals(SharedTestData.getSelectedValueOfStudentPopup());
+        return text.equals(SharedTestData.getSelectedValueOfPopup());
     }
 
     public boolean checkCalendarIsOpened() {
