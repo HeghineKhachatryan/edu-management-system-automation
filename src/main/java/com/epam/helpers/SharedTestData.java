@@ -1,9 +1,11 @@
 package com.epam.helpers;
 
+import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public final class SharedTestData {
 
@@ -15,13 +17,14 @@ public final class SharedTestData {
     private static String selectedValueOfPopup;
     private static LocalDate startDate;
     private static LocalDate endDate;
-    private static String valueOfitem;
+    private static String valueOfItem;
     private static String lastCreatedItemName;
     private static String lastInputtedTeacherName;
     private static int listSize;
     public static int resultOfMatchedSearch;
     private static int countLinkedToItem;
     private static int selectedTeachersCountInTheBox;
+    private static List<WebElement> listOfOptions;
 
     private SharedTestData() {
     }
@@ -111,12 +114,12 @@ public final class SharedTestData {
         SharedTestData.endDate = endDate;
     }
 
-    public static String getValueOfitem() {
-        return valueOfitem;
+    public static String getValueOfItem() {
+        return valueOfItem;
     }
 
-    public static void setValueOfitem(String valueOfitem) {
-        SharedTestData.valueOfitem = valueOfitem;
+    public static void setValueOfItem(String valueOfItem) {
+        SharedTestData.valueOfItem = valueOfItem;
     }
 
     public static int getListSize() {
@@ -149,5 +152,13 @@ public final class SharedTestData {
 
     public static void setSelectedTeachersCountInTheBox(int selectedTeachersCountInTheBox) {
         SharedTestData.selectedTeachersCountInTheBox = selectedTeachersCountInTheBox;
+    }
+
+    public static List<WebElement> getListOfOptions() {
+        return listOfOptions;
+    }
+
+    public static void setListOfOptions(List<WebElement> listOfOptions) {
+        SharedTestData.listOfOptions = listOfOptions;
     }
 }

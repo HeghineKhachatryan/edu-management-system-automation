@@ -40,7 +40,7 @@ public class TimetablePopup extends CommonPopup {
     }
 
     private WebElement getElementByDayOfWeek() {
-        String dayOfWeek = SharedTestData.getValueOfitem().toLowerCase();
+        String dayOfWeek = SharedTestData.getValueOfItem().toLowerCase();
         logger.info("Find element by day of week {}", dayOfWeek);
         String xpath = String.format("//div[@id='popup-container-%s']//select[@id='academicCourse']",
                 dayOfWeek);
@@ -68,7 +68,7 @@ public class TimetablePopup extends CommonPopup {
     }
 
     public boolean checkPopupForDayOfWeekIsOpened() {
-        String dayOfWeek = SharedTestData.getValueOfitem();
+        String dayOfWeek = SharedTestData.getValueOfItem();
         logger.info("Check popup for {} is opened", dayOfWeek);
         String id = String.format("popup-container-%s", dayOfWeek.toLowerCase());
         return driver.findElement(By.id(id)).isDisplayed();

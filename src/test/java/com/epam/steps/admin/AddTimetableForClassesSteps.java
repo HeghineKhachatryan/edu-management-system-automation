@@ -221,11 +221,11 @@ public class AddTimetableForClassesSteps extends BaseSteps {
     public void checkAcademicCourseIsDisplayedInTheTimetableList(String message) {
         logger.info("Check academic course is {} displayed in the timetable list", message);
         if (message.equals("not")) {
-            assertThat(timetablePage.checkListSizeOfTimetable(SharedTestData.getValueOfitem()))
+            assertThat(timetablePage.checkListSizeOfTimetable(SharedTestData.getValueOfItem()))
                     .withFailMessage("List size has not been changed, but it should be")
                     .isFalse();
         } else {
-            assertThat(timetablePage.checkListSizeOfTimetable(SharedTestData.getValueOfitem()))
+            assertThat(timetablePage.checkListSizeOfTimetable(SharedTestData.getValueOfItem()))
                     .withFailMessage("List size has changed, but it shouldn't be")
                     .isTrue();
         }
@@ -240,5 +240,10 @@ public class AddTimetableForClassesSteps extends BaseSteps {
     public void deleteTimetableFromDB(String academicClass) {
         logger.info("Delete timetable for {} class from DB", academicClass);
         dbHelper.deleteTimetableByAcademicClassId(academicClass);
+    }
+
+    @When("Save day of week - {}")
+    public void saveDayOfWeek(String dayOfWeek) {
+        SharedTestData.setValueOfItem(dayOfWeek);
     }
 }

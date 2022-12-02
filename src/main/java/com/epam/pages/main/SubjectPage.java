@@ -21,6 +21,11 @@ public class SubjectPage extends CommonPage {
 
     private int getIndexOfSubjectFromList(String subjectName) {
         logger.info("Get index of subject from the list");
+        if (subjectName.equals("second")) {
+            return 2;
+        } else if (subjectName.equals("third")) {
+            return 3;
+        }
         for (int i = 0; i < listItemsHref.size(); i++) {
             if (listItemsHref.get(i).getText().equals(subjectName)) {
                 return i;

@@ -82,4 +82,9 @@ public class CreateAcademicCourseSteps extends BaseSteps {
                 .withFailMessage("Existed academic course name is wrong")
                 .isEqualTo(ErrorMessagesProvider.getExistedAcademicCourseErrMessage());
     }
+
+    @And("Save academic course value")
+    public void saveAcademicCourseValue() {
+        academicCoursePopup.saveAcademicCourseValue();
+    }
 }

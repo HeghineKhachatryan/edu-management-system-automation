@@ -89,7 +89,7 @@ public class UICheckSteps {
                 .isTrue();
     }
 
-    @Then("Check all elements are present in chosen section of academic class")
+    @Then("Check all elements are present in chosen subsection of academic class")
     public void checkAllElementsArePresentInCoursesSectionOfAcademicClass() {
         assertThat(academicClassPage.checkAllElementsArePresentInSection())
                 .withFailMessage("Not all elements are displayed")

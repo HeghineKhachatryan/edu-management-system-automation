@@ -24,6 +24,8 @@ public class AcademicCoursePopup extends CommonPopup {
     private WebElement academicCourseSelect;
     @FindBy(id = "teacher")
     private WebElement teacherSelect;
+    @FindBy(id = "classroomTeacher")
+    private WebElement classroomTeacher;
     @FindBy(xpath = "//*/following-sibling::div[@class='error']")
     private WebElement existedAcademicCourseErrMessage;
     @FindBy(xpath = "//span[@role='combobox']")
@@ -39,8 +41,12 @@ public class AcademicCoursePopup extends CommonPopup {
     public void fillAcademicCourseName() {
         String academicCourseName = RandomStringUtils.random(16, true, false);
         logger.info("Fill academic course name {}", academicCourseName);
-        SharedTestData.setLastCreatedItemName(academicCourseName);
         uiHelper.sendKeys(academicCourseNameField, academicCourseName);
+    }
+
+    public void saveAcademicCourseValue() {
+        logger.info("Save academic course value to Shared Test Data");
+        SharedTestData.setLastCreatedItemName(academicCourseNameField.getDomProperty("value"));
     }
 
     public void fillExistedAcademicCourseName() {
@@ -120,18 +126,24 @@ public class AcademicCoursePopup extends CommonPopup {
         return uiHelper.checkElementsAreDisplayed(driver.findElements(By.xpath(xpath)));
     }
 
+    public List<WebElement> getListOfOptions(String name) {
+        logger.info("Get list of select options from {} dropdown", name);
+        String xpath = String.format("//select[@id='%s']/option", name);
+        return driver.findElements(By.xpath(xpath));
+    }
+
     public void selectFirstItem(String dropDownList) {
         logger.info("Select first item from the {} dropdown list", dropDownList);
         new Select(getElementByNameFromMap(dropDownList)).selectByIndex(1);
     }
 
     public void saveValueOfSelectedItem(String value) {
-        SharedTestData.setValueOfitem(new Select(getElementByNameFromMap(value)).getFirstSelectedOption().getText());
+        SharedTestData.setValueOfItem(new Select(getElementByNameFromMap(value)).getFirstSelectedOption().getText());
     }
 
     public boolean checkTheUserChoiceIsDisplayedInTheField(String value) {
         return new Select(getElementByNameFromMap(value)).getFirstSelectedOption().getText()
-                .equals(SharedTestData.getValueOfitem());
+                .equals(SharedTestData.getValueOfItem());
     }
 
     public void selectTheFirstTeacher() {
@@ -146,6 +158,7 @@ public class AcademicCoursePopup extends CommonPopup {
         map.putIfAbsent("academicClass",academicClassSelect);
         map.putIfAbsent("academicCourse",academicCourseSelect);
         map.putIfAbsent("teachers", teacherSelect);
+        map.putIfAbsent("classroomTeacher", classroomTeacher);
         map.putIfAbsent("subject", subjectsSelect);
         return map;
     }
