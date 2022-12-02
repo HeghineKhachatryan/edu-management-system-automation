@@ -70,7 +70,7 @@ public class AcademicClassPage extends CommonPage {
     }
 
     public void saveClassroomTeacherNameAndSurname() {
-        logger.info("Existed classroom teacher name from the list is {}", listItems.get(0).getText());
-        SharedTestData.setNameField(listItems.get(0).getText());
+        logger.info("Existed classroom teacher name from the list is {}", displayedClassroomTeacher.getText());
+        SharedTestData.setNameField(displayedClassroomTeacher.getText());
     }
 }
