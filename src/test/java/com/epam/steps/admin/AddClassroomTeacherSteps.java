@@ -99,4 +99,22 @@ public class AddClassroomTeacherSteps extends BaseSteps {
         logger.info("Check classroom teacher has been changed");
         assertThat(SharedTestData.getNameField()).isNotEqualTo(SharedTestData.getValueOfItem());
     }
+
+    @And("Check classroom teacher for {} class is not added in the DB")
+    public void checkClassroomTeacherIsNotAddedInTheDB(String classNumber) {
+        logger.info("Check classroom teacher for {} class is not added in the DB", classNumber);
+        assertThat(dbHelper.isClassroomTeacherAddedToTheDB(classNumber))
+                .withFailMessage("Check classroom teacher for {} class is added in the DB, but shouldn't be",
+                        classNumber)
+                .isFalse();
+    }
+
+    @And("Check classroom teacher for {} class is added in the DB")
+    public void checkClassroomTeacherIsAddedInTheDB(String classNumber) {
+        logger.info("Check classroom teacher for {} class is not added in the DB", classNumber);
+        assertThat(dbHelper.isClassroomTeacherAddedToTheDB(classNumber))
+                .withFailMessage("Check classroom teacher for {} class is not added in the DB, but should be",
+                        classNumber)
+                .isTrue();
+    }
 }

@@ -14,6 +14,7 @@ Feature: This feature will cover academic class page Classroom Teacher section,
     When Select the first item from classroomTeacher dropdown list
     And Click on 'X' button
     Then Check message for not having classroom teacher
+    And Check classroom teacher for 1A class is not added in the DB
 
   @TC4.39.7 @Regression @Smoke
   Scenario: Check validation of "Classroom teacher" dropdown list
@@ -36,6 +37,7 @@ Feature: This feature will cover academic class page Classroom Teacher section,
     Then Popup is closed
     And Check classroomTeacher's name is displayed in the list
     And Check 'Edit' button appears in the screen
+    And Check classroom teacher for 1A class is added in the DB
 
   @TC4.39.8 @Regression @Smoke
   Scenario: Check UI of "Edit Classroom Teacher' popup in the "Classroom teacher" section
