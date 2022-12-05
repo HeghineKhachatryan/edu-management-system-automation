@@ -66,7 +66,7 @@ public class AddClassesForCoursesSteps extends BaseSteps {
     @And("Check class for academic course is added in the DB")
     public void checkClassForAcademicCourseIsAddedInTheDB() {
         logger.info("Check if academic class for academic course is added in the DB");
-        assertThat(dbHelper.isAcademicClassAddedToAcademicCourse(SharedTestData.getValueOfitem()))
+        assertThat(dbHelper.isAcademicClassAddedToAcademicCourse(SharedTestData.getValueOfItem()))
                 .withFailMessage("Academic class is not linked to academic course and not added to the DB" +
                         ", but it should be")
                 .isTrue();

@@ -142,6 +142,7 @@ Feature: UI of pages
     Then Check all elements are present in timetable section
     When Click on Create Timetable button in timetable page
     Then Check all elements are present in opened timetable page
+    When Save day of week - Monday
     When Click on '+' button
     Then  Check popup for chosen day of week is opened
     And Check all elements are present in 'Add lesson' popup
@@ -157,7 +158,18 @@ Feature: UI of pages
     When Select classes section
     And Click on the 1A item in the list
     And Select Courses section in the dashboard
-    Then Check all elements are present in chosen section of academic class
+    Then Check all elements are present in chosen subsection of academic class
     When Click on 'Add' button and open popup
     Then Popup is opened
     And Check all elements are present in 'New Course' popup Classes section
+
+  @TC4.39.1 @TC4.39.2 @TC4.39.3 @Regression @Smoke
+  Scenario: Check UI of "Classroom teacher" subsection and "Add Classroom Teacher" popup of academic class page
+    Given Login as admin
+    When Select classes section
+    And Click on the 1A item in the list
+    And Select Classroom Teacher section in the dashboard
+    Then Check all elements are present in classroom teacher subsection
+    And Click on Add Classroom Teacher button
+    Then Popup is opened
+    And Check all elements are present in 'classroom teacher' popup

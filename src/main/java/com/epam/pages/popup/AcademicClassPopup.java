@@ -18,11 +18,23 @@ public class AcademicClassPopup extends CommonPopup {
     private WebElement academicCourseSelect;
     @FindBy(id = "teacher")
     private WebElement teacherSelect;
-
+    @FindBy(id = "classroomTeacher")
+    private WebElement classroomTeacher;
     public boolean checkUIOfCreatePopupClassesSection() {
         logger.info("Check UI of create popup in academic classes section");
         return uiHelper.checkElementsAreDisplayed(
                 classNumber,
+                xButton,
+                saveButton,
+                title
+        );
+    }
+
+    public boolean checkUIOfAddClassroomTeacherPopupClassesSection() {
+        logger.info("Check UI of 'Add/Edit Classroom Teacher' popup in academic classes " +
+                "'Classroom Teacher' subsection");
+        return uiHelper.checkElementsAreDisplayed(
+                classroomTeacher,
                 xButton,
                 saveButton,
                 title
@@ -59,6 +71,6 @@ public class AcademicClassPopup extends CommonPopup {
     }
 
     public void saveAcademicClassValue() {
-        SharedTestData.setValueOfitem(classNumber.getDomProperty("value"));
+        SharedTestData.setValueOfItem(classNumber.getDomProperty("value"));
     }
 }

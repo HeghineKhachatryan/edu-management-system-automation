@@ -59,7 +59,7 @@ public class CreateClassesSteps extends BaseSteps {
 
     @And("Academic class is added to the DB")
     public void academicClassIsAddedToTheDB() {
-        assertThat(dbHelper.isClassAddedToTheDB(SharedTestData.getValueOfitem()))
+        assertThat(dbHelper.isClassAddedToTheDB(SharedTestData.getValueOfItem()))
                 .withFailMessage("Academic class is not added to the DB, but it should be.")
                 .isTrue();
     }

@@ -9,6 +9,7 @@ Feature: This feature will cover academic course section of admin page, especial
   @TC3.21.4 @Regression
   Scenario: Check functionality of 'X' icon on the "New Subjects" pop-up
     Given Fill academic course name
+    And Save academic course value
     When Select the first item from subject dropdown list
     When Click on 'X' button
     Then Popup is closed
@@ -28,6 +29,7 @@ Feature: This feature will cover academic course section of admin page, especial
   @TC3.21.6 @Regression
   Scenario: Check the creation of new academic course after inputting valid data in mandatory fields
     Given Fill academic course name
+    And Save academic course value
     When Select the first item from subject dropdown list
     And Save value of selected subject item
     When Click on 'Save' button

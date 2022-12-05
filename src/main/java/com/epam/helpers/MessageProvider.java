@@ -13,4 +13,8 @@ public final class MessageProvider {
     public static String getSuccessMsgForTimetableCreation() {
         return PROPERTIES_READER.getProperty("successfullyCreatedTimetable");
     }
+
+    public static String getMsgForNotHavingClassroomTeacher() {
+        return PROPERTIES_READER.getProperty("noClassroomTeacher");
+    }
 }

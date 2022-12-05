@@ -65,7 +65,7 @@ public class TimetablePage extends CommonPage {
     public void clickOnPlusButton() {
         logger.info("Click on plus button of certain day of week");
         String plus = String.format("//div[@id='%s']//following-sibling::div/img[@class='plus']",
-                SharedTestData.getValueOfitem().toLowerCase());
+                SharedTestData.getValueOfItem().toLowerCase());
         uiHelper.clickOnWebElement(driver.findElement(By.xpath(plus)));
     }
 
@@ -79,7 +79,7 @@ public class TimetablePage extends CommonPage {
     public void saveListSizeAndDayOfWeek(String dayOfWeek) {
         logger.info("Save list size and day of the week to shared test data");
         SharedTestData.setListSize(getListOfCoursesForDayOfWeek(dayOfWeek).size());
-        SharedTestData.setValueOfitem(dayOfWeek.toLowerCase());
+        SharedTestData.setValueOfItem(dayOfWeek.toLowerCase());
     }
 
     public boolean checkListSizeOfTimetable(String dayOfWeek) {
@@ -90,7 +90,7 @@ public class TimetablePage extends CommonPage {
     public boolean checkCourseIsNotAddedInTimetableForDayOfWeek() {
         logger.info("Check course is not added in the timetable for certain day of week");
         return SharedTestData.getListSize()
-                <= getListOfCoursesForDayOfWeek(SharedTestData.getValueOfitem()).size();
+                <= getListOfCoursesForDayOfWeek(SharedTestData.getValueOfItem()).size();
     }
 
     public void saveSelectedCourseValueByGivenName(String courseName) {
@@ -100,7 +100,7 @@ public class TimetablePage extends CommonPage {
 
     public boolean checkCourseIsAddedInTimetablePage() {
         logger.info("Check course is added in timetable page at the end of the list");
-        List<WebElement> listOfCoursesForDayOfWeek = getListOfCoursesForDayOfWeek(SharedTestData.getValueOfitem());
+        List<WebElement> listOfCoursesForDayOfWeek = getListOfCoursesForDayOfWeek(SharedTestData.getValueOfItem());
         return listOfCoursesForDayOfWeek
                 .get(listOfCoursesForDayOfWeek.size() - 1)
                 .getText()

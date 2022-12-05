@@ -28,7 +28,7 @@ Feature: This feature will cover subject section of admin page, especially addin
   Scenario: Check search functionality and case-sensitivity of items in the "Teachers" Multi-select drop-list
     Given Click on the 'Teachers' drop-down list
     And Fill name of teacher ikh
-    Then  Check matched items appeared below the Search line
+    Then Check matched items appeared below the Search line
     And Save quantity of matched items result and clear search box
     When Fill name of teacher IKH
     And  Check matched items appeared below the Search line
@@ -55,7 +55,7 @@ Feature: This feature will cover subject section of admin page, especially addin
   Scenario: Check functionality to add new teacher in the current subject
     Given Click on the 'Teachers' drop-down list
     When Fill name of teacher Mikhail
-    And Select teacher
+    And Select teacher Mikhail Lermontov
     And Save linked teachers count for Languages subject from DB and list size from subject section
     And Click on 'Save' button
     Then Popup is closed

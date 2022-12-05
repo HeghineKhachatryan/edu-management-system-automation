@@ -26,10 +26,29 @@ public class AcademicClassesServiceImpl implements AcademicClassesService {
                 id = resultSet.getInt("id");
             }
         } catch (SQLException e) {
-            logger.error("Academic class does not exists.");
-            throw new RuntimeException(e);
+            logger.error("Can not execute query");
+            throw new RuntimeException("Can not execute query, something went wrong");
         }
         logger.info("ID of {} academic class in the DB is: {}", academicClass, id);
+        return id;
+    }
+
+    @Override
+    public int findClassroomTeacherIDByAcademicClass(String academicClass) {
+        logger.info("Find classroom teacher ID of the given academic class.");
+        int id = -1;
+        String query = "SELECT classroom_teacher_id FROM academic_class WHERE class_number =?;";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, academicClass);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                id = resultSet.getInt("classroom_teacher_id");
+            }
+        } catch (SQLException e) {
+            logger.error("Can not execute query");
+            throw new RuntimeException("Can not execute query, something went wrong");
+        }
+        logger.info("ID of classroom teacher in {} academic class in the DB is: {}", academicClass, id);
         return id;
     }
 }

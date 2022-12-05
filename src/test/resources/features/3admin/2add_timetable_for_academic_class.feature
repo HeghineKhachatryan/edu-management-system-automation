@@ -23,10 +23,10 @@ Feature: This feature will cover timetable section of academic classes,
     Then Check alert is present
     And Accept alert and leave the page
 
-  @TC4.38.7 @TC4.38.8 @Regression @Smoke   # error message must be changed
+  @TC4.38.7 @TC4.38.8 @Regression @Smoke
   Scenario: Check adding a new course to the timetable
     When Click on 'Save' button in Add Lesson popup
-    Then Check error messages of blank input fields
+    Then Check error messages of blank selections
     Given Select the first course from drop-down list
     When Save selected course name
     And Click on 'Save' button in Add Lesson popup

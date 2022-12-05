@@ -55,7 +55,7 @@ public class AdminPage extends CommonPage {
     public boolean checkAcademicClassIsDisplayedInTheList() {
         logger.info("Get last created academic class and check if it is added to the list");
         return getNameOfLastCreatedItemHref()
-                .equals(SharedTestData.getValueOfitem());
+                .equals(SharedTestData.getValueOfItem());
     }
     public boolean checkNewCreatedItemIsDisplayedOnAdminsSection() {
         logger.info("Check new created item is displayed on admins section");

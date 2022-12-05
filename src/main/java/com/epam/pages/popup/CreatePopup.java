@@ -25,9 +25,9 @@ public class CreatePopup extends CommonPopup {
     protected WebElement generatePasswordButton;
     @FindBy(xpath = "//*[@id='email']/following-sibling::div/p")
     protected WebElement emailInvalidAndExistedErrorMessage;
-    @FindBy(xpath = "//input/following-sibling::div[@class='error']")
+    @FindBy(xpath = "//input[@type='text']/following-sibling::div[@class='error']")
     protected List<WebElement> errorMessagesOfBlankInputFields;
-    @FindBy(xpath = "//input[@class='form_input' and not(@readonly)]/following-sibling::div[not(preceding-sibling::input[@id='date']) and not(preceding-sibling::*[self::select])]")
+    @FindBy(xpath = "//input[@type='text' and not(@readonly) and not(@type='hidden')]/following-sibling::div[@class='error' and not(preceding-sibling::input[@id='date']) and not(preceding-sibling::*[self::select])]")
     protected List<WebElement> errorMessagesOfMoreSymbols;
     @FindBy(id = "popup-container")
     protected WebElement popupWindow;
