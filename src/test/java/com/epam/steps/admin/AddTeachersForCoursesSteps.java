@@ -22,24 +22,24 @@ public class AddTeachersForCoursesSteps extends BaseSteps {
         adminPage = new AdminPage();
     }
 
-    @When("Select item from 'select teachers' dropdown list")
-    public void selectItemFromSelectTeachersDropdownList() {
-        coursesPopup.selectTheFirstTeacher();
+    @When("Select {} from dropdown list")
+    public void selectItemFromSelectTeachersDropdownList(String item) {
+        coursesPopup.selectTheFirstItem(item);
     }
 
-    @And("Save linked teachers count for {} course from DB and list size from section")
-    public void saveLinkedTeachersCountForCourseFromDBAndListSizeFromSection(String courseName) {
+    @And("Save linked {} count for {} course from DB and list size from section")
+    public void saveLinkedTeachersCountForCourseFromDBAndListSizeFromSection(String item, String courseName) {
         adminPage.setListSize();
-        coursesPopup.saveCountOfSelectedTeachersInTheBox();
+        coursesPopup.saveCountOfSelectedItemsInTheBox(item);
         int dbCount = dbHelper.findCountOfTeachersAddedToTheCourse(courseName);
-        logger.info("Save teachers count '{}' linked to '{}' course to shared test data",
-                dbCount, courseName);
+        logger.info("Save {} count '{}' linked to '{}' course to shared test data",
+                item, dbCount, courseName);
         SharedTestData.setCountLinkedToItem(dbCount);
     }
 
-    @And("Check multi-select drop-down list is opened")
-    public void checkMultiSelectDropDownListIsOpened() {
-        assertThat(coursesPopup.checkDropDownListIsOpened())
+    @And("Check multi-select drop-down list is opened for {}")
+    public void checkMultiSelectDropDownListIsOpened(String item) {
+        assertThat(coursesPopup.checkDropDownListIsOpened(item))
                 .withFailMessage("Drop down list is not opened, but it should be")
                 .isTrue();
     }
@@ -64,8 +64,8 @@ public class AddTeachersForCoursesSteps extends BaseSteps {
         int dbCount = dbHelper.findCountOfTeachersAddedToTheCourse(courseName);
         int sharedCount = SharedTestData.getCountLinkedToItem();
         logger.info("Count of teachers linked to {} academic course in the DB is {}, count of teachers in the list is {}," +
-                "count of selected teachers is {}", courseName, dbCount, sharedCount, coursesPopup.getCountOfSelectedTeachers());
-        return (dbCount - sharedCount) == coursesPopup.getCountOfSelectedTeachers();
+                "count of selected teachers is {}", courseName, dbCount, sharedCount, coursesPopup.getCountOfSelectedItems());
+        return (dbCount - sharedCount) == coursesPopup.getCountOfSelectedItems();
     }
 
     @Then("Check only teachers who are added for subject linked to {} course is displayed and can be selected")
@@ -73,7 +73,7 @@ public class AddTeachersForCoursesSteps extends BaseSteps {
         logger.info("Check only teachers who are added for subject linked to {} course is displayed and can be selected",
                 courseName);
         assertThat(coursesPopup.listContainsNames(
-                        dbHelper.findTeachersNameAndSurnameByAcademicCourseName(courseName)))
+                dbHelper.findTeachersNameAndSurnameByAcademicCourseName(courseName)))
                 .withFailMessage("not only teachers who are added for subject and is linked to course" +
                         " are displayed and can be selected")
                 .isTrue();

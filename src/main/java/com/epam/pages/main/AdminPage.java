@@ -97,4 +97,9 @@ public class AdminPage extends CommonPage {
         logger.info("Set list size assigned for last created item to SharedTest data.");
         SharedTestData.setListSize(listItems.size());
     }
+
+    public void saveTheFirstItemFromTheList() {
+        logger.info("Save the first item from the list");
+        SharedTestData.setValueOfItem(listItems.get(0).getText());
+    }
 }

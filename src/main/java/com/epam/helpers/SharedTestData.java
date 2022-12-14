@@ -23,7 +23,7 @@ public final class SharedTestData {
     private static int listSize;
     public static int resultOfMatchedSearch;
     private static int countLinkedToItem;
-    private static int selectedTeachersCountInTheBox;
+    private static int selectedItemsCountInTheBox;
     private static List<WebElement> listOfOptions;
 
     private SharedTestData() {
@@ -146,12 +146,12 @@ public final class SharedTestData {
         SharedTestData.countLinkedToItem = countLinkedToItem;
     }
 
-    public static int getSelectedTeachersCountInTheBox() {
-        return selectedTeachersCountInTheBox;
+    public static int getSelectedItemsCountInTheBox() {
+        return selectedItemsCountInTheBox;
     }
 
-    public static void setSelectedTeachersCountInTheBox(int selectedTeachersCountInTheBox) {
-        SharedTestData.selectedTeachersCountInTheBox = selectedTeachersCountInTheBox;
+    public static void setSelectedItemsCountInTheBox(int selectedItemsCountInTheBox) {
+        SharedTestData.selectedItemsCountInTheBox = selectedItemsCountInTheBox;
     }
 
     public static List<WebElement> getListOfOptions() {

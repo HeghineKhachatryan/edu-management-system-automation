@@ -120,6 +120,10 @@ public final class DBHelper {
         return academicCourseService.findTeachersCountByLinkedCourseId(getCourseID(courseName));
     }
 
+    public int findCountOfStudentsAddedToTheClass(String className) {
+        return classesServiceImpl.findStudentsCountByLinkedCourseId(findAcademicClassIdByName(className));
+    }
+
     private int getSubjectID(String subjectName) {
         return subjectService.findSubjectIdBySubjectName(subjectName);
     }

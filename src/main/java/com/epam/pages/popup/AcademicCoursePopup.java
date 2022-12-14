@@ -32,8 +32,6 @@ public class AcademicCoursePopup extends CommonPopup {
     private WebElement selectTeachersBox;
     @FindBy(xpath = "//ul[@id='select2-teacher-results']/li")
     private List<WebElement> listOfTeachersOptions;
-    @FindBy(id = "select2-teacher-results")
-    private WebElement dropDownList;
     @FindBy(xpath = "//*[@id='select2-teacher-container']/li")
     private List<WebElement> listOfSelectedTeachers;
     private final Map<String, WebElement> map = new HashMap<>();
@@ -146,8 +144,10 @@ public class AcademicCoursePopup extends CommonPopup {
                 .equals(SharedTestData.getValueOfItem());
     }
 
-    public void selectTheFirstTeacher() {
-        uiHelper.clickOnWebElement(listOfTeachersOptions.get(0));
+    public void selectTheFirstItem(String item) {
+        uiHelper.clickOnWebElement(driver
+                .findElements(By.xpath(String.format("//ul[@id='select2-%s-results']/li", item)))
+                .get(0));
     }
 
     private WebElement getElementByNameFromMap(String name) {
@@ -163,19 +163,19 @@ public class AcademicCoursePopup extends CommonPopup {
         return map;
     }
 
-    public int getCountOfSelectedTeachers() {
-        logger.info("Get count of selected teachers in the box.");
-        return SharedTestData.getSelectedTeachersCountInTheBox();
+    public int getCountOfSelectedItems() {
+        logger.info("Get count of selected items in the box.");
+        return SharedTestData.getSelectedItemsCountInTheBox();
     }
 
-    public void saveCountOfSelectedTeachersInTheBox() {
-        logger.info("Save count of selected teachers in the box.");
-        SharedTestData.setSelectedTeachersCountInTheBox(listOfSelectedTeachers.size());
+    public void saveCountOfSelectedItemsInTheBox(String item) {
+        logger.info("Save count of selected items in the box.");
+        SharedTestData.setSelectedItemsCountInTheBox(driver.findElements(By.xpath(String.format("//ul[@id='select2-%s-results']/li", item))).size());
     }
 
-    public boolean checkDropDownListIsOpened() {
+    public boolean checkDropDownListIsOpened(String itemName) {
         logger.info("Check multi-select drop-down list is opened.");
-        return uiHelper.checkElementsAreDisplayed(dropDownList);
+        return uiHelper.checkElementsAreDisplayed(driver.findElement(By.id(String.format("select2-%s-results", itemName))));
     }
 
     public List<String> getListOfSelectionOptions() {

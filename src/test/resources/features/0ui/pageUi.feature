@@ -173,3 +173,14 @@ Feature: UI of pages
     And Click on Add Classroom Teacher button
     Then Popup is opened
     And Check all elements are present in 'classroom teacher' popup
+
+  @TC4.37.1 @TC4.37.2 @TC4.37.3 @Regression @Smoke
+  Scenario: Check UI of "Students" subsection and UI of "New Student" popup in Academic Classes page
+    Given Login as admin
+    When Select classes section
+    And Click on the 1A item in the list
+    And Select Students section in the dashboard
+    Then Check all elements are present in chosen subsection of academic class
+    When Click on 'Add' button and open popup
+    Then Popup is opened
+    And Check all elements are present in 'New Students' popup Classes section

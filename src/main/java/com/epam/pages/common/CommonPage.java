@@ -36,7 +36,7 @@ public abstract class CommonPage extends BasePage {
     }
     public String getNameAndSurnameOfLastCreatedAdmin() {
         String nameOfLastCreatedUser = listItems.get(listItems.size() - 1).getText();
-        logger.info("Get name of last created admin - {}", nameOfLastCreatedUser);
+        logger.info("Get name of last created user - {}", nameOfLastCreatedUser);
         return nameOfLastCreatedUser;
     }
     public String getNameOfLastCreatedUser() {

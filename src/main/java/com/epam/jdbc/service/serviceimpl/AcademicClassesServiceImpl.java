@@ -51,4 +51,23 @@ public class AcademicClassesServiceImpl implements AcademicClassesService {
         logger.info("ID of classroom teacher in {} academic class in the DB is: {}", academicClass, id);
         return id;
     }
+
+    @Override
+    public int findStudentsCountByLinkedCourseId(int academicClassID) {
+        logger.info("Find count of students linked to the academic class by the given class id.");
+        int countOfStudents = 0;
+        String query = "SELECT COUNT(id) as total FROM public.student WHERE academic_class_id=?;";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, academicClassID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                countOfStudents = resultSet.getInt("total");
+            }
+        } catch (SQLException e) {
+            logger.error("Can not execute query.");
+            throw new RuntimeException("Can not execute query. Something went wrong.");
+        }
+        logger.info("Count of students linked to academic class in the DB is {}", countOfStudents);
+        return countOfStudents;
+    }
 }

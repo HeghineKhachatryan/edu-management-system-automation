@@ -7,7 +7,6 @@ import java.util.List;
 public interface AcademicCourseService {
 
     AcademicCourse findByName(String academicCourseName);
-
     List<Integer> findAcademicCourseIdsByLinkedClassId(int academicClassId);
     int findTeachersCountByLinkedCourseId(int subjectID);
     List<String> findCourseNamesByIds(List<Integer> academicCourseIds);

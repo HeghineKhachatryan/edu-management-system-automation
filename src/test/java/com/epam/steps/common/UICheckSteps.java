@@ -102,4 +102,11 @@ public class UICheckSteps {
                 .withFailMessage("All required elements in 'New Courses' popup Classes section are not displayed")
                 .isTrue();
     }
+
+    @And("Check all elements are present in 'New Students' popup Classes section")
+    public void checkAllElementsArePresentInNewStudentsPopupClassesSection() {
+        assertThat(academicClassPopup.checkAllElementsArePresentInNewStudentsPopupClassesSection())
+                .withFailMessage("Not all elements are displayed")
+                .isTrue();
+    }
 }

@@ -45,15 +45,15 @@ public class AddTeacherToSubjectSteps extends BaseSteps {
         subjectPage.clickOnSectionByText(section);
     }
 
-    @And("Check teacher for item is not displayed on the list")
-    public void teacherForSubjectIsNotDisplayedOnTheList() {
+    @And("Check item is not displayed on the list")
+    public void checkItemIsNotDisplayedOnTheList() {
         assertThat(adminPage.getListSize())
                 .withFailMessage("Teacher for item is displayed on the list, but should not be")
                 .isEqualTo(SharedTestData.getListSize());
     }
 
-    @And("Check teacher for item is displayed on the list")
-    public void teacherForItemIsDisplayedOnTheList() {
+    @And("Check item is displayed on the list")
+    public void checkTeacherForItemIsDisplayedInTheList() {
         assertThat(adminPage.getListSize())
                 .withFailMessage(adminPage.getListSize() +
                         " is not greater than " + SharedTestData.getListSize())
