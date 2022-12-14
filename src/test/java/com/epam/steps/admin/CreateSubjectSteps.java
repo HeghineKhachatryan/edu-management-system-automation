@@ -1,6 +1,7 @@
 package com.epam.steps.admin;
 
 import com.epam.helpers.ErrorMessagesProvider;
+import com.epam.helpers.SharedTestData;
 import com.epam.helpers.UserDataProvider;
 import com.epam.pages.main.AdminPage;
 import com.epam.pages.popup.SubjectPopup;
@@ -28,9 +29,13 @@ public class CreateSubjectSteps extends BaseSteps {
         subjectPopup.fillSubjectName();
     }
 
-    @Given("Fill name of teacher {}")
-    public void fillNameOfSubject(String subjectName) {
-        subjectPopup.fillTeacherName(subjectName);
+    @Given("Fill name of the item {}")
+    public void fillValueOfItem(String value) {
+        if (value.contains("saved before")) {
+            subjectPopup.fillItemValue(SharedTestData.getValueOfItem());
+        } else {
+            subjectPopup.fillItemValue(value);
+        }
     }
 
     @Given("Fill existed subject name")
@@ -38,12 +43,12 @@ public class CreateSubjectSteps extends BaseSteps {
         subjectPopup.fillExistedSubjectName();
     }
 
-    @Given("Click on the 'Teachers' drop-down list")
+    @Given("Click on the search field and open drop-down list")
     public void clickOnTheTeachersDropDownList() {
-        subjectPopup.clickOnTheTeachersDropDownList();
+        subjectPopup.clickOnTheSearchFieldDropDownList();
     }
 
-    @And("Select teacher {}")
+    @And("Select a teacher - {}")
     public void selectTeacherByName(String teacherName) {
         subjectPopup.selectTeacherByName(teacherName);
     }
@@ -53,14 +58,14 @@ public class CreateSubjectSteps extends BaseSteps {
         subjectPopup.selectTeacher();
     }
 
-    @And("Click on 'X' button of the selected teacher")
+    @And("Click on 'X' button of the selected item")
     public void clickOnXButtonOfTheSelectedTeacher() {
-        subjectPopup.clickOnXButtonOfSelectedTeacher();
+        subjectPopup.clickOnXButtonOfSelectedItem();
     }
 
-    @And("Click on 'X' button of the teacher list")
+    @And("Click on 'X' button of the whole list")
     public void clickOnXButtonOfTheTeacherList() {
-        subjectPopup.clickOnXButtonOfTheTeacherList();
+        subjectPopup.clickOnXButtonOfTheItemsList();
     }
 
 
@@ -121,9 +126,16 @@ public class CreateSubjectSteps extends BaseSteps {
                 .isTrue();
     }
 
-    @Then("Check selected items are shown with the 'x' icon")
-    public void checkSelectedItemIsShownWithTheXIcon() {
-        assertThat(subjectPopup.checkSelectedItemsAreShownWithTheXIcon())
+    @Then("Check matched items don't appear below the Search line")
+    public void checkMatchedItemsDontAppearBelowTheSearchLine() {
+        assertThat(subjectPopup.checkMatchedItemsDontAppearBelowTheSearchLine())
+                .withFailMessage("Matched items appeared, but the search box should be empty")
+                .isFalse();
+    }
+
+    @Then("Check selected {} items are shown with the 'x' icon")
+    public void checkSelectedItemIsShownWithTheXIcon(String itemName) {
+        assertThat(subjectPopup.checkSelectedItemsAreShownWithTheXIcon(itemName))
                 .withFailMessage("Selected item's 'X' button is not shown")
                 .isTrue();
     }
@@ -144,11 +156,11 @@ public class CreateSubjectSteps extends BaseSteps {
                 .isTrue();
     }
 
-    @Then("Check the search line placeholder")
-    public void checkTheSearchLinePlaceholder() {
-        logger.info("Check the search line placeholder");
+    @Then("Check the search line placeholder for {}")
+    public void checkTheSearchLinePlaceholder(String itemNAme) {
+        logger.info("Check the search line placeholder for teachers");
         assertThat(subjectPopup.getTheSearchLinePlaceholder())
                 .withFailMessage("There is selected item")
-                .isEqualTo(UserDataProvider.getTeacherSearchLinePlaceholder());
+                .isEqualTo(UserDataProvider.getTeacherSearchLinePlaceholder(itemNAme));
     }
 }

@@ -4,6 +4,7 @@ import com.epam.helpers.ErrorMessagesProvider;
 import com.epam.helpers.SharedTestData;
 import com.epam.pages.common.CommonPopup;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
@@ -19,13 +20,13 @@ public class SubjectPopup extends CommonPopup {
     @FindBy(xpath = "//*[@class='selection']/span")
     private WebElement selectTeacherBox;
     @FindBy(className = "select2-search__field")
-    private WebElement teacherSelectField;
+    private WebElement selectField;
     @FindBy(xpath = "//*[@id='select2-teacher-container']/li")
     private List<WebElement> listOfSelectedTeachers;
     @FindBy(xpath = "//button[@class='select2-selection__choice__remove']")
-    private List<WebElement> xButtonsOfSelectedTeachers;
+    private List<WebElement> xButtonsOfSelectedItem;
     @FindBy(className = "select2-selection__clear")
-    private WebElement xButtonOfTheTeacherSelectBox;
+    private WebElement xButtonOfTheItemInSelectBox;
     @FindBy(xpath = "//*[@class='select2-results__options']/li")
     private List<WebElement> teachersInDropDownList;
     @FindBy(className = "error")
@@ -43,14 +44,14 @@ public class SubjectPopup extends CommonPopup {
         uiHelper.sendKeys(nameField, existedName);
     }
 
-    public void clickOnTheTeachersDropDownList() {
-        uiHelper.clickOnWebElement(teacherSelectField);
+    public void clickOnTheSearchFieldDropDownList() {
+        uiHelper.clickOnWebElement(selectField);
     }
 
-    public void fillTeacherName(String teacherName) {
+    public void fillItemValue(String teacherName) {
         SharedTestData.setLastInputtedTeacherName(teacherName);
         logger.info("Fill teacher name {}", teacherName);
-        uiHelper.sendKeys(teacherSelectField, teacherName);
+        uiHelper.sendKeys(selectField, teacherName);
     }
 
     public void selectTeacherByName(String teacherName) {
@@ -97,20 +98,26 @@ public class SubjectPopup extends CommonPopup {
                 );
     }
 
-    public boolean checkSelectedItemsAreShownWithTheXIcon() {
-        logger.info("Check selected items are shown with the 'x' icon");
-        return listOfSelectedTeachers.stream()
+    public boolean checkMatchedItemsDontAppearBelowTheSearchLine() {
+        logger.info("Check matched items don't appear below the search line");
+        return teachersInDropDownList.isEmpty();
+    }
+
+    public boolean checkSelectedItemsAreShownWithTheXIcon(String itemName) {
+        logger.info("Check selected {} items are shown with the 'x' icon", itemName);
+        List<WebElement> elements = driver.findElements(By.xpath(String.format("//*[@id='select2-%s-container']/li", itemName)));
+        return elements.stream()
                 .allMatch(WebElement::isDisplayed)
-                && xButtonsOfSelectedTeachers.stream()
+                && xButtonsOfSelectedItem.stream()
                 .allMatch(WebElement::isDisplayed);
     }
 
-    public void clickOnXButtonOfSelectedTeacher() {
-        uiHelper.clickOnWebElement(xButtonsOfSelectedTeachers.get(xButtonsOfSelectedTeachers.size() - 1));
+    public void clickOnXButtonOfSelectedItem() {
+        uiHelper.clickOnWebElement(xButtonsOfSelectedItem.get(xButtonsOfSelectedItem.size() - 1));
     }
 
-    public void clickOnXButtonOfTheTeacherList() {
-        uiHelper.clickOnWebElement(xButtonOfTheTeacherSelectBox);
+    public void clickOnXButtonOfTheItemsList() {
+        uiHelper.clickOnWebElement(xButtonOfTheItemInSelectBox);
     }
 
     public boolean checkThereAreNoSelectedItems() {
@@ -118,13 +125,13 @@ public class SubjectPopup extends CommonPopup {
     }
 
     public String getTheSearchLinePlaceholder() {
-        return teacherSelectField.getDomProperty("placeholder");
+        return selectField.getDomProperty("placeholder");
     }
 
     public boolean checkUIofAddTeachersPopup() {
         logger.info("Check UI of add teacher popup - teachers select field, xButton and Save button");
         return uiHelper.checkElementsAreDisplayed(
-                        teacherSelectField,
+                selectField,
                         xButton,
                         saveButton
                 );
@@ -145,7 +152,7 @@ public class SubjectPopup extends CommonPopup {
 
     public void clearTeacherSelectField() {
         logger.info("Clear text in teacher select field.");
-        teacherSelectField.clear();
+        selectField.clear();
     }
 
     public boolean checkResultQuantityIsTheSameAsWasInThePreviousSearch() {
@@ -156,11 +163,11 @@ public class SubjectPopup extends CommonPopup {
 
     public int getCountOfSelectedTeachers() {
         logger.info("Get count of selected teachers in the box.");
-        return SharedTestData.getSelectedTeachersCountInTheBox();
+        return SharedTestData.getSelectedItemsCountInTheBox();
     }
 
     public void saveCountOfSelectedTeachersInTheBox() {
         logger.info("Save count of selected teachers in the box.");
-        SharedTestData.setSelectedTeachersCountInTheBox(listOfSelectedTeachers.size());
+        SharedTestData.setSelectedItemsCountInTheBox(listOfSelectedTeachers.size());
     }
 }

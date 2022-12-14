@@ -18,6 +18,8 @@ public class AcademicClassPopup extends CommonPopup {
     private WebElement academicCourseSelect;
     @FindBy(id = "teacher")
     private WebElement teacherSelect;
+    @FindBy(xpath = "//span[@role='combobox']")
+    private WebElement studentsBox;
     @FindBy(id = "classroomTeacher")
     private WebElement classroomTeacher;
     public boolean checkUIOfCreatePopupClassesSection() {
@@ -50,6 +52,17 @@ public class AcademicClassPopup extends CommonPopup {
                 academicCourseSelect,
                 xButton,
                 saveButton
+        );
+    }
+
+    public boolean checkAllElementsArePresentInNewStudentsPopupClassesSection() {
+        logger.info("Check elements are present in New Students popup academic classes section - " +
+                "title, students select, xButton and save button");
+        return uiHelper.checkElementsAreDisplayed(
+                title,
+                xButton,
+                saveButton,
+                studentsBox
         );
     }
 

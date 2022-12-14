@@ -73,13 +73,13 @@ Feature: This feature will create data for next test cases
     And Click on the second item in the list
     And Select Teachers section in the dashboard
     And Click on 'Add' button and open popup
-    Given Click on the 'Teachers' drop-down list
-    When Select item from 'select teachers' dropdown list
+    Given Click on the search field and open drop-down list
+    When Select teacher from dropdown list
     And Click on 'Save' button
     When Select courses section
     And Click on the third item in the list
     And Select Teachers section in the dashboard
     And Click on 'Add' button and open popup
-    Given Click on the 'Teachers' drop-down list
-    When Select item from 'select teachers' dropdown list
+    Given Click on the search field and open drop-down list
+    When Select teacher from dropdown list
     And Click on 'Save' button

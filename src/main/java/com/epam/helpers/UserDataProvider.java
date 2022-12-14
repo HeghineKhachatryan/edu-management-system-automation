@@ -42,8 +42,8 @@ public final class UserDataProvider {
         return PROPERTIES_READER.getProperty("address");
     }
 
-    public static String getTeacherSearchLinePlaceholder() {
-        return PROPERTIES_READER.getProperty("teacherSearchLinePlaceholder");
+    public static String getTeacherSearchLinePlaceholder(String itemNAme) {
+        return PROPERTIES_READER.getProperty("searchLinePlaceholder") + " " + itemNAme;
     }
     public static String getExistedClass() {
         return PROPERTIES_READER.getProperty("existedClass");

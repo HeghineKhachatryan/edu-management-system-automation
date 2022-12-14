@@ -8,8 +8,8 @@ Feature: This feature will cover vacation section of admin page, especially crea
 
   @TC2.14.4 @Regression @Smoke
   Scenario: Check functionality of 'X' button
-    When Fill 12 Dec 2022 date in start date field
-    When Fill 12 Nov 2023 date in end date field
+    When Fill 12 Dec 2024 date in start date field
+    When Fill 12 Nov 2025 date in end date field
     And Save date values
     And Click on 'X' button
     Then Popup is closed
@@ -32,8 +32,8 @@ Feature: This feature will cover vacation section of admin page, especially crea
     Then Check that you can't select start date before today - the day of selection
 
   @TC2.14.8 @Regression @Smoke
-  Scenario: Check validation for Start Date < End Date
-    When Fill 10 Dec 2023 date in start date field
-    When Fill 10 Dec 2022 date in end date field
+  Scenario: Check validation for Start Date > End Date
+    When Fill 10 Dec 2025 date in start date field
+    When Fill 10 Dec 2024 date in end date field
     And Click on 'Save' button
     Then Check error message of wrong selected dates

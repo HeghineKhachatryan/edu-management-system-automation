@@ -22,7 +22,7 @@ Feature: Admin page/ Subjects section functionality
   Scenario: Check the creation of the new subject after inputted valid data
   in the mandatory field "Subject Name" and the optional field "Teachers".
     Given Fill subject name
-    And Click on the 'Teachers' drop-down list
+    And Click on the search field and open drop-down list
     And Select teacher
     And Save value from subject name field
     When Click on 'Save' button
@@ -48,18 +48,18 @@ Feature: Admin page/ Subjects section functionality
 
   @TC2.12.10 @Regression
   Scenario: Check functionality of the "Teachers" Multi-select drop-list
-    Given Click on the 'Teachers' drop-down list
-    Then Check the search line placeholder
+    Given Click on the search field and open drop-down list
+    Then Check the search line placeholder for teachers
     And Check there is no selected item
 
   @TC2.12.11 @TC2.12.12 @TC2.12.13 @TC2.12.14 @TC2.12.15 @Regression @Smoke
   Scenario: Check "Clear all selected item" functionality in the  "Teachers" Multi-select drop-list
-    Given Click on the 'Teachers' drop-down list
-    And Fill name of teacher gay
+    Given Click on the search field and open drop-down list
+    And Fill name of the item gay
     Then Check matched items appeared below the Search line
-    When Select teacher Gayane Hovhannisyan
-    And Select teacher Gayush Poghosyan
-    Then Check selected items are shown with the 'x' icon
-    And Click on 'X' button of the selected teacher
-    And Click on 'X' button of the teacher list
+    When Select a teacher - Gayane Hovhannisyan
+    And Select a teacher - Gayush Poghosyan
+    Then Check selected teacher items are shown with the 'x' icon
+    And Click on 'X' button of the selected item
+    And Click on 'X' button of the whole list
     And Check selected items are deleted from drop-list fragment
