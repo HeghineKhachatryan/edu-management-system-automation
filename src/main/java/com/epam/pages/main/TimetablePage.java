@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class TimetablePage extends CommonPage {
@@ -39,6 +40,8 @@ public class TimetablePage extends CommonPage {
     private List<WebElement> plusButtonsForEveryDayOfWeek;
     @FindBy(xpath = "//label[@class='close-btn']")
     private WebElement closeButtonOfSelectedCourses;
+    @FindBy(className = "ui-datepicker-year")
+    private WebElement yearToSelect;
 
     public boolean checkAllElementsArePresentInTimetableSection() {
         logger.info("Check elements are present in timetable section - create button, url-path");
@@ -71,7 +74,7 @@ public class TimetablePage extends CommonPage {
 
     private List<WebElement> getListOfCoursesForDayOfWeek(String dayOfWeek) {
         logger.info("Get list of courses for {} day of week", dayOfWeek);
-        String xpath = String.format("//div[@id='%s']//following-sibling::div//div[@class='single_item']//div[@class='title']",
+        String xpath = String.format("//div[@id='%s']//following-sibling::div//div[@class='single_item']//p[@class='title']",
                 dayOfWeek.toLowerCase());
         return driver.findElements(By.xpath(xpath));
     }
@@ -142,14 +145,7 @@ public class TimetablePage extends CommonPage {
         driver.navigate().refresh();
     }
 
-    public boolean checkEndDateCantBeLessOrEqualToStartDate() {
-        int selectedStartDate = SharedTestData.getStartDate().getDayOfMonth();
-        logger.info("Check that end dates can't be before or equal to selected start date -> {}",
-                selectedStartDate);
-        uiHelper.clickOnWebElement(endDate);
-        return disabledDates.stream().allMatch(dates -> (Integer.parseInt(dates.getText()) <= selectedStartDate)
-                && dates.getAttribute("class").contains("disabled"));
-    }
+
 
     public void clickOnXButtonOfLastSelectedCourse() {
         logger.info("Click on xButton of last selected course");
