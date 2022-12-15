@@ -87,6 +87,7 @@ public final class DBHelper {
     public void deleteTimetableByAcademicClassId(String academicClassName) {
         timeTableService.deleteTimetableByAcademicClassId(findAcademicClassIdByName(academicClassName));
     }
+
     public List<String> findTeachersNameAndSurnameByAcademicCourseName(String academicCourse) {
         logger.info("Find teachers name and surname by their IDs, using connected subject ID and academic course name");
         return teacherService.findTeacherNameAndSurnameById(
@@ -111,7 +112,13 @@ public final class DBHelper {
     public boolean isAcademicClassAddedToAcademicCourse(String academicClassName) {
         return academicCourseService.findAcademicCourseIdsByLinkedClassId(findAcademicClassIdByName(academicClassName)).size() != 0;
     }
+    public void insertIntoAcademicCourseTeachersByCourseID(int id) {
+        academicCourseService.insertIntoAcademicCourseTeachersByCourseID(id);
+    }
 
+    public int countOfAcademicCoursesInTheDB() {
+        return academicCourseService.findCountOfAcademicCoursesInTHeDB();
+    }
     public int findCountOfTeachersAddedToTheSubject(String subjectName) {
         return subjectService.findTeachersCountByConnectedSubjectId(getSubjectID(subjectName));
     }

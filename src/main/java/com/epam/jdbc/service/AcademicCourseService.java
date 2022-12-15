@@ -10,4 +10,6 @@ public interface AcademicCourseService {
     List<Integer> findAcademicCourseIdsByLinkedClassId(int academicClassId);
     int findTeachersCountByLinkedCourseId(int subjectID);
     List<String> findCourseNamesByIds(List<Integer> academicCourseIds);
+    void insertIntoAcademicCourseTeachersByCourseID(int id);
+    int findCountOfAcademicCoursesInTHeDB();
 }

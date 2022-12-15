@@ -83,3 +83,6 @@ Feature: This feature will create data for next test cases
     Given Click on the search field and open drop-down list
     When Select teacher from dropdown list
     And Click on 'Save' button
+
+    Scenario: Add teacher for academic courses
+      When Add teacher for academic courses

@@ -103,4 +103,36 @@ public class AcademicCourseServiceImpl implements AcademicCourseService {
         return courseNames;
     }
 
+    @Override
+    public void insertIntoAcademicCourseTeachersByCourseID(int id) {
+        logger.info("Insert into academic course a teacher.");
+        String query = "INSERT INTO academic_course_teacher_mapping" +
+                "(academic_course_id, teacher_id) VALUES(?, 1);";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, id);
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            logger.error("Can not execute query.");
+            throw new RuntimeException("Can not execute query. Something went wrong.");
+        }
+    }
+
+    @Override
+    public int findCountOfAcademicCoursesInTHeDB() {
+        logger.info("Find count of academic courses in the DB.");
+        int countOfCourses = 0;
+        String query = "SELECT COUNT(id) as total FROM academic_course;";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                countOfCourses = resultSet.getInt("total");
+            }
+        } catch (SQLException e) {
+            logger.error("Can not execute query.");
+            throw new RuntimeException("Can not execute query. Something went wrong.");
+        }
+        logger.info("Count of courses in the DB is {}", countOfCourses);
+        return countOfCourses;
+    }
+
 }

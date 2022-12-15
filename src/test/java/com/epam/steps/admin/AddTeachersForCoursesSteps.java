@@ -49,7 +49,7 @@ public class AddTeachersForCoursesSteps extends BaseSteps {
         logger.info("Check teacher for {} course is added in the DB", courseName);
         assertThat(isTeacherForCourseAddedToTheDB(courseName))
                 .withFailMessage("Teacher for course is not added to the DB, but should be")
-                .isTrue();
+                .isFalse();
     }
 
     @And("Check teacher for {} course is not added in the DB")
@@ -57,7 +57,7 @@ public class AddTeachersForCoursesSteps extends BaseSteps {
         logger.info("Check teacher for {} course is not added in the DB", courseName);
         assertThat(isTeacherForCourseAddedToTheDB(courseName))
                 .withFailMessage("Teacher for course is added to the DB, but should not be")
-                .isFalse();
+                .isTrue();
     }
 
     private boolean isTeacherForCourseAddedToTheDB(String courseName) {
@@ -77,5 +77,20 @@ public class AddTeachersForCoursesSteps extends BaseSteps {
                 .withFailMessage("not only teachers who are added for subject and is linked to course" +
                         " are displayed and can be selected")
                 .isTrue();
+    }
+
+    @When("Add teacher for academic courses")
+    public void addTeacherForAcademicCourses() {
+        logger.info("Insert into academic courses teacher");
+        int count = dbHelper.countOfAcademicCoursesInTheDB();
+        if (count <= 10) {
+            for (int i = 1; i < dbHelper.countOfAcademicCoursesInTheDB(); i++) {
+                dbHelper.insertIntoAcademicCourseTeachersByCourseID(i);
+            }
+        } else {
+            for (int i = 1; i < 11; i++) {
+                dbHelper.insertIntoAcademicCourseTeachersByCourseID(i);
+            }
+        }
     }
 }
