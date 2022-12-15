@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -68,6 +69,30 @@ public class AcademicYearsAndVacationPopup extends CreatePopup {
         new Select(yearToSelect).selectByValue(String.valueOf(year));
         new Select(monthToSelect).selectByVisibleText(month);
         selectDay(day).click();
+    }
+
+    public boolean checkEndDaysCanTBeMoreThan12MonthsAfterTodaySDate() {
+        uiHelper.clickOnWebElement(endDate);
+        LocalDate date = LocalDate.now().plusMonths(12).plusDays(1);
+        logger.info("Click on end date field, check that date - {}/{}/{} is not clickable (unselectable)",
+                date.getDayOfMonth(), date.getMonthValue(), date.getYear());
+        new Select(yearToSelect).selectByValue(String.valueOf(date.getYear()));
+        new Select(monthToSelect).selectByVisibleText(getValueOfMonth(date.getMonth()));
+        return driver.findElement(By.xpath(String.format("//span[text()='%s']//parent::td", date.getDayOfMonth())))
+                .getAttribute("class").contains("unselectable");
+    }
+
+    public void fillTodayDateInStartAndEndDateFields() {
+        LocalDate today = LocalDate.now();
+        logger.info("Fill start and date fields with doday's date - {}", LocalDate.now());
+        selectDate(today.getDayOfMonth(), getValueOfMonth(today.getMonth()), today.getYear(), "start");
+        selectDate(today.getDayOfMonth(), getValueOfMonth(today.getMonth()), today.getYear(), "end");
+    }
+
+    private String getValueOfMonth(Month month) {
+        String valueOfMonth = String.valueOf(month).substring(0, 3).toLowerCase();
+        byte[] firstLetter = String.valueOf(valueOfMonth.charAt(0)).toUpperCase().getBytes();
+        return valueOfMonth.replace(valueOfMonth.charAt(0), (char) firstLetter[0]);
     }
 
     public boolean isDateBeforeTodayEnabled(String field) {

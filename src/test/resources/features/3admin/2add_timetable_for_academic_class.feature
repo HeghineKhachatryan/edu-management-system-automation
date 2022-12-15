@@ -61,7 +61,7 @@ Feature: This feature will cover timetable section of academic classes,
     Given Select the first course from drop-down list
     When Click on 'Save' button in Add Lesson popup
     And Click on Create button in timetable page
-    Then Check error message for leaving dates blank in timetable
+    Then Check error message for wrong dates in timetable
     When Refresh the page
     When Fill 31 Dec 2022 date in start date field
     And Fill 10 Oct 2023 date in end date field
@@ -76,10 +76,10 @@ Feature: This feature will cover timetable section of academic classes,
     And Click on 'Save' button in Add Lesson popup
     Then Check that you can't select start date before today - the day of selection
     And Check that you can't select end date before today - the day of selection
-    When Fill 02 Feb 2023 date in start date field
-    And Save start date values
-    Then Check you can't select end days before or equal to start date
-#    And Check end days can't be more than 12 months after selected start date ---- not working bug
+    When Fill today's date in start and end date fields
+    And Click on Create button in timetable page
+    Then Check error message for wrong dates in timetable
+    And Check end days can't be more than 12 months after today's date
     When Select classes section
     And Accept alert and leave the page
 
@@ -96,4 +96,3 @@ Feature: This feature will cover timetable section of academic classes,
     And Check academic course is not displayed in the timetable list
     When Select classes section
     And Accept alert and leave the page
-

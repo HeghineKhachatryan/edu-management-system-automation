@@ -41,6 +41,15 @@ public class CreateYearsSteps extends BaseSteps {
         yearsAndVacationPopup.selectDate(day, month, year, field);
     }
 
+    @And("Check end days can't be more than 12 months after today's date")
+    public void checkEndDaysCanTBeMoreThanMonthsAfterTodaySDate() {
+        logger.info("Check end days can't be more than 12 months after today's date");
+        assertThat(yearsAndVacationPopup.checkEndDaysCanTBeMoreThan12MonthsAfterTodaySDate())
+                .withFailMessage("You can select date after 12 months from today, " +
+                        "but it should have been limited by frontend")
+                .isTrue();
+    }
+
     @And("Save date values")
     public void saveDateValues() {
         yearsAndVacationPopup.saveStartDateValue();
@@ -52,6 +61,12 @@ public class CreateYearsSteps extends BaseSteps {
         assertThat(yearsAndVacationPopup.isDateBeforeTodayEnabled(date))
                 .withFailMessage("Days before today are not disabled.")
                 .isTrue();
+    }
+
+
+    @When("Fill today's date in start and end date fields")
+    public void fillTodaySDateInStartAndEndDateFields() {
+        yearsAndVacationPopup.fillTodayDateInStartAndEndDateFields();
     }
 
     @Then("Check error message of wrong selected dates")

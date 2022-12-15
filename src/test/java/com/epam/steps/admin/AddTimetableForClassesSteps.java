@@ -189,19 +189,11 @@ public class AddTimetableForClassesSteps extends BaseSteps {
         timetablePage.refreshPage();
     }
 
-    @Then("Check error message for leaving dates blank in timetable")
-    public void checkErrorMessageOfBlankDatesInTimetable() {
+    @Then("Check error message for wrong dates in timetable")
+    public void checkErrorMessageForWrongDatesInTimetable() {
         logger.info("Check error messages for leaving dates blank in timetable");
         assertThat(timetablePage.checkErrorMessagesOfBlankDates())
                 .withFailMessage("Error messages for leaving dates blank is incorrect")
-                .isTrue();
-    }
-
-    @Then("Check you can't select end days before or equal to start date")
-    public void checkYouCanTSelectEndDaysBeforeOrEqualToStartDate() {
-        logger.info("Check you can't select end days before or equal to start date");
-        assertThat(timetablePage.checkEndDateCantBeLessOrEqualToStartDate())
-                .withFailMessage("End day is equal or greater than start day")
                 .isTrue();
     }
 
