@@ -34,7 +34,7 @@ public final class ErrorMessagesProvider {
     }
 
     public static String getExistedEmailErrMessage() {
-        return PROPERTIES_READER.getProperty("existedEmail");
+        return PROPERTIES_READER.getProperty("existedEmailErrMsg");
     }
 
     public static String getExistedAcademicClassErrMessage() {

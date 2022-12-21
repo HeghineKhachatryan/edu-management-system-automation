@@ -56,4 +56,12 @@ public final class UserDataProvider {
     public static String getExistedSubject() {
         return PROPERTIES_READER.getProperty("existedSubject");
     }
+
+    public static String getExistedName() {
+        return PROPERTIES_READER.getProperty("existedName");
+    }
+
+    public static String getExistedSurname() {
+        return PROPERTIES_READER.getProperty("existedSurname");
+    }
 }

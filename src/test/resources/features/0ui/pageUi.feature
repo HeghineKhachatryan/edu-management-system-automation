@@ -184,3 +184,34 @@ Feature: UI of pages
     When Click on 'Add' button and open popup
     Then Popup is opened
     And Check all elements are present in 'New Students' popup Classes section
+
+  @TC6.119.1 @TC6.119.2 @TC6.119.3 @TC6.126.1 @TC6.126.2 @TC6.126.3 @Regression @Smoke
+  Scenario Outline: Check UI of teacher's and student's profile
+    Given Login as admin
+    When Select <section> section
+    And Click on the first item in the list
+    And Select Profile section in the dashboard
+    Then Check all elements are present in <user>'s profile section
+    When Click on 'create' button and open popup
+    Then Popup is opened
+
+    Examples:
+      | section  | user     |
+      | teachers | teacher  |
+      | students | student |
+      | parents  | parent  |
+
+  @TC6.119.4 @Regression @Smoke
+  Scenario Outline: Check UI of edit popup of teacher's profile
+    Given Login as admin
+    When Select <section> section
+    And Click on the first item in the list
+    And Select Profile section in the dashboard
+    When Click on 'create' button and open popup
+    Then Check all elements are present in <user>'s profile edit popup
+
+    Examples:
+      | section  | user     |
+      | teachers | teacher  |
+      | students | student |
+      | parents  | parent  |

@@ -40,7 +40,7 @@ public class CreatePopup extends CommonPopup {
     }
 
     public void fillExistedName() {
-        String name = new SuperAdminPage().getNameOfLastCreatedUser();
+        String name = UserDataProvider.getExistedName();
         logger.info("Fill existed name {}", name);
         fillName(name);
     }
@@ -60,7 +60,7 @@ public class CreatePopup extends CommonPopup {
     }
 
     public void fillExistedSurname() {
-        String surname = new SuperAdminPage().getSurnameOfLastCreatedUser();
+        String surname = UserDataProvider.getExistedSurname();
         logger.info("Fill existed surname {}", surname);
         fillSurname(surname);
     }
@@ -78,7 +78,7 @@ public class CreatePopup extends CommonPopup {
 
     public void fillExistedEmail() {
         String existedEmail = UserDataProvider.getExistedEmail();
-        logger.info("Fill existed email");
+        logger.info("Fill existed email - {}", existedEmail);
         uiHelper.sendKeys(emailInput, existedEmail);
     }
 
@@ -87,6 +87,24 @@ public class CreatePopup extends CommonPopup {
         logger.info("50 symbols in name field are {}", generatedString);
         inputFields
                 .forEach(fields -> uiHelper.sendKeys(fields, generatedString));
+    }
+
+    public void clearInputField(String field) {
+        logger.info("Clear {} input field", field);
+        switch (field) {
+            case "name":
+                nameInput.clear();
+                break;
+            case "surname":
+                surnameInput.clear();
+                break;
+            case "email":
+                emailInput.clear();
+                break;
+            case "all":
+                inputFields.forEach(WebElement::clear);
+                break;
+        }
     }
 
     public void fillInputFieldsWithNotAllowedSymbols() {
@@ -136,6 +154,19 @@ public class CreatePopup extends CommonPopup {
                 passwordInput,
                 saveButton,
                 generatePasswordButton,
+                xButton
+        );
+    }
+
+    public boolean checkAllFieldsArePresentOnProfilePage() {
+        logger.info("Check fields name, surname, email, save button," +
+                "X button are displayed in edit popup of profile page");
+        return uiHelper.checkElementsAreDisplayed(
+                title,
+                nameInput,
+                surnameInput,
+                emailInput,
+                saveButton,
                 xButton
         );
     }
@@ -213,6 +244,7 @@ public class CreatePopup extends CommonPopup {
     }
 
     public String getEmailFieldErrorMessage() {
+        logger.info("Get text of error message under email field - {}", emailInvalidAndExistedErrorMessage.getText());
         return emailInvalidAndExistedErrorMessage.getText();
     }
 }

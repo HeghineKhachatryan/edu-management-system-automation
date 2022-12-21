@@ -34,10 +34,6 @@ public class AdminPage extends CommonPage {
         );
     }
 
-    private WebElement getSectionElementByName(String section) {
-        return driver.findElement(By.xpath(String.format("//a[@href='/%s']", section)));
-    }
-
     public boolean checkNewUserIsDisplayedOnAdminsSection() {
         logger.info("Check new user is displayed");
         return getNameOfLastCreatedUser()

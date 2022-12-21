@@ -10,8 +10,6 @@ import java.util.List;
 
 public class AcademicClassPage extends CommonPage {
 
-    @FindBy(className = "url-path")
-    private WebElement urlPath;
     @FindBy(className = "item")
     private WebElement displayedClassroomTeacher;
     @FindBy(id = "vis-btn")
