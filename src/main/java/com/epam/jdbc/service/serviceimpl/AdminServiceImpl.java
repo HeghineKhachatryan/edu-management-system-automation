@@ -41,4 +41,28 @@ public class AdminServiceImpl implements UserService<Admin> {
         }
         return admin;
     }
+
+    @Override
+    public Admin findUserByID(int id) {
+        logger.info("Find parent by {} id", id);
+        Admin admin = new Admin();
+        String query = "SELECT * FROM public.admin INNER JOIN user_table ON " +
+                "admin.id=user_table.id WHERE admin.id=?;";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                admin.setId(resultSet.getInt("id"));
+                admin.setName(resultSet.getString("username"));
+                admin.setSurname(resultSet.getString("surname"));
+                admin.setPassword(resultSet.getString("password"));
+                admin.setUserId(resultSet.getInt("user_id"));
+                admin.setEmail(resultSet.getString("email"));
+            }
+        } catch (SQLException e) {
+            logger.error("Can not execute query");
+            throw new RuntimeException("Can not execute query, something went wrong");
+        }
+        return admin;
+    }
 }

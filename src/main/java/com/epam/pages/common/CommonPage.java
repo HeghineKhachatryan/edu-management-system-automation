@@ -1,6 +1,7 @@
 package com.epam.pages.common;
 
 import com.epam.pages.BasePage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -22,6 +23,8 @@ public abstract class CommonPage extends BasePage {
     protected List<WebElement> listItemsHref;
     @FindBy(linkText = "Settings")
     protected WebElement settingsSection;
+    @FindBy(className = "url-path")
+    protected WebElement urlPath;
 
     public String getRoleName() {
         String name = roleName.getText();
@@ -29,16 +32,30 @@ public abstract class CommonPage extends BasePage {
         return name;
     }
 
+    public void clickOnSectionByText(String sectionText) {
+        uiHelper.clickOnWebElement(getSubsectionElementByName(sectionText));
+    }
+
+    protected WebElement getSectionElementByName(String section) {
+        return driver.findElement(By.xpath(String.format("//a[@href='/%s']", section)));
+    }
+
+    protected WebElement getSubsectionElementByName(String subsection) {
+        return driver.findElement(By.xpath(String.format("//div[contains(@class,'debar2')]//a[text()='%s']", subsection)));
+    }
+
     public String getNameAndSurname() {
         String surnameAndName = nameAndSurname.getText();
         logger.info("Get name and surname - {}", surnameAndName);
         return surnameAndName;
     }
+
     public String getNameAndSurnameOfLastCreatedAdmin() {
         String nameOfLastCreatedUser = listItems.get(listItems.size() - 1).getText();
         logger.info("Get name of last created user - {}", nameOfLastCreatedUser);
         return nameOfLastCreatedUser;
     }
+
     public String getNameOfLastCreatedUser() {
         String nameOfLastCreatedUser = listItemsHref.get(listItemsHref.size() - 1).getText().split(" ")[0];
         logger.info("Get name of last created user - {}", nameOfLastCreatedUser);

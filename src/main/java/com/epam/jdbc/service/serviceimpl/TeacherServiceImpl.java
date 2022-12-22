@@ -1,6 +1,7 @@
 package com.epam.jdbc.service.serviceimpl;
 
 import com.epam.jdbc.config.DBConnectionProvider;
+import com.epam.jdbc.model.Admin;
 import com.epam.jdbc.model.Teacher;
 import com.epam.jdbc.service.UserService;
 import org.slf4j.Logger;
@@ -62,5 +63,29 @@ public class TeacherServiceImpl implements UserService<Teacher> {
             throw new RuntimeException("Can not execute query, something went wrong");
         }
         return nameList;
+    }
+
+    @Override
+    public Teacher findUserByID(int id) {
+        logger.info("Find teacher by {} id", id);
+        Teacher teacher = new Teacher();
+        String query = "SELECT * FROM teacher INNER JOIN user_table on " +
+                "teacher.user_id=user_table.id WHERE teacher.id=?;";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                teacher.setId(resultSet.getInt("id"));
+                teacher.setName(resultSet.getString("name"));
+                teacher.setSurname(resultSet.getString("surname"));
+                teacher.setPassword(resultSet.getString("password"));
+                teacher.setUserId(resultSet.getInt("user_id"));
+                teacher.setEmail(resultSet.getString("email"));
+            }
+        } catch (SQLException e) {
+            logger.error("Can not execute query");
+            throw new RuntimeException("Can not execute query, something went wrong");
+        }
+        return teacher;
     }
 }

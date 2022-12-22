@@ -1,14 +1,8 @@
 package com.epam.pages.main;
 
 import com.epam.pages.common.CommonPage;
-import org.openqa.selenium.By;
 
 public class SubjectPage extends CommonPage {
-
-    public void clickOnSectionByText(String sectionText) {
-        String section = String.format("//div[contains(@class,'debar2')]//a[text()='%s']", sectionText);
-        uiHelper.clickOnWebElement(driver.findElement(By.xpath(section)));
-    }
 
     public void clickOnAddButton() {
         uiHelper.clickOnWebElement(createButton);
@@ -16,15 +10,18 @@ public class SubjectPage extends CommonPage {
 
     public void clickOnItemFromTheList(String itemName) {
         logger.info("Click on item from the list using item name and index");
-        uiHelper.clickOnWebElement(listItemsHref.get(getIndexOfSubjectFromList(itemName)));
+        uiHelper.clickOnWebElement(listItemsHref.get(getIndexOfItemFromList(itemName)));
     }
 
-    private int getIndexOfSubjectFromList(String subjectName) {
+    private int getIndexOfItemFromList(String subjectName) {
         logger.info("Get index of subject from the list");
-        if (subjectName.equals("second")) {
-            return 2;
-        } else if (subjectName.equals("third")) {
-            return 3;
+        switch (subjectName) {
+            case "first":
+                return 0;
+            case "second":
+                return 1;
+            case "third":
+                return 2;
         }
         for (int i = 0; i < listItemsHref.size(); i++) {
             if (listItemsHref.get(i).getText().equals(subjectName)) {

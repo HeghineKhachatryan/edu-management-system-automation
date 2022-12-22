@@ -1,9 +1,11 @@
 package com.epam.steps.common;
 
 import com.epam.helpers.ErrorMessagesProvider;
+import com.epam.helpers.SharedTestData;
 import com.epam.helpers.UserDataProvider;
 import com.epam.pages.main.SuperAdminPage;
 import com.epam.pages.popup.CreatePopup;
+import com.epam.pages.popup.StudentsPopup;
 import com.epam.steps.BaseSteps;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
@@ -17,11 +19,13 @@ public class CreateUserSteps extends BaseSteps {
 
     private SuperAdminPage superAdminPage;
     private CreatePopup createPopup;
+    private StudentsPopup studentsPopup;
 
     @Before
     public void initPages() {
         superAdminPage = new SuperAdminPage();
         createPopup = new CreatePopup();
+        studentsPopup = new StudentsPopup();
     }
 
     @Given("Fill valid name and surname")
@@ -62,10 +66,16 @@ public class CreateUserSteps extends BaseSteps {
         createPopup.fillInputFieldsWithMoreSymbols();
     }
 
+    @Given("Clear {} input fields")
+    public void clearField(String field) {
+       createPopup.clearInputField(field);
+    }
+
     @Given("Fill in input fields with not allowed symbols")
     public void fillInInputFieldsWithNotAllowedSymbols() {
         createPopup.fillInputFieldsWithNotAllowedSymbols();
     }
+
     @And("Click on 'Generate password' button")
     public void clickOnGeneratePasswordButton() {
         createPopup.clickOnGeneratePasswordButton();
@@ -168,7 +178,8 @@ public class CreateUserSteps extends BaseSteps {
 
     @Then("Check invalid email error message")
     public void checkInvalidErrorMessage() {
-        logger.info("Check error message of invalid inputted email");
+        logger.info("Check error message of invalid inputted email -> {}",
+                ErrorMessagesProvider.getInvalidEmailErrMessage());
         assertThat(createPopup.getEmailFieldErrorMessage())
                 .withFailMessage("Error message of invalid email is incorrect")
                 .isEqualTo(ErrorMessagesProvider.getInvalidEmailErrMessage());
@@ -215,5 +226,19 @@ public class CreateUserSteps extends BaseSteps {
         assertThat(createPopup.checkBlankInputFieldsErrorMessagesAreNotDisplayed())
                 .withFailMessage("Blank input fields error messages are displayed")
                 .isTrue();
+    }
+
+    @Then("Check all elements are present in {}'s profile edit popup")
+    public void checkAllElementsArePresentInProfileEditPopup(String user) {
+        logger.info("Check all elements are present in {}'s profile edit popup", user);
+        if (user.equals("student")) {
+            assertThat(studentsPopup.checkUIOfEditPopupStudentsProfile())
+                    .withFailMessage("Not all elements are present on profile page")
+                    .isTrue();
+        } else {
+            assertThat(createPopup.checkAllFieldsArePresentOnProfilePage())
+                    .withFailMessage("Not all elements are present on profile page")
+                    .isTrue();
+        }
     }
 }

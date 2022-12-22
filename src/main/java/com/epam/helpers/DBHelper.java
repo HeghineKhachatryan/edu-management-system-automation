@@ -1,7 +1,9 @@
 package com.epam.helpers;
 
+import com.epam.jdbc.model.Parent;
+import com.epam.jdbc.model.Student;
+import com.epam.jdbc.model.Teacher;
 import com.epam.jdbc.service.serviceimpl.*;
-import io.cucumber.java.sl.In;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,6 +30,17 @@ public final class DBHelper {
         return userService.findUserByEmail(SharedTestData.getLastEmail()).getEmail() == null;
     }
 
+    public Teacher getTeacherByID(int id) {
+        return teacherService.findUserByID(id);
+    }
+
+    public Parent getParentByID(int id) {
+        return parentService.findUserByID(id);
+    }
+
+    public Student getStudentByID(int id) {
+        return studentService.findUserByID(id);
+    }
     public boolean isSubjectAddedInTheDB() {
         return subjectService.findByName(SharedTestData.getLastCreatedItemName()).getName() == null;
     }

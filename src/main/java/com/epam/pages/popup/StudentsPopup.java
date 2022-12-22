@@ -98,6 +98,19 @@ public class StudentsPopup extends CreatePopup {
                 );
     }
 
+    public boolean checkUIOfEditPopupStudentsProfile() {
+        logger.info("Check UI of create popup in students section");
+        return checkAllFieldsArePresentOnProfilePage() &&
+                uiHelper.checkElementsAreDisplayed(
+                        address,
+                        birthDate,
+                        linkedClass,
+                        bloodGroup,
+                        gender,
+                        linkedParent
+                );
+    }
+
     public boolean checkAllFieldsAreEmptyInStudentsCreatePopup() {
         logger.info("Check all fields are empty in students section create popup.");
         return checkAllInputFieldsAreEmpty()
