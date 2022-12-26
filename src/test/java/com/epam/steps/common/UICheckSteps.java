@@ -4,13 +4,14 @@ import com.epam.pages.main.*;
 import com.epam.pages.popup.AcademicClassPopup;
 import com.epam.pages.popup.AcademicCoursePopup;
 import com.epam.pages.popup.AcademicYearsAndVacationPopup;
+import com.epam.steps.BaseSteps;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class UICheckSteps {
+public class UICheckSteps extends BaseSteps {
 
     private LoginPage loginPage;
     private SuperAdminPage superAdminPage;

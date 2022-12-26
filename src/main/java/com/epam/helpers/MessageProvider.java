@@ -17,4 +17,12 @@ public final class MessageProvider {
     public static String getMsgForNotHavingClassroomTeacher() {
         return PROPERTIES_READER.getProperty("noClassroomTeacher");
     }
+
+    public static String getWrongImgFormatMSG() {
+        return PROPERTIES_READER.getProperty("wrongImgFormatMSG");
+    }
+
+    public static String getBigSizeImgMSG() {
+        return PROPERTIES_READER.getProperty("bigSizeImgMSG");
+    }
 }
