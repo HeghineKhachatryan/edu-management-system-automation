@@ -6,7 +6,6 @@ Feature: This feature will cover image upload functionality teacher's, student's
   Background: Login as admin
     When Login as admin
 
-
     @TC6.986.2 @TC6.986.3 @TC6.986.4 @TC6.986.5 @Regression @Smoke
     Scenario: Check "Upload image" functionality
       When Select teachers section
