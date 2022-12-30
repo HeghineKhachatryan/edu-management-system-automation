@@ -13,8 +13,18 @@ import org.openqa.selenium.support.FindBy;
 public class UserProfile extends CommonPage {
 
     private final DBHelper dbHelper = new DBHelper();
-    @FindBy(id = "boot-icon")
+    @FindBy(id = "file-input")
     private WebElement imageUpload;
+    @FindBy(xpath = "//div[@name='btn-div']/button[@id='submit-image']")
+    private WebElement OKButtonSize;
+    @FindBy(xpath = "//button[@id='submit-image-format']")
+    private WebElement OKButtonFormat;
+    @FindBy(className = "delete-img")
+    private WebElement deleteImg;
+    @FindBy(xpath = "//div[@id='popup-container-image-format']//p[@class='successText']")
+    private WebElement wrongImgFormatMSG;
+    @FindBy(xpath = "//div[@id='popup-container-image']//p[@class='successText']")
+    private WebElement wrongImgSizeMSG;
 
     public boolean checkAllElementsArePresentInProfilePage(String user) {
         logger.info("Check teacher's profile page contains elements: url-path, edit button, subsections" +
@@ -62,6 +72,36 @@ public class UserProfile extends CommonPage {
         String nameAndSurname = getProfileInformationByText("Name") + " " + getProfileInformationByText("Surname");
         logger.info("Check updated name and surname from profile {} is equal or not to what was saved before {}", nameAndSurname, SharedTestData.getValueOfItem());
         return !nameAndSurname.equals(SharedTestData.getValueOfItem());
+    }
+
+    public void uploadImage(String imageName) {
+        SharedTestData.setNameField(imageName);
+        imageUpload.sendKeys("C:\\Users\\Heghine_Khachatryan\\Desktop\\" + imageName);
+    }
+
+    public void clickOnOKButton(String message) {
+        if (message.contains("wrong format")) {
+            uiHelper.clickOnWebElement(OKButtonFormat);
+        } else {
+            uiHelper.clickOnWebElement(OKButtonSize);
+        }
+    }
+
+    public String getWrongImgFormatMSG() {
+        logger.info("Get wrong image format message - {}", wrongImgFormatMSG.getText());
+        return wrongImgFormatMSG.getText();
+    }
+
+    public String getWrongImgSizeMSG() {
+        logger.info("Get wrong image size message - {}", wrongImgSizeMSG.getText());
+        return wrongImgSizeMSG.getText();
+    }
+
+    public boolean checkImageIsUploaded() {
+        String src = driver.findElement(By.xpath("//div[@class='container-img']/img")).getDomProperty("src");
+        logger.info("Property of image src in DOM is {}. Check if it contains image name {}", src,
+                SharedTestData.getNameField());
+        return src.contains(SharedTestData.getNameField());
     }
 
     private boolean checkTeacherPersonalInfo() {
